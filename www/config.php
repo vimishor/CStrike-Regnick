@@ -30,7 +30,7 @@ define('ALLOWED_CHARS', 'a-zA-Z0-9 %@.:_\/-');
 $config['title']    = 'CStrike Regnick';
 
 // Script full URL
-$config['site_url'] = 'http://localhost/regnick';
+$config['site_url'] = 'http://localhost/regnick/www/';
 
 
 /**
@@ -42,6 +42,7 @@ define('DB_HOST', 'localhost');
 define('DB_NAME', 'regnick');
 define('DB_USER', 'root');
 define('DB_PASS', '');
+define('DB_TABLE', 'cstrike_admins');
 // ---
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', 'utf8_general_ci');
@@ -71,7 +72,6 @@ $config['email_secure'] = 'ssl';
  */
 add_server(1, 'cs.domain.tld:27015', 'ab');
 add_server(2, 'war.domain.tld:26015', 'ab');
-
 
 // CONFIG END
 ?>

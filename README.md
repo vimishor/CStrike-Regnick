@@ -1,6 +1,6 @@
 ## What is CStrike Regnick?
 
-CStrike Regnick is a small Web interface through which any owner of a 
+CStrike Regnick is a small web interface through any owner of a 
 Counter-Strike 1.6 server may allow players to register their nickname used 
 on the server, easily and with minimal effort.
 
@@ -8,7 +8,7 @@ on the server, easily and with minimal effort.
 ## Requirements
 
 * Web space with PHP 5.2.x and up.
-* Counter-Strike 1.6 server with AMXMoxX and Mysql module enabled.
+* Counter-Strike 1.6 server with AMXModX and Mysql module enabled.
 
 
 ## Installation

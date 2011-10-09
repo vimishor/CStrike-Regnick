@@ -155,7 +155,7 @@ function user_exist($nickname)
     global $sql;
     
     $q = $sql->query(
-            $sql->prepare("SELECT auth FROM `admins` WHERE `auth` = %s", $nickname)
+            $sql->prepare("SELECT auth FROM `".DB_TABLE."` WHERE `auth` = %s", $nickname)
          );
         
     return ($sql->num_rows() > 0) ? true : false;
@@ -184,7 +184,7 @@ function add_account($nickname, $password, $access, $flags, $email, $server_tag,
     $date = mktime();
     
     $q = $sql->query(
-            $sql->prepare("INSERT INTO `admins`
+            $sql->prepare("INSERT INTO `".DB_TABLE."`
             (`auth`, `password`, `access`, `flags`, `email`, `server_tag`, `activ`, `date`, `key`)
             VALUES ('%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%s')
             ", $nickname, $password, $access, $flags, $email, $server_tag, $activ, $date, rand_string())
@@ -205,7 +205,7 @@ function email_exist($address)
     global $sql;
 
     $q = $sql->query(
-            $sql->prepare("SELECT email FROM `admins` WHERE `email` = %s", $address)
+            $sql->prepare("SELECT email FROM `".DB_TABLE."` WHERE `email` = %s", $address)
          );
         
     return ($sql->num_rows() > 0) ? true : false;
@@ -223,7 +223,7 @@ function get_pass_by_mail($email)
     global $sql;
     
     $q = $sql->query(
-            $sql->prepare("SELECT `password`, `email` FROM `admins` WHERE `email` = '%s'", $email)
+            $sql->prepare("SELECT `password`, `email` FROM `".DB_TABLE."` WHERE `email` = '%s'", $email)
          );
 
     return ($sql->num_rows() > 0) ? $q[1]->password : false;
@@ -269,5 +269,53 @@ function rand_string($len=6)
         $str .= substr($allowed, mt_rand(0, strlen($allowed) -1), 1);
     }
     return $str;
+}
+
+function fs_write($file, $contents, $mode=0644)
+{
+    if ( ! ($fp = @fopen($file, 'w')) )
+        return false;
+    
+    @fwrite($fp, $contents);
+    @fclose($fp);
+    return @chmod($file, $mode);
+}
+
+function set_installed()
+{
+    global $sql;
+    
+    // create table
+    $q = $sql->query("CREATE TABLE `".DB_TABLE."` 
+            ( `id` int(11) unsigned NOT NULL AUTO_INCREMENT, 
+            `auth` varchar(32) NOT NULL DEFAULT '', 
+            `password` varchar(50) NOT NULL DEFAULT '', 
+            `access` varchar(50) NOT NULL DEFAULT '', 
+            `flags` varchar(50) NOT NULL DEFAULT '', 
+            `email` varchar(255) DEFAULT NULL, 
+            `server_tag` int(2) NOT NULL, 
+            `activ` int(11) DEFAULT '0', 
+            `date` int(11) NOT NULL, 
+            `key` varchar(6) NOT NULL, PRIMARY KEY (`id`)
+            ) COMMENT = 'AMX Mod X Admins'"
+         );
+    if ($q === false)
+        return false;
+        
+    // write file
+    if ( fs_write(BASEPATH.'.installed', 'gentle software solutions | www.gentle.ro', 0644) === false)
+        return false;
+    
+    return true;
+}
+
+function is_installed()
+{
+    if ( defined('IS_INSTALLED') )
+        return true;
+    elseif (is_file(BASEPATH.'.installed'))
+        return true;
+    else
+        return false;
 }
 ?>

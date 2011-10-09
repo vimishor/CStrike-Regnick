@@ -118,6 +118,21 @@ class Route
         {
             show_page('recover');
         }
+        elseif ($INP->segment(1) === 'install')
+        {
+            if (is_installed() === true)
+            {
+                show_page('default', 'Already installed', 'CStrike Regnick is already installed.', true);
+            }
+            elseif (set_installed() === true)
+            {
+                show_page('default', 'Script installed', 'CStrike Regnick has been installed successfully.', true);
+            }
+            else
+            {
+                show_page('default', 'Install error', 'CStrike Regnick has not been installed!', true);
+            }
+        }
         else
         {
             show_page('404');
