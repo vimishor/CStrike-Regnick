@@ -1,6 +1,6 @@
 ## What is CStrike Regnick?
 
-CStrike Regnick is a small web interface through any owner of a 
+CStrike Regnick is a small web interface through which any owner of a 
 Counter-Strike 1.6 server may allow players to register their nickname used 
 on the server, easily and with minimal effort.
 
