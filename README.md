@@ -15,6 +15,11 @@ on the server, easily and with minimal effort.
 
 Available on [CStrike Regnick Wiki](https://github.com/vimishor/CStrike-Regnick/wiki/Install)
 
+## Official Links
+
+* [CStrike Regnick official site](http://www.gentle.ro/proiecte/cstrike-regnick/)
+* [CStrike Regnick wiki](https://github.com/vimishor/CStrike-Regnick/wiki)
+
 ## Credits
 
 This application contains code and/or inspiration from:
@@ -24,11 +29,6 @@ This application contains code and/or inspiration from:
 * [JQuery](http://jquery.com/)
 * [Cufon](https://github.com/sorccu/cufon)
 * [Staicu Ionut-Bogdan](http://www.iamntz.com/)
-
-## Official Links
-
-* [CStrike Regnick official site](http://www.gentle.ro/proiecte/cstrike-regnick/)
-* [CStrike Regnick wiki](https://github.com/vimishor/CStrike-Regnick/wiki)
 
 ## LICENSE
 
