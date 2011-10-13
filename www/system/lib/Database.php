@@ -66,6 +66,7 @@ class Database
      */
     private $rows_count;
     public $insert_id;
+    private $rows_affected;
     
     public function __construct($host, $user, $pass, $name)
     {
@@ -103,21 +104,27 @@ class Database
         $this->result   = @mysql_query($sql,$this->link);
         
         if ( $this->error = mysql_error( $this->link ) ) {
-			$this->getError();
+            // print last error
+			echo '<div class="error">';
+            echo '<strong>[MySQL Error]</strong> '. $this->getError();
+            echo '</div>';
 			return false;
 		}
         
         if ( preg_match( '/^\s*(create|alter|truncate|drop) /i', $sql) ) {
-			$return_val = $this->result;
+			#$return_val = $this->result;
+            $this->last_result = $this->result;
 		} 
         elseif ( preg_match( '/^\s*(insert|delete|update|replace) /i', $sql ) )
         {
+            $this->rows_affected = mysql_affected_rows( $this->link );
+            
             // Take note of the insert_id
 			if ( preg_match( '/^\s*(insert|replace) /i', $sql ) ) {
 				$this->insert_id = mysql_insert_id($this->link);
 			}
 			// Return number of rows affected
-			//$return_val = $this->rows_affected;
+            $this->last_result = $this->rows_affected;
         }
         else
         {
@@ -128,7 +135,6 @@ class Database
     		}            
         }
         
-
         @mysql_free_result( $this->result );
                 
         return $this->last_result;

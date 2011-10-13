@@ -15,6 +15,9 @@ on the server, easily and with minimal effort.
 
 Available on [CStrike Regnick Wiki](https://github.com/vimishor/CStrike-Regnick/wiki/Install)
 
+## Update
+Available on [CStrike Regnick Wiki](https://github.com/vimishor/CStrike-Regnick/wiki/Update)
+
 ## Official Links
 
 * [CStrike Regnick official site](http://www.gentle.ro/proiecte/cstrike-regnick/)

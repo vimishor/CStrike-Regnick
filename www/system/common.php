@@ -155,7 +155,7 @@ function user_exist($nickname)
     global $sql;
     
     $q = $sql->query(
-            $sql->prepare("SELECT auth FROM `".DB_TABLE."` WHERE `auth` = %s", $nickname)
+            $sql->prepare("SELECT auth FROM `".DB_TABLE_PREFIX.DB_TABLE."` WHERE `auth` = %s", $nickname)
          );
         
     return ($sql->num_rows() > 0) ? true : false;
@@ -184,7 +184,7 @@ function add_account($nickname, $password, $access, $flags, $email, $server_tag,
     $date = mktime();
     
     $q = $sql->query(
-            $sql->prepare("INSERT INTO `".DB_TABLE."`
+            $sql->prepare("INSERT INTO `".DB_TABLE_PREFIX.DB_TABLE."`
             (`auth`, `password`, `access`, `flags`, `email`, `server_tag`, `activ`, `date`, `key`)
             VALUES ('%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%s')
             ", $nickname, $password, $access, $flags, $email, $server_tag, $activ, $date, rand_string())
@@ -205,7 +205,7 @@ function email_exist($address)
     global $sql;
 
     $q = $sql->query(
-            $sql->prepare("SELECT email FROM `".DB_TABLE."` WHERE `email` = %s", $address)
+            $sql->prepare("SELECT email FROM `".DB_TABLE_PREFIX.DB_TABLE."` WHERE `email` = %s", $address)
          );
         
     return ($sql->num_rows() > 0) ? true : false;
@@ -223,7 +223,7 @@ function get_pass_by_mail($email)
     global $sql;
     
     $q = $sql->query(
-            $sql->prepare("SELECT `password`, `email` FROM `".DB_TABLE."` WHERE `email` = '%s'", $email)
+            $sql->prepare("SELECT `password`, `email` FROM `".DB_TABLE_PREFIX.DB_TABLE."` WHERE `email` = '%s'", $email)
          );
 
     return ($sql->num_rows() > 0) ? $q[1]->password : false;
@@ -271,6 +271,16 @@ function rand_string($len=6)
     return $str;
 }
 
+/**
+ * Write file
+ * 
+ * @since 1.0.0
+ * 
+ * @param string $file File to write
+ * @param string $contents Contents of file
+ * @param int $mode File permissions
+ * @return bool
+ */
 function fs_write($file, $contents, $mode=0644)
 {
     if ( ! ($fp = @fopen($file, 'w')) )
@@ -281,12 +291,32 @@ function fs_write($file, $contents, $mode=0644)
     return @chmod($file, $mode);
 }
 
+/**
+ * Read file
+ * 
+ * @since 1.0.1
+ * 
+ * @param string $file File to read
+ * @return string
+ */
+function fs_read($file)
+{
+    return file_get_contents($file, true);
+}
+
+/**
+ * Install script
+ * 
+ * @since 1.0.0
+ * 
+ * @return bool
+ */
 function set_installed()
 {
     global $sql;
     
     // create table
-    $q = $sql->query("CREATE TABLE `".DB_TABLE."` 
+    $q = $sql->query("CREATE TABLE `".DB_TABLE_PREFIX.DB_TABLE."` 
             ( `id` int(11) unsigned NOT NULL AUTO_INCREMENT, 
             `auth` varchar(32) NOT NULL DEFAULT '', 
             `password` varchar(50) NOT NULL DEFAULT '', 
@@ -309,6 +339,12 @@ function set_installed()
     return true;
 }
 
+/**
+ * Check if script has been installed
+ * 
+ * @since 1.0.0
+ * @return bool
+ */
 function is_installed()
 {
     if ( defined('IS_INSTALLED') )
@@ -317,5 +353,52 @@ function is_installed()
         return true;
     else
         return false;
+}
+
+/**
+ * Run script update if required
+ * 
+ * @since 1.0.1
+ * @return bool
+ */
+function run_update()
+{
+    global $sql;
+    
+    if (!is_dir(BASEPATH.'core_update'))
+        return false;
+            
+    // update db
+    if (file_exists(BASEPATH.'core_update/update.sql'))
+    {
+        $update_sql_file = BASEPATH.'core_update/update.sql';
+        $contents = fs_read($update_sql_file);
+        $contents = explode("\n", $contents);
+        
+        foreach ($contents as $line)
+        {
+            
+            if(trim($line) != "" && strpos($line, "--") === false)
+            {
+                $cmd = preg_replace('/{REGNICK_TABLE}/', ''.DB_TABLE_PREFIX.DB_TABLE.'', $line);
+                $cmd = preg_replace('/;/', '', $cmd);
+                
+                $q = $sql->query($cmd);       
+            
+                if ($q === false)
+                    return false;
+            }
+        }
+    }
+    
+    // update file
+    if (file_exists(BASEPATH.'core_update/update_php'))
+        include(BASEPATH.'core_update/update.php');
+    
+    // write file
+    if ( fs_write(BASEPATH.'.installed', 'gentle software solutions | www.gentle.ro', 0644) === false)
+        return false;
+    
+    return true;
 }
 ?>

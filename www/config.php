@@ -42,11 +42,11 @@ define('DB_HOST', 'localhost');
 define('DB_NAME', 'regnick');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DB_TABLE', 'cstrike_admins');
+define('DB_TABLE', 'admins');
 // ---
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', 'utf8_general_ci');
-//define('DB_TABLE_PREFIX', ''); // not used yet
+define('DB_TABLE_PREFIX', '');
 
 
 /**

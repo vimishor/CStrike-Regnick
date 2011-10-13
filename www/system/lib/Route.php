@@ -23,7 +23,14 @@ class Route
 {
     public static function dispatch()
     {
-        global $INP;
+        global $INP, $config;
+        
+        // if update directory exists, redirect any request
+        if ( ($INP->segment(1) !== 'update') && (is_dir(BASEPATH.'core_update')) )
+        {
+            header('Location: '.$config['site_url'].'/update/', true);
+        }
+            
         
         /**
          * Block: Recover account
@@ -130,7 +137,18 @@ class Route
             }
             else
             {
-                show_page('default', 'Install error', 'CStrike Regnick has not been installed!', true);
+                show_page('default', 'Install error', 'CStrike Regnick has NOT been installed!', true);
+            }
+        }
+        elseif ($INP->segment(1) === 'update')
+        {
+            if (run_update() === true)
+            {
+                show_page('default', 'Script updated', 'CStrike Regnick has been updated successfully.<br /><br /><strong>Please delete "core_update" directory</strong> !', true);
+            }
+            else
+            {
+                show_page('default', 'Script update error', 'CStrike Regnick has NOT been updated !', true);
             }
         }
         else
