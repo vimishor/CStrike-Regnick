@@ -150,7 +150,7 @@ class Input
      * @since 1.0.0
      * 
      * @param int $no Segment number
-     * @return string
+     * @return string|bool
      */
     public function segment($no)
     {

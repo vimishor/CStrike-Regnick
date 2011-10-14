@@ -30,8 +30,10 @@ define('ALLOWED_CHARS', 'a-zA-Z0-9 %@.:_\/-');
 $config['title']    = 'CStrike Regnick';
 
 // Script full URL
-$config['site_url'] = 'http://localhost/regnick/www/';
+$config['site_url'] = 'http://localhost/regnick/';
 
+// Entries number to show per page (used by pagination)
+$config['per_page'] = '10'; 
 
 /**
  * -----------------------

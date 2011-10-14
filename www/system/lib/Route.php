@@ -107,7 +107,7 @@ class Route
             elseif (is_steamid($nickname)) { $flags = 'ac'; }
             
             // add account
-            if ( add_account($nickname, $pass1, 'ab', $flags, $email, $server_tag) === true)
+            if ( add_account($nickname, $pass1, 'b', $flags, $email, $server_tag) === true)
             {
                 show_page('default', 'Nickname registred', 'Your nickname was registered successfully.', true);
             } 
@@ -149,6 +149,19 @@ class Route
             else
             {
                 show_page('default', 'Script update error', 'CStrike Regnick has NOT been updated !', true);
+            }
+        }
+        elseif ($INP->segment(1) === 'users')
+        {
+            if ($INP->segment(2) !== false )
+            {
+                // paginate
+                $page = (int) $INP->segment(2);
+                echo show_users($page);
+            }
+            else
+            {
+                show_page('default', 'Active users', '', true);
             }
         }
         else

@@ -15,5 +15,10 @@
 <!-- main file -->
 <script type="text/javascript" src="<?php echo $config['site_url']; ?>/js/main.js"></script>
 
+<?php if (get_url_segment(1) === 'users'): ?>
+<!-- users pagination -->
+<script type="text/javascript" src="<?php echo $config['site_url']; ?>/js/users.js"></script>
+<?php endif; ?>
+
 </body>
 </html>

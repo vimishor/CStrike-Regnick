@@ -10,7 +10,7 @@ Options -Indexes
 <IfModule mod_rewrite.c>
     RewriteEngine on
     
-    RewriteBase /regnick/www
+    RewriteBase /regnick
     
     # rewrite assets requests to /app/ directory
     RewriteCond %{REQUEST_FILENAME} !-f

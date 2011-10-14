@@ -101,6 +101,9 @@ class Database
         if (!$this->is_connected())
             $this->connect();
         
+        // reset row count
+        $this->rows_count = 0;
+        
         $this->result   = @mysql_query($sql,$this->link);
         
         if ( $this->error = mysql_error( $this->link ) ) {
@@ -110,7 +113,7 @@ class Database
             echo '</div>';
 			return false;
 		}
-        
+                
         if ( preg_match( '/^\s*(create|alter|truncate|drop) /i', $sql) ) {
 			#$return_val = $this->result;
             $this->last_result = $this->result;
@@ -144,6 +147,14 @@ class Database
     {
         return $this->rows_count;
     }
+    
+    public function count_rows($sql)
+    {
+        $result = @mysql_query($sql,$this->link);
+        
+        return mysql_num_rows($result);
+    }
+    
     /**
 	 * Escapes content by reference for insertion into the database, for security
 	 *

@@ -78,6 +78,20 @@ function add_server($id, $address, $access_level='ab')
 	return array_push($config['servers'], array('id' => $id, 'address' => $address, 'access' => $access_level) );
 }
 
+function server_name($tag)
+{
+    global $config;
+    
+    foreach ($config['servers'] as $server)
+    {
+        if ($server['id'] == $tag)
+            return $server['address'];
+    }
+    
+    #_debug($config['servers']);
+    
+    return 'unknown';
+}
 
 /**
  * Validate email address
@@ -400,5 +414,74 @@ function run_update()
         return false;
     
     return true;
+}
+
+/**
+ * Show current users on all servers
+ * 
+ * @since 1.0.1
+ * 
+ * @param int $page Current page
+ * @return string 
+ */
+function show_users($page)
+{
+    global $sql, $config, $pagination;
+    
+    $ret = '';
+    $per_page   = $config['per_page'];
+    $start      = ($page-1) * $per_page;
+    
+    $query = 'SELECT id, auth, flags, server_tag, activ
+                        FROM '.DB_TABLE_PREFIX.DB_TABLE.'
+                            WHERE `activ` = "1" 
+                        ORDER by `id` ASC';
+    
+    $count          = $sql->count_rows($query);
+    $total_pages    = ceil($count/$config['per_page']);
+    
+    // data
+    $users = $sql->query($query.' LIMIT '.$start.', '.$per_page.'');
+        
+    if ( ($users === false) || ($users === NULL) )
+    {
+        $ret = '<h2>No active users.</h2>';
+    }
+    else
+    {
+        $ret .= '<table><thead><tr><td>Auth</td> <td class="last">Server</td> </tr></thead>';
+        foreach ($users as $user )
+        {
+            $ret .= '<tr><td>'.$user->auth.'</td> <td class="last">'.server_name($user->server_tag).'</td> </tr>';
+        }
+        $ret .= '</table>';
+    }
+    
+    // pagination
+    $cfg = array(
+        'items_per_page'    => $config['per_page'],
+        'items_total'       => $count,
+        'current_page'      => $page
+    );
+    $pagination->setup($cfg);
+    $ret .= $pagination->start();
+    
+        
+    return $ret;
+}
+
+/**
+ * Get URL segment for use in templates.
+ * 
+ * @since 1.0.1
+ * 
+ * @param int $no Segment number
+ * @return string|bool
+ */
+function get_url_segment($no)
+{
+    global $INP;
+    
+    return $INP->segment($no);
 }
 ?>

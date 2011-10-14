@@ -44,11 +44,13 @@ check_config();
 require_once(SYS.'lib.'.DS.'Route'.EXT);
 require_once(SYS.'lib.'.DS.'Input'.EXT);
 require_once(SYS.'lib.'.DS.'Database'.EXT);
+require_once(SYS.'lib.'.DS.'Pagination'.EXT);
 require_once(SYS.'lib.'.DS.'Mail'.EXT);
 
 // instantiate classes
 $INP = new Input();
 $sql = new Database(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+$pagination = new Pagination();
 
 // setup route
 Route::dispatch();

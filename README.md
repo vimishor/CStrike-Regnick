@@ -12,7 +12,6 @@ on the server, easily and with minimal effort.
 
 
 ## Installation
-
 Available on [CStrike Regnick Wiki](https://github.com/vimishor/CStrike-Regnick/wiki/Install)
 
 ## Update
@@ -29,6 +28,7 @@ This application contains code and/or inspiration from:
 
 * [Wordpress](http://wordpress.org/)
 * [CodeIgniter](http://codeigniter.com/)
+* [Jim Jagielski](http://code.google.com/a/apache-extras.org/p/phpmailer/)
 * [JQuery](http://jquery.com/)
 * [Cufon](https://github.com/sorccu/cufon)
 * [Staicu Ionut-Bogdan](http://www.iamntz.com/)
