@@ -5,7 +5,8 @@ if (defined('ENV'))
 	switch (ENV)
 	{
 		case 'dev':
-			error_reporting(E_ALL);
+			error_reporting(E_ALL | E_STRICT);
+			ini_set("display_errors", 1);
 		break;
 		
 		case 'prod':
@@ -13,7 +14,8 @@ if (defined('ENV'))
 		break;
 		
 		default:
-			error_reporting(E_ALL);
+			error_reporting(E_ALL | E_STRICT);
+			ini_set("display_errors", 1);
 	}
 }
 
@@ -41,11 +43,11 @@ $_POST = array_map('clean_string', $_POST);
 // to ensure that the user has not written something wrong in settings
 check_config();
 
-require_once(SYS.'lib.'.DS.'Route'.EXT);
-require_once(SYS.'lib.'.DS.'Input'.EXT);
-require_once(SYS.'lib.'.DS.'Database'.EXT);
-require_once(SYS.'lib.'.DS.'Pagination'.EXT);
-require_once(SYS.'lib.'.DS.'Mail'.EXT);
+require_once(SYS.'lib'.DS.'Route'.EXT);
+require_once(SYS.'lib'.DS.'Input'.EXT);
+require_once(SYS.'lib'.DS.'Database'.EXT);
+require_once(SYS.'lib'.DS.'Pagination'.EXT);
+require_once(SYS.'lib'.DS.'Mail'.EXT);
 
 // instantiate classes
 $INP = new Input();
