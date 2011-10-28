@@ -195,7 +195,7 @@ function add_account($nickname, $password, $access, $flags, $email, $server_tag,
 {
     global $sql;
     
-    $date = mktime();
+    $date = time();
     
     $q = $sql->query(
             $sql->prepare("INSERT INTO `".DB_TABLE_PREFIX.DB_TABLE."`
@@ -240,7 +240,7 @@ function get_pass_by_mail($email)
             $sql->prepare("SELECT `password`, `email` FROM `".DB_TABLE_PREFIX.DB_TABLE."` WHERE `email` = '%s'", $email)
          );
 
-    return ($sql->num_rows() > 0) ? $q[1]->password : false;
+    return ($sql->num_rows() > 0) ? $q[0]->password : false;
 }
 
 
