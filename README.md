@@ -6,7 +6,6 @@ on the server, easily and with minimal effort.
 
 
 ## Requirements
-
 * Web space with PHP 5.2.x and up.
 * Counter-Strike 1.6 server with AMXModX and Mysql module enabled.
 
