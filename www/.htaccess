@@ -1,29 +1,35 @@
-Options -Indexes
-
-# Protect files from being viewed
-<Files .*>
-	Order Deny,Allow
-	Deny From All
-</Files>
-
-# Rewrite block
 <IfModule mod_rewrite.c>
-    RewriteEngine on
-    
+    RewriteEngine On
+
     RewriteBase /regnick
-    
-    # rewrite assets requests to /app/ directory
+
+    # rewrite `pub/` requests
+    #   IE: [app_path]/themes/default/css/ maps to [app_path]/pub/themes/default/css/
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^(?:css|images|js)\b.* app/$0 [L]
+    RewriteRule ^(?:themes|upload)\b.* pub/$0 [L]
     
     # this adds trailing slash
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_URI} !(.*)/$
     RewriteRule ^(.*)$ $1/ [R=301,L]
 
-    # this gets rid of index.php
+    # Secure directories
+    RewriteRule ^(app|core) index.php [R=403,L]
+
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond $1 !^(index\.php|favicon\.ico|robots\.txt)
-    RewriteRule ^(.*)$ index.php?page=$1
-</IfModule> 
+    RewriteCond $1 !^(index\.php|pub|favicon\.ico|robots\.txt|humans\.txt\|sitemap\.gz|sitemap\.xml)
+    RewriteRule ^(.*)$ index.php/$1 [QSA,L]
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+    # Prevent directory listings
+    Options -Indexes
+
+    # If we don't have mod_rewrite installed, all 404's
+    # can be sent to index.php, and everything works as normal.
+    #
+    #   -> Remember to add the subdirectory if necessary.
+    #
+    ErrorDocument 404 /index.php
+</IfModule>

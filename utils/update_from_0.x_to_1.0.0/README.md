@@ -1,1 +1,0 @@
-[(see CStrike Regnick Wiki)](https://github.com/vimishor/CStrike-Regnick/wiki/Update-to-1.0.0)

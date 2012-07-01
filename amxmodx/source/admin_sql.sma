@@ -32,6 +32,12 @@
 *  version.
 */
 
+/**
+ *
+ * TODO: refactor this to match with CStrike-Regnick requirements
+ *
+ */
+
 // Uncomment for SQL version
 #define USING_SQL
 
@@ -60,7 +66,9 @@ new bool:g_CaseSensitiveName[33];
 new amx_mode;
 new amx_password_field;
 new amx_default_access;
-new regnick_server_tag;
+new amx_rn_message;
+new amx_rn_message_site;
+new amx_rn_message_time;
 
 public plugin_init()
 {
@@ -74,8 +82,10 @@ public plugin_init()
 	amx_mode=register_cvar("amx_mode", "1")
 	amx_password_field=register_cvar("amx_password_field", "_pw")
 	amx_default_access=register_cvar("amx_default_access", "")
+	amx_rn_message = register_cvar("amx_rn_message","1");
+	amx_rn_message_site = register_cvar("amx_rn_message_site","http://yoursitehere.com");
+	amx_rn_message_time = register_cvar("amx_rn_message_time","300.0"); // Float
 
-	regnick_server_tag=register_cvar("regnick_server_tag", "1")
 	register_cvar("amx_vote_ratio", "0.02")
 	register_cvar("amx_vote_time", "10")
 	register_cvar("amx_vote_answers", "1")
@@ -90,7 +100,8 @@ public plugin_init()
 
 #if defined USING_SQL
 	register_srvcmd("amx_sqladmins", "adminSql")
-	register_cvar("amx_sql_table", "regnick_admins")
+	register_cvar("amx_sql_table", "admins")
+	register_cvar("amx_sql_serverid", "0")
 #endif
 	register_cvar("amx_sql_host", "127.0.0.1")
 	register_cvar("amx_sql_user", "root")
@@ -478,15 +489,10 @@ public adminSql()
 {
 	new table[32], error[128], type[12], errno
 	
-	static host[64], user[32], pass[32], db[128];
-	
-	get_cvar_string("amx_sql_host", host, 63);
-	get_cvar_string("amx_sql_user", user, 31);
-	get_cvar_string("amx_sql_pass", pass, 31);
-	get_cvar_string("amx_sql_db", db, 127);
-	
-	new Handle:info = SQL_MakeDbTuple(host, user, pass, db, 1);
+	new Handle:info = SQL_MakeStdTuple()
 	new Handle:sql = SQL_Connect(info, errno, error, 127)
+	
+	server_print("[AMXX] Using serverID = %d ", get_cvar_num("amx_sql_serverid"));
 	
 	get_cvar_string("amx_sql_table", table, 31)
 	
@@ -510,15 +516,30 @@ public adminSql()
 	
 	if (equali(type, "sqlite"))
 	{
-		if (!sqlite_TableExists(sql, table))
-		{
-			SQL_QueryAndIgnore(sql, "CREATE TABLE %s ( auth TEXT NOT NULL DEFAULT '', password TEXT NOT NULL DEFAULT '', access TEXT NOT NULL DEFAULT '', flags TEXT NOT NULL DEFAULT '' )", table)
-		}
-
-		query = SQL_PrepareQuery(sql, "SELECT auth, password, access, flags FROM %s", table)
+		server_print("[AMXX] CStrike-Regnick does not support sqlite backend for the moment.");
+		
 	} else {
-		SQL_QueryAndIgnore(sql, "CREATE TABLE IF NOT EXISTS `%s` ( `id` int(11) unsigned NOT NULL AUTO_INCREMENT,  `auth` varchar(32) NOT NULL DEFAULT '',  `password` varchar(50) NOT NULL DEFAULT '', `access` varchar(50) NOT NULL DEFAULT '', `flags` varchar(50) NOT NULL DEFAULT '',  `email` varchar(255) DEFAULT NULL, `server_tag` int(2) NOT NULL, `activ` int(11) DEFAULT '0', `date` int(11) NOT NULL, `key` varchar(6) NOT NULL,  PRIMARY KEY (`id`)) COMMENT = 'AMX Mod X Admins'", table)
-		query = SQL_PrepareQuery(sql,"SELECT `auth`,`password`,`access`,`flags` FROM `%s` WHERE `server_tag`='%d' AND `activ`='1' ", table, get_pcvar_num(regnick_server_tag))
+				
+		query = SQL_PrepareQuery(sql, "\
+			SELECT \
+			    usr.login, usr.password, usr.account_flags, grp.name, grp.access \
+			FROM \
+			    regnick_users usr \
+			INNER JOIN (\
+			    SELECT \
+				user_ID, server_ID, group_ID \
+			    FROM \
+				regnick_users_access \
+			    WHERE \
+				(server_ID = '0' OR server_ID = '%d') \
+			    ORDER BY server_ID ASC ) as acc \
+			INNER JOIN \
+			    regnick_groups grp \
+			ON \
+			    (acc.user_ID = usr.ID) AND (acc.group_ID = grp.ID) \
+			WHERE \
+			    (usr.active = 1) \
+			GROUP by usr.login;", get_cvar_num("amx_sql_serverid") );
 	}
 
 	if (!SQL_Execute(query))
@@ -532,10 +553,10 @@ public adminSql()
 		AdminCount = 0
 		
 		/** do this incase people change the query order and forget to modify below */
-		new qcolAuth = SQL_FieldNameToNum(query, "auth")
+		new qcolAuth = SQL_FieldNameToNum(query, "login")
 		new qcolPass = SQL_FieldNameToNum(query, "password")
 		new qcolAccess = SQL_FieldNameToNum(query, "access")
-		new qcolFlags = SQL_FieldNameToNum(query, "flags")
+		new qcolFlags = SQL_FieldNameToNum(query, "account_flags")
 		
 		new AuthData[44];
 		new Password[44];
@@ -871,5 +892,28 @@ public client_putinserver(id)
 	if (!is_dedicated_server() && id == 1)
 		return get_pcvar_num(amx_mode) ? accessUser(id) : PLUGIN_CONTINUE
 	
+	if(!is_user_admin(id))
+	{
+		new rn_message = get_pcvar_num(amx_rn_message)
+		
+		if(rn_message == 1)
+		{
+			set_task(10.0, "RNMessage", id)
+		}
+	}	
+	
 	return PLUGIN_CONTINUE
+}
+
+public RNMessage(id)
+{
+	new rn_message_site[32]
+	get_pcvar_string(amx_rn_message_site, rn_message_site, 31)
+	
+	set_hudmessage(255, 255, 255, -1.0, 0.60, 0, 6.0, 10.0)
+	show_hudmessage(id, "Your nickname is not registered!^nFor registering, go to %s", rn_message_site)
+	
+	client_cmd(id,"spk ^"vox/warning _comma unauthorized access^"")
+	
+	set_task(float(get_pcvar_num(amx_rn_message_time)), "RNMessage", id)
 }

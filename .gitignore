@@ -1,0 +1,29 @@
+#
+# CStrike-Regnick
+# http://www.gentle.ro/proiecte/cstrike-regnick/
+# rev 003
+
+# development environment specific data
+.dev/*
+www/app/config/development
+
+# documentation specific
+Publish/*
+Release/*
+
+# do not track cache
+www/app/cache/*
+!www/app/cache/index.html
+!www/app/cache/.htaccess
+
+# do not track logs
+www/app/logs/*
+!www/app/logs/index.html
+!www/app/logs/.htaccess 
+
+# other files and directories
+.DS_Store
+*.back
+
+# ignore this file
+!.gitignore
