@@ -102,6 +102,7 @@ public plugin_init()
 	register_srvcmd("amx_sqladmins", "adminSql")
 	register_cvar("amx_sql_table", "admins")
 	register_cvar("amx_sql_serverid", "0")
+	register_cvar("amx_sql_table_prefix", "")
 #endif
 	register_cvar("amx_sql_host", "127.0.0.1")
 	register_cvar("amx_sql_user", "root")
@@ -487,14 +488,15 @@ loadSettings(szFilename[])
 #if defined USING_SQL
 public adminSql()
 {
-	new table[32], error[128], type[12], errno
+	new error[128], type[12], errno
+	new prefix[32]
 	
 	new Handle:info = SQL_MakeStdTuple()
 	new Handle:sql = SQL_Connect(info, errno, error, 127)
 	
 	server_print("[AMXX] Using serverID = %d ", get_cvar_num("amx_sql_serverid"));
 	
-	get_cvar_string("amx_sql_table", table, 31)
+	get_cvar_string("amx_sql_table_prefix", prefix, 31)
 	
 	SQL_GetAffinity(type, 11)
 	
@@ -524,12 +526,12 @@ public adminSql()
 			SELECT \
 			    usr.login, usr.password, usr.account_flags, grp.name, grp.access \
 			FROM \
-			    regnick_users usr \
+			    %susers usr \
 			INNER JOIN (\
 			    SELECT \
 				user_ID, server_ID, group_ID \
 			    FROM \
-				regnick_users_access \
+				%susers_access \
 			    WHERE \
 				(server_ID = '0' OR server_ID = '%d') \
 			    ORDER BY server_ID ASC ) as acc \
@@ -539,7 +541,7 @@ public adminSql()
 			    (acc.user_ID = usr.ID) AND (acc.group_ID = grp.ID) \
 			WHERE \
 			    (usr.active = 1) \
-			GROUP by usr.login;", get_cvar_num("amx_sql_serverid") );
+			GROUP by usr.login;", prefix, prefix, get_cvar_num("amx_sql_serverid") );
 	}
 
 	if (!SQL_Execute(query))
