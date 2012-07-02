@@ -45,7 +45,7 @@
 | the active record class
 */
 
-$active_group = ENVIRONMENT;
+$active_group = 'production';
 $active_record = TRUE;
 
 /**
@@ -66,25 +66,6 @@ $db['production']['dbcollat'] = 'utf8_general_ci';
 $db['production']['swap_pre'] = '';
 $db['production']['autoinit'] = TRUE;
 $db['production']['stricton'] = FALSE;
-
-/**
- * Development server
- */
-$db['development']['hostname'] = 'localhost';
-$db['development']['username'] = 'root';
-$db['development']['password'] = 'root';
-$db['development']['database'] = 'regnick_dev';
-$db['development']['dbdriver'] = 'mysql';
-$db['development']['dbprefix'] = 'regnick_';
-$db['development']['pconnect'] = FALSE;
-$db['development']['db_debug'] = TRUE;
-$db['development']['cache_on'] = FALSE;
-$db['development']['cachedir'] = APPPATH.'cache';
-$db['development']['char_set'] = 'utf8';
-$db['development']['dbcollat'] = 'utf8_general_ci';
-$db['development']['swap_pre'] = '';
-$db['development']['autoinit'] = TRUE;
-$db['development']['stricton'] = TRUE;
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */

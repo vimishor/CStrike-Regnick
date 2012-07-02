@@ -1,0 +1,92 @@
+CStrike-Regnick v2.0.3-alpha
+www.gentle.ro
+
+
+Notificare:
+-----------
+
+    Orice versiune a aplicatiei CStrike-Regnick care contine tag-ul `alpha`, `dev` sau `pre`, inseamna ca nu 
+trebuie folosita pe servere aflate in productie. Aceste versiuni sunt lansate pentru a se putea testa aplicatia 
+de catre mai multe persoane, intr-un mediu controlat, unde eventualele bug-uri nu pot produce pagube majore.
+
+    Orice versiune a aplicatiei CStrike-Regnick care contine unul dintre aceste tag-uri, este recomandat sa o 
+testati pe localhost sau intr-un sandbox.
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+CERINTE:
+--------
+
+    1. PHP 5.2+
+    2. Firma de hosting web sa permita conexiuni externe la server-ul MySQL.
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+      
+NOTE:
+-----
+ 
+    1. Fiind o versiune pentru testare, metoda de instalare nu este foarte simpla si la indemana oricui.
+        Metoda de instalare o sa fie simplificata in viitor.
+    2. Pentru o exemplificare facila, presupunem ca avem domeniul exemplu.com si dorim sa instalam 
+        CStrike-Regnick la adresa www.exemplu.com/regnick/
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+INSTALARE:
+----------
+
+    INSTALARE SCRIPT WEB:
+    ---------------------
+    
+        1. Dupa dezarhivare creeaza o noua baza de date si importa fisierul `sql/regnick.sql` in aceasta.
+        2. Pe server-ul web, creeaza directorul `regnick`.
+        3. Editeaza fisierul `www/app/config/database.php` si schimba setarile in mod corespunzator.
+        4. Editeaza fisierul `www/app/config/config.php` si modifica `CHANGE_ME` cu orice doresti:
+            $config['encryption_key'] = 'CHANGE-ME';        
+        5. Incarca fisierele din directorul `www` aflat in arhiva, in directorul `regnick` de pe server.
+        6. Acceseaza http://www.exemplu.com/regnick/
+        7. Te poti autentifica folosind datele:
+            username: administrator
+            password: admin            
+        8. Daca script-ul nu este instalat pe localhost, nu uita sa schimbi parola pentru utilizatorul `administrator`.
+    
+    
+    INSTALARE PLUGIN AMXX
+    ---------------------
+    
+        1. Copiaza fiiserul `amxmodx/bin/admin_sql.amxx` in `cstrike/addons/amxmodx/plugins`
+        2. Editeaza `cstrike/addons/amxmodx/plugins/configs/sql.cfg`:
+        
+            amx_sql_host	"127.0.0.1" // IP-ul trebuie sa fie identic cu cel specificat in configuratia script-ului web
+            amx_sql_user	"username"
+            amx_sql_pass	"parola"
+            amx_sql_db		"regnick"   // numele bazei de date in care se regasesc tabelele CStrike-Regnick
+            amx_sql_serverid "2"        // ID-ul server-ului curent
+            amx_sql_table	"n/a"       // nu este folosit. se poate lasa necompletat
+            amx_sql_type	"mysql"
+       
+       3. Editeaza `cstrike/addons/amxmodx/plugins/configs/plugins.ini`:
+            1. Dezactiveaza plugin-ul `admin.amxx`.
+            2. Activeaza plugin-ul `admin_sql.amxx`
+        
+       4. (Re)porneste server-ul de CS si urmareste consola/log-urile pt a vedea daca conexiunea la MySQL reuseste.
+            
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+LICENTA:
+    1. Aplicatia CStrike-Regnick este lansata sub licenta GPL v2. (vezi docs/LICENSE)
+    2. Framework-ul CodeIgniter este lansat sub licenta OSL3.0 (vezi http://codeigniter.com/user_guide/license.html)
+    3. Alte module, componente si/sau fragmente de cod scrise de terte persoane, se pot afla sub alte licente. 
+    Citeste fisierul LICENSE acolo unde se gaseste sau header-ul oricarui fisier pentru a afla sub ce licenta 
+    se afla respectivul fisier.
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Contributors:
+    *** Note: Remove `-no-spam` tag to send email.
+    
+    vimishor    < alex [at] gentle-no-spam.ro >
+    T-z3P       < camel_ikimosu [at] yahoo-no-spam.com >
+
+[/EOF]
