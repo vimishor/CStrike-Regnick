@@ -11,7 +11,7 @@ Counter-Strike 1.6 servers.
 
 
 ## Installation
-Read `docs/Install`
+Read `docs/Install` (Ro)
 
 ## Official Links
 
