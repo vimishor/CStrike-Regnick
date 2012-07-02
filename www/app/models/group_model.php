@@ -1,5 +1,26 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+/**
+ * This file is part of the CStrike-Regnick package
+ * 
+ * (c) Gentle Software Solutions <www.gentle.ro>
+ * 
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
+// ------------------------------------------------------------------------
+
+/**
+ * Group model
+ * 
+ * Manipulate groups stored in database.
+ * 
+ * @package     CStrike-Regnick
+ * @category    Models
+ * @copyright   (c) 2011 - 2012 Gentle Software Solutions
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @link        http://www.gentle.ro/ 
+ */
 class group_model extends CI_Model
 {
     /**

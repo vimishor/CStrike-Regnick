@@ -1,9 +1,25 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+/**
+ * This file is part of the CStrike-Regnick package
+ * 
+ * (c) Gentle Software Solutions <www.gentle.ro>
+ * 
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+// ------------------------------------------------------------------------
 
 /**
+ * Ucp controller
+ * 
  * User control panel
  * 
- * UCP controller 
+ * @package     CStrike-Regnick
+ * @category    Controllers
+ * @copyright   (c) 2011 - 2012 Gentle Software Solutions
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @link        http://www.gentle.ro/ 
  */
 class Ucp extends MY_Controller
 {

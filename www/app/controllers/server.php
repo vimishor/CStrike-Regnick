@@ -1,7 +1,25 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+/**
+ * This file is part of the CStrike-Regnick package
+ * 
+ * (c) Gentle Software Solutions <www.gentle.ro>
+ * 
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+// ------------------------------------------------------------------------
 
 /**
- * Servers controller
+ * Server controller
+ * 
+ * Provides servers listing
+ * 
+ * @package     CStrike-Regnick
+ * @category    Controllers
+ * @copyright   (c) 2011 - 2012 Gentle Software Solutions
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @link        http://www.gentle.ro/ 
  */
 class Server extends MY_Controller
 {
