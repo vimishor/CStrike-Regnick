@@ -111,7 +111,7 @@ class Acp extends MY_Controller
     {
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
-        $this->load->library('security');
+        //$this->load->library('security');
         $this->load->model('server_model');
         
         if ($this->form_validation->run('acp-server-add') === true) // process form
@@ -169,7 +169,7 @@ class Acp extends MY_Controller
     {
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
-        $this->load->library('security');
+        //$this->load->library('security');
         $this->load->model('server_model');
         
         if ($this->form_validation->run('acp-server-add') === true) // process form
@@ -279,7 +279,7 @@ class Acp extends MY_Controller
     {
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
-        $this->load->library('security');
+        //$this->load->library('security');
         $this->load->model('group_model');
         
         if ($this->form_validation->run('acp-group-edit') === true) // process form
@@ -344,7 +344,7 @@ class Acp extends MY_Controller
     {
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
-        $this->load->library('security');
+        //$this->load->library('security');
         $this->load->model('group_model');
         
         if ($this->form_validation->run('acp-group-add') === true) // process form
@@ -502,7 +502,7 @@ class Acp extends MY_Controller
     {
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
-        $this->load->library('security');
+        //$this->load->library('security');
         $this->load->model('server_model');
         
         if ($this->form_validation->run('acp-user-edit') === true) // process form
@@ -625,7 +625,7 @@ class Acp extends MY_Controller
     {
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
-        $this->load->library('security');
+        //$this->load->library('security');
         
         if ($this->form_validation->run('acp-user-add') === true) // process form
         {

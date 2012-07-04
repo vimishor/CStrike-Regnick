@@ -83,7 +83,7 @@ class Ucp extends MY_Controller
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
         $this->load->library('regnick_auth');
-        $this->load->library('security');
+        //$this->load->library('security');
         
         if ($this->form_validation->run('ucp-register') === true) // process form
         {
@@ -183,7 +183,7 @@ class Ucp extends MY_Controller
         
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
-        $this->load->library('security');
+        //$this->load->library('security');
                 
         if ($this->form_validation->run('ucp-settings') === true) // process form
         {
@@ -237,7 +237,7 @@ class Ucp extends MY_Controller
         
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
-        $this->load->library('security');
+        //$this->load->library('security');
                         
         if ($this->form_validation->run('ucp-password') === true) // process form
         {
@@ -331,7 +331,7 @@ class Ucp extends MY_Controller
         
         $this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
-		$this->load->library('security');
+		//$this->load->library('security');
                 
         if ($this->form_validation->run('ucp-login') === true) // process form
         {
@@ -398,7 +398,7 @@ class Ucp extends MY_Controller
         
         $this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
-		$this->load->library('security');
+		//$this->load->library('security');
         
         if ($this->form_validation->run('ucp-recover') === true) // process form
         {
