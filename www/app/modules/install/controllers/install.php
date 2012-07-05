@@ -140,6 +140,11 @@ class install extends MY_Controller {
 				'label'	=> 'Password',
 				'rules'	=> 'trim'
 			),
+            array(
+				'field' => 'prefix',
+				'label'	=> 'Prefix',
+				'rules'	=> 'trim'
+			),
         ));
         
         // If the form validation passed
@@ -153,6 +158,9 @@ class install extends MY_Controller {
                 'dbprefix' => $this->input->post('prefix')
             );
             $this->db_conf = array_merge($this->db_conf, $conf);
+            
+            // store dbprefix in session for latter.
+            $this->session->set_userdata('dbprefix', $this->db_conf['dbprefix']);
             
             // save database credentials to config
             if ($this->save_db_config())
@@ -219,14 +227,14 @@ class install extends MY_Controller {
     public function step3()
     {
         $schema     = file_get_contents(MODULES_PATH.'install/data/regnick.sql');
-        $schema     = str_replace('{PREFIX}', $this->db->dbprefix, $schema);
+        $schema     = str_replace('{prefix}', $this->session->userdata('dbprefix'), $schema);
         $queries    = explode(':: split ::', $schema);
         $complete   = true;
         
         foreach($queries as $query)
         {
             if(trim($query) != "" && strpos($query, "--") === false)
-            {                
+            {   
                 if (!$this->db->simple_query($query))
                 {
                     $complete = false;
@@ -244,6 +252,7 @@ class install extends MY_Controller {
                 
         // clean installer data from session
         $this->session->unset_userdata('installing');
+        $this->session->unset_userdata('dbprefix');
         
         $data = array(
             'page_title'    => 'Instalation complete',

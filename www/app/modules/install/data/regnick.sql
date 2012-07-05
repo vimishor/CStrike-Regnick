@@ -1,7 +1,7 @@
-DROP TABLE IF EXISTS `{PREFIX}groups`;
+DROP TABLE IF EXISTS `{prefix}groups`;
 :: split ::
 
-CREATE TABLE `{PREFIX}groups` (
+CREATE TABLE `{prefix}groups` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `access` varchar(50) NOT NULL,
@@ -10,30 +10,30 @@ CREATE TABLE `{PREFIX}groups` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 :: split ::
 
-INSERT INTO `{PREFIX}groups` VALUES ('1', 'Default', 'z', '0');
+INSERT INTO `{prefix}groups` VALUES ('1', 'Default', 'z', '0');
 :: split ::
 
-UPDATE `{PREFIX}groups` SET `ID` = '0' WHERE (`ID`='1');
+UPDATE `{prefix}groups` SET `ID` = '0' WHERE (`ID`='1');
 :: split ::
 
-DROP TABLE IF EXISTS `{PREFIX}options`;
+DROP TABLE IF EXISTS `{prefix}options`;
 :: split ::
 
-CREATE TABLE `{PREFIX}options` (
+CREATE TABLE `{prefix}options` (
   `name` varchar(64) NOT NULL,
   `value` longtext NOT NULL,
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 :: split ::
 
-INSERT INTO `{PREFIX}options` VALUES ('app_version', '2.0.3-alpha');
+INSERT INTO `{prefix}options` VALUES ('app_version', '2.0.3-alpha');
 :: split ::
-INSERT INTO `{PREFIX}options` VALUES ('db_version', '21062012');
+INSERT INTO `{prefix}options` VALUES ('db_version', '21062012');
 :: split ::
 
-DROP TABLE IF EXISTS `{PREFIX}servers`;
+DROP TABLE IF EXISTS `{prefix}servers`;
 :: split ::
-CREATE TABLE `{PREFIX}servers` (
+CREATE TABLE `{prefix}servers` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `address` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -41,16 +41,16 @@ CREATE TABLE `{PREFIX}servers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 :: split ::
 
-INSERT INTO `{PREFIX}servers` VALUES ('1', 'All servers', 'All servers');
+INSERT INTO `{prefix}servers` VALUES ('1', 'All servers', 'All servers');
 :: split ::
-UPDATE `{PREFIX}servers` SET `ID` = '0' WHERE (`ID`='1');
+UPDATE `{prefix}servers` SET `ID` = '0' WHERE (`ID`='1');
 :: split ::
-ALTER TABLE {PREFIX}servers AUTO_INCREMENT = 1;
+ALTER TABLE {prefix}servers AUTO_INCREMENT = 1;
 :: split ::
 
-DROP TABLE IF EXISTS `{PREFIX}users`;
+DROP TABLE IF EXISTS `{prefix}users`;
 :: split ::
-CREATE TABLE `{PREFIX}users` (
+CREATE TABLE `{prefix}users` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `login` varchar(50) NOT NULL,
   `password` varchar(64) NOT NULL,
@@ -63,13 +63,13 @@ CREATE TABLE `{PREFIX}users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 :: split ::
 
-INSERT INTO `{PREFIX}users` VALUES ('1', 'administrator', 'admin', 'admin@example.com', '1331499421', '1', 'FROM_INSTALL', 'abf');
+INSERT INTO `{prefix}users` VALUES ('1', 'administrator', 'admin', 'admin@example.com', '1331499421', '1', 'FROM_INSTALL', 'abf');
 :: split ::
 
-DROP TABLE IF EXISTS `{PREFIX}users_access`;
+DROP TABLE IF EXISTS `{prefix}users_access`;
 :: split ::
 
-CREATE TABLE `{PREFIX}users_access` (
+CREATE TABLE `{prefix}users_access` (
   `access_ID` int(11) NOT NULL AUTO_INCREMENT,
   `user_ID` int(11) NOT NULL,
   `server_ID` int(11) NOT NULL,
