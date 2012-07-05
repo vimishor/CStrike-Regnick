@@ -55,7 +55,7 @@ class install extends MY_Controller {
     function __construct() 
     {
         parent::__construct();
-        
+                
         $this->load->library('session');
         
         // if is already installed, stop execution here.
@@ -118,7 +118,7 @@ class install extends MY_Controller {
     {
         $this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation'); 
-        
+                
         $this->form_validation->set_rules(array(
             array(
 				'field' => 'hostname',
@@ -148,7 +148,7 @@ class install extends MY_Controller {
         ));
         
         // If the form validation passed
-        if ($this->form_validation->run($this))
+        if ($this->form_validation->run('', $this))
         {
             $conf = array(
                 'hostname' => $this->input->post('hostname'),
@@ -293,7 +293,7 @@ class install extends MY_Controller {
             '{database}'    => $this->db_conf['database'],
 			'{username}' 	=> $this->db_conf['username'],
 			'{password}' 	=> $this->db_conf['password'],
-            '{prefix}'      => $this->db_conf['prefix'],
+            '{prefix}'      => $this->db_conf['dbprefix'],
 		);
         
         // replace {} variables from template with real data

@@ -328,14 +328,13 @@ class Ucp extends MY_Controller
         {
             redirect('ucp/dashboard', 'refresh');
         }
-        
+
         $this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
 		//$this->load->library('security');
-                
+        
         if ($this->form_validation->run('ucp-login') === true) // process form
-        {
-            
+        {            
             if ($this->regnick_auth->user_login($this->input->post('username'), $this->input->post('password'), (bool) $this->input->post('remember') ) )
             {
                 // login successful.

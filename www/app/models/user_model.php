@@ -194,8 +194,8 @@ class user_model extends CI_Model
         $sql = 'SELECT 
                     acc.server_ID as ID, grp.name as group_name
                 FROM
-                    regnick_users_access as acc, 
-                    regnick_groups as grp 
+                    '.$this->db->dbprefix('users_access').' as acc, 
+                    '.$this->db->dbprefix('groups').' as grp 
                 WHERE (acc.user_ID = ?) 
                     AND (acc.group_ID = grp.ID);';
         

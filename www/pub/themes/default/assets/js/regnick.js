@@ -18,7 +18,7 @@ function show_confirm()
  */
 function user_notify(message, type)
 {
-    tpl = '<div class="alert alert-'+ type +'"><a class="close" data-dismiss="alert">×</a>'+ message +'</div>';
+    tpl = '<div class="alert alert-'+ type +'"><a class="close" data-dismiss="alert">x</a>'+ message +'</div>';
     $(tpl).appendTo($(".user-notify"));
 }
 

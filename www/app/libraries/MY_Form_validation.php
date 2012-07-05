@@ -2,8 +2,30 @@
 
 class MY_Form_validation extends CI_Form_validation 
 {
-    function run($module = '', $group = '') {        
-        (is_object($module)) AND $this->CI =& $module;
+    
+    public $caller;
+    
+    // ------------------------------------------------------------------------
+    
+    function __construct($rules = array())
+	{
+		parent::__construct($rules);
+	}
+    
+    // ------------------------------------------------------------------------
+    
+    function run($group = '', $module = '')
+    {        
+        if (is_object($module))
+        {
+            $this->CI =& $module;   
+        }
+        
+        if (is_object($this->caller))
+        {
+            $this->CI =& $this->caller;
+        }
+        
         return parent::run($group);
     }    
 }

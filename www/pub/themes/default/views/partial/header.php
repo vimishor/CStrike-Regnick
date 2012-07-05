@@ -49,6 +49,7 @@
                     <li class="divider"></li>
                     <li><a href="<?php echo site_url('acp/dashboard'); ?>"><i class="icon-wrench"></i> <?php echo lang('administration'); ?></a></li>
                     <?php endif; ?>
+                    
                     <li class="divider"></li>
                     <li><a href="<?php echo site_url('ucp/logout'); ?>"><i class="icon-lock"></i> <?php echo lang('logout'); ?></a></li>
                   </ul>

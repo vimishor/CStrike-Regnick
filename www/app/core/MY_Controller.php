@@ -14,7 +14,7 @@ class MY_Controller extends MX_Controller {
     function __construct()
     {
         parent::__construct();
-        
+                
         // If application is not installed, proceed with installation
         if ( ($this->session->userdata('installing') OR !defined('RN_INSTALLED')) AND ($this->uri->segment(1) != 'install') )
         {
