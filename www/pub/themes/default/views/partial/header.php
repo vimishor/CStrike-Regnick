@@ -68,7 +68,7 @@
         <div class="user-notify"></div>
         <?php if ( ($msg = get_userNotice()) OR (form_has_error()) ): ?>
         <div class="alert alert-<?php echo $msg['type']; ?>">
-            <a class="close" data-dismiss="alert">×</a>
+            <a class="close" data-dismiss="alert">x</a>
             <?php echo $msg['body']; ?>
             <?php if (form_has_error()) { echo validation_errors(); } ?>
         </div>

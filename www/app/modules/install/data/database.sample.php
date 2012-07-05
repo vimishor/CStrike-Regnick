@@ -51,10 +51,10 @@ $active_record = TRUE;
 /**
  * Production (LIVE) server
  */
-$db['production']['hostname'] = '';
-$db['production']['username'] = '';
-$db['production']['password'] = '';
-$db['production']['database'] = '';
+$db['production']['hostname'] = '{hostname}';
+$db['production']['username'] = '{username}';
+$db['production']['password'] = '{password}';
+$db['production']['database'] = '{database}';
 $db['production']['dbdriver'] = 'mysql';
 $db['production']['dbprefix'] = '';
 $db['production']['pconnect'] = FALSE;
@@ -66,6 +66,9 @@ $db['production']['dbcollat'] = 'utf8_general_ci';
 $db['production']['swap_pre'] = '';
 $db['production']['autoinit'] = TRUE;
 $db['production']['stricton'] = FALSE;
+
+// Edit end
+define('RN_INSTALLED', TRUE);
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */

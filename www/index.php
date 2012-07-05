@@ -203,6 +203,12 @@ if( ! ini_get('date.timezone') )
 		define('APPPATH', BASEPATH.$application_folder.'/');
 	}
 
+/**
+ * CStrike-Regnick
+ */
+define('MODULES_PATH', APPPATH.'modules/');
+
+
 /*
  * --------------------------------------------------------------------
  * LOAD THE BOOTSTRAP FILE
