@@ -225,7 +225,7 @@ class Acp extends MY_Controller
         $this->load->library('pagination');
         $config['base_url']     = base_url().'/acp/server/list/';
         $config['total_rows']   = $this->db->where('ID >', 0)->count_all_results('servers');
-        $config['per_page']     = 2;
+        $config['per_page']     = $this->config->item('results_per_page');
         $config['uri_segment']  = 4;
         $this->pagination->initialize($config);
                 
@@ -399,7 +399,7 @@ class Acp extends MY_Controller
         $this->load->library('pagination');
         $config['base_url']     = base_url().'/acp/group/list/';
         $config['total_rows']   = $this->db->count_all('groups');
-        $config['per_page']     = 2;
+        $config['per_page']     = $this->config->item('results_per_page');;
         $config['uri_segment']  = 4;
         $this->pagination->initialize($config);
         
@@ -687,7 +687,7 @@ class Acp extends MY_Controller
         $this->load->library('pagination');
         $config['base_url']     = base_url().'/acp/user/list/';
         $config['total_rows']   = $this->db->count_all('users');
-        $config['per_page']     = 2;
+        $config['per_page']     = $this->config->item('results_per_page');
         $config['uri_segment']  = 4;
         $this->pagination->initialize($config);
         

@@ -81,7 +81,7 @@ class Server extends MY_Controller
         // + pagination config
         $config['base_url']     = site_url('server/list');
         $config['total_rows']   = $this->db->where('ID >', 0)->count_all_results('servers');
-        $config['per_page']     = 12;
+        $config['per_page']     = $this->config->item('results_per_page');
         $config['uri_segment']  = 3;
         $this->pagination->initialize($config);
         // - pagination config 

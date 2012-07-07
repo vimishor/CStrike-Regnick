@@ -47,5 +47,10 @@ $config['ui.tooltips'] = true;
  */
 $config['webmaster.email']  = 'accounts@example.com';
 
+/**
+ * How many SQL results do we show on one page ?
+ */
+$config['results_per_page'] = '12';
+
 /* End of file regnick.php */
 /* Location: ./application/config/regnick.php */
