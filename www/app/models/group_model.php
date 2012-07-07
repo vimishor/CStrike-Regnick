@@ -78,7 +78,7 @@ class group_model extends CI_Model
      */
     public function saveGroup($groupID, $name, $access, $is_public)
     {
-        if ($this->isGroup($name) === false)
+        if ($this->isGroup($groupID) === false)
         {
             $this->set_error('no_group');
             console_log('no_group');
