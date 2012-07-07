@@ -169,6 +169,7 @@ class install extends MY_Controller {
             }
             
             // config not saved for some reason
+            notify('Unable to save file database.php. (Probably no write permissions?)', 'error');
             redirect('install/'); 
         }
         else 
@@ -273,9 +274,9 @@ class install extends MY_Controller {
      */
     private function test_permissions()
     {
-        $this->permissions['app_cache']     = is_writable(APPPATH.'cache') ? 'Yes' : 'No';
-        $this->permissions['app_logs']      = is_writable(APPPATH.'cache') ? 'Yes' : 'No';
-        $this->permissions['app_db_cfg']    = is_writable(APPPATH.'cache') ? 'Yes' : 'No';
+        $this->permissions['app_cache']     = is_really_writable(APPPATH.'cache') ? 'Yes' : 'No';
+        $this->permissions['app_logs']      = is_really_writable(APPPATH.'logs') ? 'Yes' : 'No';
+        $this->permissions['app_db_cfg']    = is_really_writable(APPPATH.'config/database.php') ? 'Yes' : 'No';
     }
     
     /**

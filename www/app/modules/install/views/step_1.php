@@ -14,7 +14,7 @@
                         <td class="center" style="<?php echo ($app_dir_cache == 'Yes') ? 'color: green;' : 'color: red;'; ?>"><?php echo $app_dir_cache; ?></td>
                     </tr>
                     <tr>
-                        <td>Cache directory is writable</td>
+                        <td>Logs directory is writable</td>
                         <td class="center" style="<?php echo ($app_dir_logs == 'Yes') ? 'color: green;' : 'color: red;'; ?>"><?php echo $app_dir_logs; ?></td>
                     </tr>
                     <tr>
