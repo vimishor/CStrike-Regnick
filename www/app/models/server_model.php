@@ -65,6 +65,8 @@ class server_model extends CI_Model {
      */
     private function getUsers($serverID, $public = false)
     {
+        $this->benchmark->mark('server_members_list_(SQL)_start');
+        
         $public = ($public) ? 1 : 0;
         
         $sql = 'SELECT 
@@ -83,6 +85,8 @@ class server_model extends CI_Model {
                     AND (grp.public = ?);';
         
         $query = $this->db->query($sql, array((int)$serverID, (int)$public));
+        
+        $this->benchmark->mark('server_members_list_(SQL)_end');
         
         return $query->result_array(); 
     }
@@ -113,9 +117,13 @@ class server_model extends CI_Model {
             return false;
         }
         
+        $this->benchmark->mark('delete_server_(SQL)_start');
+                
         // delete server
         $this->db->where('ID', $serverID);
         $this->db->delete('servers');
+        
+        $this->benchmark->mark('delete_server_(SQL)_end');
         
         return ($this->db->affected_rows() > 0) ? true : false;
     }
@@ -129,12 +137,16 @@ class server_model extends CI_Model {
      */
     public function getServer($serverID)
     {
+        $this->benchmark->mark('get_server_(SQL)_start');
+        
         $query = $this->db->select('ID, address, name')
                     ->where('ID', (int)$serverID)
                     ->limit(1)
                     ->get('servers');
         
         $server = $query->row();
+        
+        $this->benchmark->mark('get_server_(SQL)_end');
         
         return is_object($server) ? $server : false;
     }
@@ -161,7 +173,11 @@ class server_model extends CI_Model {
             'name'      => $name,
         );
         
+        $this->benchmark->mark('save_server_(SQL)_start');
+        
         $this->db->where('ID', (int)$serverID)->update('servers', $data);
+        
+        $this->benchmark->mark('save_server_(SQL)_end');
         
         return $this->db->affected_rows() == 1;
     }
@@ -199,6 +215,8 @@ class server_model extends CI_Model {
      */
     public function isServer($address)
     {
+        $this->benchmark->mark('is_server_(SQL)_start');
+        
         $column = 'address';
         
         if (is_numeric($address))
@@ -210,7 +228,9 @@ class server_model extends CI_Model {
                         ->where($column, $address)
                         ->limit(1)
                         ->get('servers');
-                
+        
+        $this->benchmark->mark('is_server_(SQL)_end');
+        
         return ($query->num_rows() == 1) ? true : false;
     }
     
@@ -226,6 +246,8 @@ class server_model extends CI_Model {
      */
     public function getServers($with_global = false, $num, $offset, $return = 'obj')
     {
+        $this->benchmark->mark('servers_list_(SQL)_start');
+        
         $query = '';
         
         if ($with_global === true)
@@ -241,6 +263,8 @@ class server_model extends CI_Model {
                         ->limit($num, $offset)
                         ->get('servers');
         }
+        
+        $this->benchmark->mark('servers_list_(SQL)_end');
         
         if ($return == 'obj')
         {
