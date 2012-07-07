@@ -521,28 +521,34 @@ public adminSql()
 		server_print("[AMXX] CStrike-Regnick does not support sqlite backend for the moment.");
 		
 	} else {
-				
+		
 		query = SQL_PrepareQuery(sql, "\
 			SELECT \
 			    usr.login, usr.password, usr.account_flags, grp.name, grp.access \
 			FROM \
-			    %susers usr \
+			    %s usr \
 			INNER JOIN (\
 			    SELECT \
 				user_ID, server_ID, group_ID \
 			    FROM \
-				%susers_access \
+				%s \
 			    WHERE \
 				(server_ID = '0' OR server_ID = '%d') \
 			    ORDER BY server_ID ASC ) as acc \
 			INNER JOIN \
-			    regnick_groups grp \
+			    %s grp \
 			ON \
 			    (acc.user_ID = usr.ID) AND (acc.group_ID = grp.ID) \
 			WHERE \
 			    (usr.active = 1) \
-			GROUP by usr.login;", prefix, prefix, get_cvar_num("amx_sql_serverid") );
+			GROUP by usr.login;", 
+				table_prefix("users", prefix), 
+				table_prefix("users_access", prefix), 
+				get_cvar_num("amx_sql_serverid"), 
+				table_prefix("groups", prefix) 
+			);
 	}
+	
 
 	if (!SQL_Execute(query))
 	{
@@ -593,6 +599,14 @@ public adminSql()
 	}
 	
 	return PLUGIN_HANDLED
+}
+
+
+public table_prefix(name[], prefix[])
+{
+	new temp[128];
+	format(temp, 127, "%s%s", prefix, name);
+	return temp;
 }
 #endif
 
