@@ -183,7 +183,6 @@ class Ucp extends MY_Controller
         
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
-        //$this->load->library('security');
                 
         if ($this->form_validation->run('ucp-settings') === true) // process form
         {

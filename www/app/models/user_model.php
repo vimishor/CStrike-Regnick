@@ -335,7 +335,13 @@ class user_model extends MY_Model
     {
         $this->db->where('ID', $user_id)->update('users', $settings);
         
-        return ($this->db->affected_rows() > 0) ? true : false;
+        if ($this->db->affected_rows() > 0)
+        {
+            return true;
+        }
+        
+        $this->set_error('error_on_save');
+        return false;
     }
     
     /**
