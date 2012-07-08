@@ -21,16 +21,7 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @link        http://www.gentle.ro/ 
  */
-class core_model extends CI_Model {
-    
-    /**
-     * Error(s) holder
-     * @var array
-     */
-    private $errors = array();
-    
-    // ----------------------------------------------------------------------------------------------------------
-    
+class core_model extends MY_Model {
     
     /**
      * Fetch specified option from DB
@@ -151,49 +142,6 @@ class core_model extends CI_Model {
         return $this->db->insert('options', $data);
     }
     
-    // ----------------------------------------------------------------------------------------------------------
-        
-    /**
-	 * Set an error message
-	 *
-     * @access  public
-     * @param   string  $error  Error message
-     * @return  string   
-	 */
-	public function set_error($error)
-	{
-		$this->errors[] = $error;
-        notify($this->lang->line($error), 'error'); // show error to user
-        
-		return $error;
-	}
-    
-    /**
-     * Get last error
-     * 
-     * @access  public
-     * @return  string
-     */
-    public function get_error()
-    {
-        if ($this->is_error() === false)
-        {
-            return '';
-        }
-        
-        return array_pop($this->errors);
-    }
-    
-    /**
-     * Check if any error has occured
-     * 
-     * @access  public
-     * @return  bool
-     */
-    public function is_error()
-    {
-        return (count($this->errors) > 0) ? true : false;
-    }
 }
 
 /* End of file */

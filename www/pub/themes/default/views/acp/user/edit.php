@@ -90,7 +90,7 @@
                                 <tr><td colspan="3" class="center"><?php echo lang('user_has_no_access'); ?>.</td></tr>
                                 
                                 <?php elseif (!array_key_exists(0, $no_access)): ?>
-                                <tr id="<?php echo $server['ID']; ?>">
+                                <tr id="<?php echo $servers[0]['ID']; ?>">
                                     <td><a href="#" data-scope="del-access" data-serverID="0" data-userID="<?php echo $userID; ?>" title="<?php echo lang('del_access_on_server'); ?>">0</a></td>
                                     <td><?php echo $servers[0]['address']; ?></td>
                                     <td><a class="has-access" href="<?php echo site_url('acp/user/'.$userID.'/access/0/') ?>" title="<?php echo lang('edit_access_on_server'); ?>"> <?php echo (array_key_exists($servers[0]['ID'], $no_access)) ? lang('no') : lang('yes'); ?></a></td>

@@ -21,13 +21,8 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @link        http://www.gentle.ro/ 
  */
-class user_model extends CI_Model
+class user_model extends MY_Model
 {
-    /**
-     * Error(s) holder
-     * @var array
-     */
-    private $errors = array();
     
     /**
      * Password encryption methods
@@ -238,7 +233,13 @@ class user_model extends CI_Model
                 
         $this->db->where('ID', (int)$userID)->update('users', $data);
         
-        return $this->db->affected_rows() == 1;
+        if ($this->db->affected_rows() == 1)
+        {
+            return true;
+        }
+        
+        $this->set_error('error_on_save');
+        return false;
     }
     
     /**
@@ -538,50 +539,6 @@ class user_model extends CI_Model
         return ($enc_method == 'none') ? $password : call_user_func($enc_method, $password);
     }
     
-    
-    // ----------------------------------------------------------------------------------------------------------
-        
-    /**
-	 * Set an error message
-	 *
-     * @access  public
-     * @param   string  $error  Error message
-     * @return  string   
-	 */
-	public function set_error($error)
-	{
-		$this->errors[] = $error;
-        notify($this->lang->line($error), 'error'); // show error to user
-        
-		return $error;
-	}
-    
-    /**
-     * Get last error
-     * 
-     * @access  public
-     * @return  string
-     */
-    public function get_error()
-    {
-        if ($this->is_error() === false)
-        {
-            return '';
-        }
-        
-        return array_pop($this->errors);
-    }
-    
-    /**
-     * Check if any error has occured
-     * 
-     * @access  public
-     * @return  bool
-     */
-    public function is_error()
-    {
-        return (count($this->errors) > 0) ? true : false;
-    }
 }
 
 /* End of file */
