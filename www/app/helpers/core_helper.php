@@ -26,6 +26,20 @@
 
 // ------------------------------------------------------------------------ 
 
+/**
+ * Store current URL
+ * 
+ * @return  void
+ */
+if ( ! function_exists('store_location'))
+{
+    function store_location()
+    {
+        $CI =& get_instance();
+        $CI->load->helper('url');
+        $CI->session->set_userdata('continue', current_url());
+    }
+}
 
 /**
  * Fetch option from DB

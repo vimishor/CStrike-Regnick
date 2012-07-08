@@ -339,6 +339,12 @@ class Ucp extends MY_Controller
             {
                 // login successful.
                 console_log('Login OK');
+                
+                if ($continue = $this->session->userdata('continue'))
+                {
+                    $this->session->unset_userdata('continue');
+                    redirect($continue);
+                }
                 redirect('ucp/dashboard', 'refresh');
             }
             else
