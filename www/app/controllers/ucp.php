@@ -117,9 +117,7 @@ class Ucp extends MY_Controller
                 {
                     notify($this->lang->line('account_created'), 'success');
                 }
-                
-                // @todo: add server access if necessary
-                
+                                
                 redirect('', 'refresh');
             }
             else
@@ -137,18 +135,21 @@ class Ucp extends MY_Controller
             $server_list        = $this->server_model->getServers( $this->config->item('register.global') );
             $groups = $servers  = array();
             
-            // filter groups
-            // @todo: refactor this
-            foreach ($pub_groups as $group)
+            if (count($pub_groups>0))
             {
-                $groups[$group->ID] = $group->name;
-            }
-            
-            // filter servers
-            // @todo: refactor this
-            foreach ($server_list as $server)
-            {
-                $servers[$server->ID] = $server->address;
+                // filter groups
+                // @todo: refactor this
+                foreach ($pub_groups as $group)
+                {
+                    $groups[$group->ID] = $group->name;
+                }
+                
+                // filter servers
+                // @todo: refactor this
+                foreach ($server_list as $server)
+                {
+                    $servers[$server->ID] = $server->address;
+                }
             }
             
             // spring cleaning
