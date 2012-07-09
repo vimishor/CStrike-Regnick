@@ -94,7 +94,13 @@ class group_model extends MY_Model
         
         $this->db->where('ID', (int)$groupID)->update('groups', $data);
         
-        return $this->db->affected_rows() == 1;   
+        if ($this->db->affected_rows() == 1)
+        {
+            return true;
+        }
+        
+        $this->set_error('error_on_save');
+        return false;   
     }
     
     /**
