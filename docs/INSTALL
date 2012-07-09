@@ -59,14 +59,17 @@ INSTALARE:
         1. Copiaza fiserul `amxmodx/bin/admin_sql.amxx` in `cstrike/addons/amxmodx/plugins`
         2. Editeaza `cstrike/addons/amxmodx/plugins/configs/sql.cfg`:
         
-            amx_sql_host	        "127.0.0.1" // IP-ul trebuie sa fie identic cu cel specificat in configuratia script-ului web
+            amx_sql_host	        "127.0.0.1"                         // IP-ul trebuie sa fie identic cu cel specificat in configuratia script-ului web
             amx_sql_user	        "username"
             amx_sql_pass	        "parola"
-            amx_sql_db		        "regnick"   // numele bazei de date in care se regasesc tabelele CStrike-Regnick
-            amx_sql_serverid        "2"         // ID-ul server-ului curent
-            amx_sql_table_prefix    "regnick_"  // Identic cu prefixul specificat la instalarea scriptului web
-            amx_sql_table	        "n/a"       // nu este folosit. se poate lasa necompletat
+            amx_sql_db		        "regnick"                           // numele bazei de date in care se regasesc tabelele CStrike-Regnick
+            amx_sql_serverid        "2"                                 // ID-ul server-ului curent
+            amx_sql_table_prefix    "regnick_"                          // Identic cu prefixul specificat la instalarea scriptului web
+            amx_sql_table	        "n/a"                               // nu este folosit. se poate lasa necompletat
             amx_sql_type	        "mysql"
+            amx_rn_message          "1"                                 // Doresti sa apara un mesaj de informare pt cei care nu au nick-ul inregistrat ?
+            amx_rn_message_time     "300.0"                             // cat de des doresti sa apara acest mesaj ?
+            amx_rn_message_site     "http://www.example.com/regnick/"   // adresa web unde este instalat script-ul CStrike-Regnick
        
        3. Editeaza `cstrike/addons/amxmodx/plugins/configs/plugins.ini`:
             1. Dezactiveaza plugin-ul `admin.amxx`.
