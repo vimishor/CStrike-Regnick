@@ -140,7 +140,7 @@ $config = array(
         array(
             'field' => 'username',
             'label' => 'Username',
-            'rules' => 'trim|required|xss_clean'
+            'rules' => 'trim|required|xss_clean|is_unique[users.login]'
         ),
         array(
             'field' => 'email',

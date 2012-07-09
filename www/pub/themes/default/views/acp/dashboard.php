@@ -11,5 +11,6 @@
             This website section is under development and is not available for the moment. 
             Please check this page again in next <a href="http://www.gentle.ro/proiecte/cstrike-regnick/" rel="external" title="cstrike regnick">CStrike Regnick</a> version.
         </div>
+        <div class="clearfix hspace"><br></div>
     </div><!-- /#content -->
 </div><!-- /#content-wrapper -->

@@ -72,7 +72,7 @@ class server_model extends MY_Model {
                     '.$this->db->dbprefix('groups').' as grp 
                 WHERE (acc.group_ID > 0)
                     AND (usr.active = 1)  
-                    AND (acc.server_ID = ?) 
+                    AND (acc.server_ID = ? OR acc.server_ID = 0)
                     AND (acc.user_ID = usr.ID)
                     AND (acc.group_ID = grp.ID)
                     AND (grp.public = ?);';
