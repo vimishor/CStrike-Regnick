@@ -163,7 +163,16 @@ $config = array(
             'label' => 'Confirm password',
             'rules' => 'trim|xss_clean|matches[password]'
         ),
-        
+        array(
+            'field' => 'group',
+            'label' => 'Group',
+            'rules' => 'trim|xss_clean'
+        ),
+        array(
+            'field' => 'server',
+            'label' => 'Server',
+            'rules' => 'trim|xss_clean'
+        ),
     ),
     
     'ucp-login' => array(

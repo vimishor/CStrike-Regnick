@@ -33,6 +33,20 @@
                     <div class="controls"><?php echo form_password($form_passsword_conf); ?></div>
                 </div>
                 
+                
+                <div class="control-group">
+                    <?php echo form_label( lang('group'), 'group', array('class' => 'control-label')); ?>
+                    <div class="controls"><?php echo form_dropdown('group', $groups); ?></div>
+                </div>
+                <div class="control-group">
+                    <?php echo form_label( lang('server'), 'server', array('class' => 'control-label')); ?>
+                    <div class="controls"><?php echo form_dropdown('server', $servers); ?></div>
+                </div>
+                
+                
+                <?php if (count($groups)>0): ?>
+                <?php endif; ?>
+                
                 <hr>
                         
                 <div class="span4 offset2">

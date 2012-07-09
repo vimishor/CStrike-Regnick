@@ -43,6 +43,8 @@ class user_model extends MY_Model
      */
     public function saveAccess($userID, $serverID, $groupID)
     {        
+        $this->load->model('group_model');
+        
         if (!$this->group_model->getUserGroup($userID, $serverID))
         {
             return $this->addAccess($userID, $serverID, $groupID);

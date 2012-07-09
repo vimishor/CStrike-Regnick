@@ -477,7 +477,7 @@ class Acp extends MY_Controller
             $data = array(
                 'page_title'    => lang('change_access'),
                 'page_subtitle' => '',
-                'groups'        => $this->group_model->get_groups(100, 0),
+                'groups'        => $this->group_model->get_groups(false),
                 'serverName'    => $this->server_model->getServer($serverID)->address,
                 'userName'      => $this->user_model->getUsername($userID),
                 'userGroup'     => $this->group_model->getUserGroup($userID, $serverID),

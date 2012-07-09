@@ -1,3 +1,0 @@
-[09-Jul-2012 01:12:02] PHP Fatal error:  Maximum execution time of 0 seconds exceeded in D:\Dezvoltare\php\www\regnick\www\index.php on line 21
-[09-Jul-2012 01:12:02] PHP Stack trace:
-[09-Jul-2012 01:12:02] PHP   1. {main}() D:\Dezvoltare\php\www\regnick\www\index.php:0

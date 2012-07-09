@@ -25,14 +25,14 @@ $config['password_encrypt'] = 'none';
  * 
  * default: true
  */
-$config['register.global'] = false;
+$config['register.global'] = true;
 
 /**
  * Send confirmation email for new accounts ?
  * 
  * default: true
  */
-$config['register.confirmation'] = true;
+$config['register.confirmation'] = false;
 
 /**
  * Use those sexy tooltips ?

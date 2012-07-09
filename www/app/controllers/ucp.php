@@ -83,13 +83,14 @@ class Ucp extends MY_Controller
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
         $this->load->library('regnick_auth');
-        //$this->load->library('security');
         
         if ($this->form_validation->run('ucp-register') === true) // process form
         {
+            
             if ($this->regnick_auth->user_add(
                 $this->input->post('username'), $this->input->post('email'), $this->input->post('email-conf'), 
-                $this->input->post('password'), $this->input->post('password-conf') ) === true)
+                $this->input->post('password'), $this->input->post('password-conf'),
+                $this->input->post('group'), $this->input->post('server') ) === true)
             {
                 // register successful.
                 console_log('Register OK');
@@ -128,10 +129,36 @@ class Ucp extends MY_Controller
             }
         }
         else
-        {            
+        {
+            $this->load->model('group_model');
+            $this->load->model('server_model');
+            
+            $pub_groups         = $this->group_model->get_groups(true);
+            $server_list        = $this->server_model->getServers( $this->config->item('register.global') );
+            $groups = $servers  = array();
+            
+            // filter groups
+            // @todo: refactor this
+            foreach ($pub_groups as $group)
+            {
+                $groups[$group->ID] = $group->name;
+            }
+            
+            // filter servers
+            // @todo: refactor this
+            foreach ($server_list as $server)
+            {
+                $servers[$server->ID] = $server->address;
+            }
+            
+            // spring cleaning
+            unset($pub_groups, $server_list);
+                        
             $data = array(
                 'page_title'    => lang('register'),
                 'page_subtitle' => '', 
+                'groups'        => $groups,
+                'servers'       => $servers, 
                 
                 'form_username' => array(
                     'class'     => 'input-xlarge',

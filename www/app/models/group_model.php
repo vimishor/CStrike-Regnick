@@ -183,15 +183,28 @@ class group_model extends MY_Model
      * Fetch groups
      * 
      * @access  public
+     * @param   bool        $only_public    Fetch only public groups ?
      * @param   int         $num
      * @param   int         $offset
-     * @return  array|bool          False on error
+     * @return  array|bool                  False on error
      */
-    public function get_groups($num, $offset)
+    public function get_groups($only_public = false, $num = 100, $offset = 0)
     {
-        $query = $this->db->select('ID, name, access, public')
+        $query = '';
+        
+        if ($only_public)
+        {
+            $query = $this->db->select('ID, name, access, public')
+                    ->where('public =', '1')
                     ->limit($num, $offset)
                     ->get('groups');
+        }
+        else
+        {
+            $query = $this->db->select('ID, name, access, public')
+                    ->limit($num, $offset)
+                    ->get('groups');
+        }
         
         return ($query->num_rows()>0) ? $query->result_object() : false;
     }

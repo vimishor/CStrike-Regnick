@@ -196,19 +196,30 @@ class Regnick_auth
      * valid and sanitized data.
      * 
      * @access  public
-     * @param   string  $login          Username
-     * @param   string  $email          Email address
-     * @param   string  $email-conf     Email address confirmation
-     * @param   string  $password       Account password
-     * @param   string  $password-conf  Account password confirmation
+     * @param   string      $login          Username
+     * @param   string      $email          Email address
+     * @param   string      $email-conf     Email address confirmation
+     * @param   string      $password       Account password
+     * @param   string      $password-conf  Account password confirmation
+     * @param   int|bool    $groupID        Add user to this group on specified server
+     * @param   int|bool    $serverID       Add user access on this server
      * @return  bool
      */
-    public function user_add($login, $email, $email_conf, $password, $password_conf)
-    {
+    public function user_add($login, $email, $email_conf, $password, $password_conf, $groupID = false, $serverID = false)
+    {        
         $flags      = $this->ci->user_model->checkFlags($login, 'b', 'a', '');
         $is_active  = ($this->ci->config->item('register.confirmation')) ? false : true;
         
-        return ( $this->ci->user_model->user_add($login, $password, $email, $is_active, $flags) );
+        // add user
+        $user       = $this->ci->user_model->user_add($login, $password, $email, $is_active, $flags);
+                
+        // include user in chosen group
+        if ( is_numeric($groupID) AND is_numeric($serverID) )
+        { 
+            $user_group = $this->ci->user_model->saveAccess($this->ci->db->insert_id(), $serverID, $groupID);
+        }
+                
+        return $user;
     }
     
     /**

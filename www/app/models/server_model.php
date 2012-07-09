@@ -238,12 +238,12 @@ class server_model extends MY_Model {
      * 
      * @access  public
      * @param   bool        $with_global    Include server with ID = 0, that is used for global accounts ?
-     * @param   int         $num            Results start number
+     * @param   int         $num            Results number
      * @param   int         $offset         Results offset number
      * @param   string      $return         Return data as object or array ? Values: 'obj' or 'arr'
      * @return  array|bool  False on error
      */
-    public function getServers($with_global = false, $num, $offset, $return = 'obj')
+    public function getServers($with_global = false, $num = 100, $offset = 0, $return = 'obj')
     {
         $this->benchmark->mark('servers_list_(SQL)_start');
         
