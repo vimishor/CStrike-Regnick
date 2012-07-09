@@ -78,10 +78,18 @@ class group_model extends MY_Model
             return false;
         }
         
+        $public = ((bool)$is_public) ? 1 : 0;
+        
+        // force default group to be private
+        if ($groupID == 0)
+        {
+            $public = 0;
+        }
+        
         $data = array(
             'name'      => $name,
             'access'    => $access,
-            'public'    => ((bool)$is_public) ? 1 : 0,
+            'public'    => $public,
         );
         
         $this->db->where('ID', (int)$groupID)->update('groups', $data);
