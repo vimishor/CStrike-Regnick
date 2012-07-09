@@ -405,7 +405,7 @@ class Acp extends MY_Controller
         $data = array(
             'page_title'    => lang('available_groups'),
             'page_subtitle' => '',
-            'groups'        => $this->group_model->get_groups($config['per_page'],$page),
+            'groups'        => $this->group_model->get_groups(false, $config['per_page'],$page),
         );
             
         $this->template->set_layout('two_col')->build('acp/group/list', $data);        
