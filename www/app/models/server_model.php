@@ -72,7 +72,7 @@ class server_model extends MY_Model {
                     '.$this->db->dbprefix('groups').' as grp 
                 WHERE (acc.group_ID > 0)
                     AND (usr.active = 1)  
-                    AND (acc.server_ID = ? OR acc.server_ID = 0)
+                    AND (acc.server_ID = ? OR acc.server_ID = '.DEFAULT_SERVER_ID.')
                     AND (acc.user_ID = usr.ID)
                     AND (acc.group_ID = grp.ID)
                     AND (grp.public = ?);';
@@ -97,7 +97,7 @@ class server_model extends MY_Model {
     public function delServer($serverID)
     {
         // disallow global server to be deleted
-        if ($serverID == 0)
+        if ($serverID == DEFAULT_SERVER_ID)
         {
             $this->set_error('not_allowed');
             return false;
@@ -258,7 +258,7 @@ class server_model extends MY_Model {
         else
         {
             $query = $this->db->select('ID, address, name')
-                        ->where('ID >', 0)
+                        ->where('ID >', DEFAULT_SERVER_ID)
                         ->limit($num, $offset)
                         ->get('servers');
         }

@@ -32,7 +32,6 @@ class Regnick_auth
         $this->ci = &get_instance();
         
         // load dependencies
-        //$this->ci->load->config('regnick', TRUE);
         $this->ci->load->library('session');
         $this->ci->load->database();
         $this->ci->load->model('user_model');
@@ -290,8 +289,6 @@ class Regnick_auth
         notify($this->ci->lang->line('chg_pass_successful'), 'success');
         return true;
     }
-    
-    public function change_email() { }
     
     // ----------------------------------------------------------------------------------------------------------
     

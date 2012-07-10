@@ -12,8 +12,9 @@ CREATE TABLE `{prefix}groups` (
 
 INSERT INTO `{prefix}groups` VALUES ('1', 'Default', 'z', '0');
 :: split ::
-
 UPDATE `{prefix}groups` SET `ID` = '0' WHERE (`ID`='1');
+:: split ::
+ALTER TABLE {prefix}groups AUTO_INCREMENT = 1;
 :: split ::
 
 DROP TABLE IF EXISTS `{prefix}options`;
@@ -28,7 +29,7 @@ CREATE TABLE `{prefix}options` (
 
 INSERT INTO `{prefix}options` VALUES ('app_version', '2.0.3-alpha');
 :: split ::
-INSERT INTO `{prefix}options` VALUES ('db_version', '21062012');
+INSERT INTO `{prefix}options` VALUES ('db_version', '09072012');
 :: split ::
 
 DROP TABLE IF EXISTS `{prefix}servers`;

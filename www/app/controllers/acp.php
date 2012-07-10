@@ -168,7 +168,6 @@ class Acp extends MY_Controller
     {
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
-        //$this->load->library('security');
         $this->load->model('server_model');
         
         if ($this->form_validation->run('acp-server-add') === true) // process form
@@ -223,7 +222,7 @@ class Acp extends MY_Controller
         $this->load->model('server_model');
         $this->load->library('pagination');
         $config['base_url']     = base_url().'/acp/server/list/';
-        $config['total_rows']   = $this->db->where('ID >', 0)->count_all_results('servers');
+        $config['total_rows']   = $this->db->where('ID >', DEFAULT_SERVER_ID)->count_all_results('servers');
         $config['per_page']     = $this->config->item('results_per_page');
         $config['uri_segment']  = 4;
         $this->pagination->initialize($config);
@@ -231,7 +230,6 @@ class Acp extends MY_Controller
         $data = array(
             'page_title'    => lang('available_servers'),
             'page_subtitle' => '',
-            //'groups'        => $this->group_model->get_groups($config['per_page'],$page),
             'servers'       => $this->server_model->getServers(false, $config['per_page'], $page),
         );
             
@@ -342,7 +340,6 @@ class Acp extends MY_Controller
     {
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
-        //$this->load->library('security');
         $this->load->model('group_model');
         
         if ($this->form_validation->run('acp-group-add') === true) // process form
@@ -622,7 +619,6 @@ class Acp extends MY_Controller
     {
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
-        //$this->load->library('security');
         
         if ($this->form_validation->run('acp-user-add') === true) // process form
         {

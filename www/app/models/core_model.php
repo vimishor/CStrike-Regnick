@@ -39,7 +39,7 @@ class core_model extends MY_Model {
         
         $option = $query->row();
         
-        return is_object($option) ? unserialize($option->value) : false;
+        return is_object($option) ? $option->value : false;
     }
     
     /**
@@ -116,7 +116,7 @@ class core_model extends MY_Model {
     protected function update_option($name, $value)
     {
         $data = array(
-            'value' => serialize($value),
+            'value' => $value,
         );
         
         $this->db->where('name', $name)->update('options', $data);
@@ -136,7 +136,7 @@ class core_model extends MY_Model {
     {
         $data = array(
             'name'  => $name,
-            'value' => serialize($value),
+            'value' => $value,
         );
         
         return $this->db->insert('options', $data);

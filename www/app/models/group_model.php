@@ -34,7 +34,7 @@ class group_model extends MY_Model
     public function delGroup($groupID)
     {
         // disallow default group to be deleted
-        if ($groupID == 0)
+        if ($groupID == DEFAULT_GROUP_ID)
         {
             $this->set_error('not_allowed');
             return false;
@@ -49,7 +49,7 @@ class group_model extends MY_Model
         
         // move users to default group
         $data = array(
-            'group_ID'  => 0,
+            'group_ID'  => DEFAULT_GROUP_ID,
         );
         $this->db->where('group_ID', (int)$groupID)->update('users_access', $data);
         
@@ -81,7 +81,7 @@ class group_model extends MY_Model
         $public = ((bool)$is_public) ? 1 : 0;
         
         // force default group to be private
-        if ($groupID == 0)
+        if ($groupID == DEFAULT_GROUP_ID)
         {
             $public = 0;
         }

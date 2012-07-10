@@ -264,7 +264,6 @@ class Ucp extends MY_Controller
         
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
-        //$this->load->library('security');
                         
         if ($this->form_validation->run('ucp-password') === true) // process form
         {
@@ -358,7 +357,6 @@ class Ucp extends MY_Controller
 
         $this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
-		//$this->load->library('security');
         
         if ($this->form_validation->run('ucp-login') === true) // process form
         {            
@@ -393,7 +391,6 @@ class Ucp extends MY_Controller
                     'class' => 'input-xlarge',
                     'name'	=> 'username',
                 	'id'	=> 'username',
-                	//'value' => set_value('login'),
                 	'maxlength'	=> 80,
                 ),
                 'form_password' => array(

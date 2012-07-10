@@ -119,4 +119,6 @@ td.center { text-align: center; }
 #content .header h2 {
   /*text-transform: uppercase;*/
 }
-
+.content-data { 
+    margin-bottom: 14px;
+}
