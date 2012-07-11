@@ -135,7 +135,7 @@ class Ucp extends MY_Controller
             $server_list        = $this->server_model->getServers( $this->config->item('register.global') );
             $groups = $servers  = array();
             
-            if (count($pub_groups>0))
+            if ($pub_groups AND count($pub_groups>0))
             {
                 // filter groups
                 // @todo: refactor this
