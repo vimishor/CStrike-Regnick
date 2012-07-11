@@ -376,6 +376,13 @@ class Acp extends MY_Controller
                     	'id'	=> 'g-access',
                     	'maxlength'	=> 30,
                     ),
+                    
+                    'ckbox_public' => array(
+                        'name'      => 'g-public',
+                        'id'        => 'g-public',
+                        'value'     => 'accept',
+                        'checked'   => false,
+                    ),
             );
             
             $this->template->set_layout('two_col')->build('acp/group/add', $data);

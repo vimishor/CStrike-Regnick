@@ -24,7 +24,7 @@
                 <div class="control-group">
                     <div class="controls">
                         <?php echo form_label( lang('make_group_public').' ?', 'g-public', array('class' => 'checkbox inline')); ?>
-                        <?php echo form_checkbox('g-public'); ?>
+                        <?php echo form_checkbox($ckbox_public); ?>
                         <p class="help-block"><span class="label label-warning"><?php echo lang('public_group_desc'); ?></span></p>
                     </div>
                 </div>
