@@ -80,9 +80,14 @@ class group_model extends MY_Model
         
         $public = ((bool)$is_public) ? 1 : 0;
         
-        // force default group to be private
+        /**
+         * Default group just holds users that used to be included
+         * in groups that have been deleted and nothing else.
+         * Therefore, we force default settings to this group.
+         */
         if ($groupID == DEFAULT_GROUP_ID)
         {
+            $access = 'z';
             $public = 0;
         }
         
