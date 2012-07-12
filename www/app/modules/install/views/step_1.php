@@ -18,10 +18,13 @@
                         <td class="center" style="<?php echo ($app_dir_logs == 'Yes') ? 'color: green;' : 'color: red;'; ?>"><?php echo $app_dir_logs; ?></td>
                     </tr>
                     <tr>
-                        <td>Database file is writable</td>
+                        <td>Database config file is writable</td>
                         <td class="center" style="<?php echo ($app_file_db == 'Yes') ? 'color: green;' : 'color: red;'; ?>"><?php echo $app_file_db; ?></td>
                     </tr>
-                    
+                    <tr>
+                        <td>Email config file is writable</td>
+                        <td class="center" style="<?php echo ($app_file_mail == 'Yes') ? 'color: green;' : 'color: red;'; ?>"><?php echo $app_file_mail; ?></td>
+                    </tr>
                 </tbody>
             </table>
             

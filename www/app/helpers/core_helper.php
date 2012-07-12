@@ -227,3 +227,15 @@ if ( ! function_exists('is_steamid'))
     }
 }
 
+/**
+ * Is email configured properly ?
+ * 
+ * @return  bool
+ */
+if ( ! function_exists('can_send_email'))
+{
+    function can_send_email()
+    {
+        return (defined('RN_EMAIL_CONFIGURED') AND (RN_EMAIL_CONFIGURED === true));
+    }
+}

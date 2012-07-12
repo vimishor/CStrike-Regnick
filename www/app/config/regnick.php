@@ -29,10 +29,11 @@ $config['register.global'] = true;
 
 /**
  * Send confirmation email for new accounts ?
- * 
  * default: true
+ * 
+ * @deprecated  Moved to DB as `register_confirmation` 
  */
-$config['register.confirmation'] = false;
+//$config['register.confirmation'] = false;
 
 /**
  * Use those sexy tooltips ?

@@ -70,6 +70,7 @@ $lang['account_created']                = 'Account created';
 $lang['account_created_validation']     = 'Account created. Check your email address to confirm this account.';
 $lang['account_confirmed']              = 'Account confirmed';
 $lang['account_confirmed_error']        = 'Account specified can not be confirmed';
+$lang['invalid_email']                  = 'Invalid email address';
 
 // Sidebar
 $lang['my_profile']                     = 'My profile';
@@ -119,5 +120,7 @@ $lang['server_exist']                   = 'Server exists';
 $lang['add_server']                     = 'Add server';
 $lang['del_server']                     = 'Delete server';
 $lang['edit_server']                    = 'Edit server';
+
+$lang['email_not_configured']           = 'Email settings are not configured.';
 
 /* End of file regnick_lang.php */

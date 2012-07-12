@@ -207,7 +207,7 @@ class Regnick_auth
     public function user_add($login, $email, $email_conf, $password, $password_conf, $groupID = false, $serverID = false)
     {        
         $flags      = $this->ci->user_model->checkFlags($login, 'b', 'a', '');
-        $is_active  = ($this->ci->config->item('register.confirmation')) ? false : true;
+        $is_active  = ( (get_option('register_confirmation') == '1') AND (can_send_email() === true) ) ? false : true;
         
         // add user
         $user       = $this->ci->user_model->user_add($login, $password, $email, $is_active, $flags);
@@ -232,6 +232,13 @@ class Regnick_auth
     {
         if (!$this->ci->user_model->email_exist($email))
         {
+            $this->set_error('invalid_email');
+            return false;
+        }
+        
+        if ( can_send_email() === false)
+        {
+            $this->set_error('email_not_configured');
             return false;
         }
         

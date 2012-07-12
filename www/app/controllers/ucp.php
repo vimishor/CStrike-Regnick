@@ -95,7 +95,11 @@ class Ucp extends MY_Controller
                 // register successful.
                 console_log('Register OK');
                 
-                if ( $this->config->item('register.confirmation') )
+                /**
+                 * If email is not configured, register user anyway, even if `register_confirmation`
+                 * option is activated.
+                 */
+                if ( (get_option('register_confirmation') == '1') AND (can_send_email() === true) )
                 {
                     notify($this->lang->line('account_created_validation'), 'success');
                     
@@ -443,7 +447,7 @@ class Ucp extends MY_Controller
             }
         }
         else
-        {
+        {            
             // not logged in, show the form
             $data = array(
                 'page_title'    => lang('recover_account'),

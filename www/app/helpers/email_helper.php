@@ -62,6 +62,12 @@ if ( ! function_exists('send_email'))
 {
     function send_email($recipient, $subject = 'Test email', $message = 'Hello World' )
     {
+        if (can_send_email() === false)
+        {
+            log_message('error', 'You are trying to send email, without setting up email configuration first.');
+            return false;
+        }
+            
         $CI =& get_instance();
         
         $CI->load->library('email');
