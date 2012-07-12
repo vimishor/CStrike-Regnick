@@ -50,7 +50,9 @@ INSTALARE:
             password: admin
         5. Have fun
         
-        NOTA: Daca script-ul nu este instalat pe localhost, nu uita sa schimbi parola pentru utilizatorul `administrator`
+        NOTA: 
+            1. Daca script-ul nu este instalat pe localhost, nu uita sa schimbi parola pentru utilizatorul `administrator`
+            2. Daca script-ul este instalat intr-un alt director decat `regnick`, nu uita sa schimi setarea `RewriteBase` din `.htaccess`
             
     
     INSTALARE PLUGIN AMXX
