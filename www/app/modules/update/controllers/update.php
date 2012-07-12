@@ -9,6 +9,20 @@ class Update extends MY_Controller {
     {
         parent::__construct();
         
+        // Each page served by this controller requires user to be logged in.
+        if ($this->regnick_auth->logged_in() === false)
+        {
+            store_location();
+            redirect('ucp/login', 'refresh');
+        }
+        
+        // Each page served by this controller requires user to have `administrator` access.
+        if ($this->regnick_auth->isOwner($this->session->userdata('user_id')) === false)
+        {
+            notify($this->lang->line('insuficient_access'), 'success');
+            redirect('', 'refresh');
+        }
+        
         $this->load->library('update_manager');
     }
     
