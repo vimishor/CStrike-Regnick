@@ -80,7 +80,7 @@ $autoload['helper'] = array('language', 'url', 'core');
 |
 */
 
-$autoload['config'] = array('regnick');
+$autoload['config'] = array('regnick', 'email');
 
 
 /*
