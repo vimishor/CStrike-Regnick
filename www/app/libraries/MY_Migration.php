@@ -8,6 +8,23 @@ class MY_Migration extends CI_Migration {
         
         // migration path is not preserved when passing it to constructor. why ?
         $this->_migration_path = MODULES_PATH.'update/migrations/';
+        
+        // If the migrations table is missing, make it
+		if ( ! $this->db->table_exists($this->_migration_table))
+		{
+            if (!is_object($this->dbforge))
+            {
+                $this->load->dbforge();
+            }
+        
+			$this->dbforge->add_field(array(
+				'version' => array('type' => 'INT', 'constraint' => 3),
+			));
+
+			$this->dbforge->create_table($this->_migration_table, TRUE);
+
+			$this->db->insert($this->_migration_table, array('version' => 0));
+		}
     }
 
     /**
