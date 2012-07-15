@@ -10,7 +10,7 @@ CREATE TABLE `{prefix}groups` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 :: split ::
 
-INSERT INTO `{prefix}groups` VALUES ('1', 'Default', 'z', '0');
+INSERT INTO `{prefix}groups` VALUES ('1', 'Default', 'r', '0');
 :: split ::
 UPDATE `{prefix}groups` SET `ID` = '0' WHERE (`ID`='1');
 :: split ::

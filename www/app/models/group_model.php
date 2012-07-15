@@ -87,7 +87,7 @@ class group_model extends MY_Model
          */
         if ($groupID == DEFAULT_GROUP_ID)
         {
-            $access = 'z';
+            $access = DEFAULT_GROUP_FLAG;
             $public = 0;
         }
         
