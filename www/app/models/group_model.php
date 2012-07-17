@@ -83,12 +83,11 @@ class group_model extends MY_Model
         /**
          * Default group just holds users that used to be included
          * in groups that have been deleted and nothing else.
-         * Therefore, we force default settings to this group.
+         * Therefore, we enforce some default settings to this group.
          */
         if ($groupID == DEFAULT_GROUP_ID)
         {
             $access = DEFAULT_GROUP_FLAG;
-            $public = 0;
         }
         
         $data = array(
@@ -97,9 +96,7 @@ class group_model extends MY_Model
             'public'    => $public,
         );
         
-        $this->db->where('ID', (int)$groupID)->update('groups', $data);
-        
-        if ($this->db->affected_rows() == 1)
+        if ($this->db->where('ID', (int)$groupID)->update('groups', $data))
         {
             return true;
         }

@@ -530,9 +530,10 @@ if ( ! function_exists('redirect'))
 {
 	function redirect($uri = '', $method = 'location', $http_response_code = 302)
 	{
-        if ($uri = ci()->session->userdata('continue'))
+        if ($continue = ci()->session->userdata('continue'))
         {
             ci()->session->unset_userdata('continue');
+            $uri = $continue;
         }
         
 		if ( ! preg_match('#^https?://#i', $uri))
