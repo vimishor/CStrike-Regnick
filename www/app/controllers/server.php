@@ -27,7 +27,7 @@ class Server extends MY_Controller
     {
         parent::__construct();
     }
-	
+    
     /**
      * Fetch server members
      * 
@@ -44,6 +44,8 @@ class Server extends MY_Controller
             'users'         => $this->server_model->getMembers($serverID),
             'server_name'   => $this->server_model->getServer($serverID)->address,
         );
+        
+        $data = Events::trigger('members_list', $data);
         
         $this->template->set_layout('one_col')->build('server/team', $data);
     }
@@ -65,6 +67,8 @@ class Server extends MY_Controller
             'server_name'   => $this->server_model->getServer($serverID)->address,
         );
         
+        $data = Events::trigger('team_list', $data);
+        
         $this->template->set_layout('one_col')->build('server/team', $data);
     }
     
@@ -85,12 +89,14 @@ class Server extends MY_Controller
         $config['uri_segment']  = 3;
         $this->pagination->initialize($config);
         // - pagination config 
-                
+        
         $data = array(
             'page_title'    => lang('community_servers'),
             'page_subtitle' => 'Play with joy !',
             'servers'       => $this->server_model->getServers(false, $config['per_page'], $page),
         );
+        
+        $data = Events::trigger('server_list', $data);
         
         $this->template->set_layout('one_col')->build('server/list', $data);
 	}

@@ -24,7 +24,7 @@
 | 4. Custom config files
 | 5. Language files
 | 6. Models
-|
+| 7. Events
 */
 
 /*
@@ -111,6 +111,18 @@ $autoload['language'] = array('regnick');
 
 $autoload['model'] = array('core_model');
 
+
+/*
+| -------------------------------------------------------------------
+|  Auto-load events from modules
+| -------------------------------------------------------------------
+| Prototype:
+|
+|	$autoload['module'] = array('module1', 'module2');
+|
+*/
+
+$autoload['modules'] = array('welcome', 'update');
 
 /* End of file autoload.php */
 /* Location: ./application/config/autoload.php */

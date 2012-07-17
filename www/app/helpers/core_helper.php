@@ -239,3 +239,8 @@ if ( ! function_exists('can_send_email'))
         return (defined('RN_EMAIL_CONFIGURED') AND (RN_EMAIL_CONFIGURED));
     }
 }
+
+function ci()
+{
+    return get_instance();
+}

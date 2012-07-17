@@ -42,6 +42,8 @@ class Acp extends ACP_Controller
             'page_subtitle' => 'Application overview',
         );
         
+        $data = Events::trigger('acp_dashboard', $data);
+        
         $this->template->set_layout('two_col')->build('acp/dashboard', $data);
     }
     

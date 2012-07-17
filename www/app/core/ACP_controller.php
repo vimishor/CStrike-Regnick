@@ -28,6 +28,8 @@ class ACP_Controller extends MY_Controller {
             notify($this->lang->line('insuficient_access'), 'success');
             redirect('', 'refresh');
         }
+        
+        Events::trigger('acp_controller');
     }
     
 }

@@ -48,8 +48,13 @@ class MY_Controller extends MX_Controller {
             ->set_partial('sidebar', 'partial/sidebar')
             ->set_layout('one_col')
             ->set($data);
+        
+        Events::autoload();
+        
+        Events::trigger('base_controller');
     }
     
     public function __destruct() { }
 }
+
 /* End of file MY_Controller.php */
