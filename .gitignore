@@ -6,6 +6,7 @@
 # development environment specific data
 .dev/*
 www/app/config/development
+www/app/config/production
 
 # documentation specific
 Publish/*
