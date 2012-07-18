@@ -406,6 +406,14 @@ class install extends MY_Controller {
         $this->permissions['app_logs']      = is_really_writable(APPPATH.'logs') ? 'Yes' : 'No';
         $this->permissions['app_db_cfg']    = is_really_writable(APPPATH.'config/database.php') ? 'Yes' : 'No';
         $this->permissions['app_email_cfg'] = is_really_writable(APPPATH.'config/email.php') ? 'Yes' : 'No';
+        
+        // create environment directory 
+        if(!is_dir(APPPATH.'config/'.ENVIRONMENT))
+        {
+            $old = umask(0); 
+            mkdir(APPPATH.'config/'.ENVIRONMENT,0777);
+            umask($old);
+        }
     }
     
     /**
@@ -430,7 +438,7 @@ class install extends MY_Controller {
         $new_cfg_file   = str_replace(array_keys($replace), $replace, $cfg_tpl);
         
         // open config file and write new data
-        $handle = @fopen(APPPATH.'config/database.php','w+');
+        $handle = @fopen(APPPATH.'config/'.ENVIRONMENT.'/database.php','w+');
         
         if ($handle !== false)
         {
@@ -461,7 +469,7 @@ class install extends MY_Controller {
         $new_cfg_file   = str_replace(array_keys($replace), $replace, $cfg_tpl);
         
         // open config file and write new data
-        $handle = @fopen(APPPATH.'config/email.php','w+');
+        $handle = @fopen(APPPATH.'config/'.ENVIRONMENT.'/email.php','w+');
         
         if ($handle !== false)
         {

@@ -24,7 +24,7 @@ $config['cur_tag_open']     = '<li class="active"><a href="#">';
 $config['cur_tag_close']    = '</a></li>';
 $config['num_tag_open']     = '<li>';
 $config['num_tag_close']    = '</li>';
-$config['results_per_page'] = '12';
+//$config['results_per_page'] = '12';
 
 /* End of file pagination.php */
 /* Location: ./application/config/pagination.php */
