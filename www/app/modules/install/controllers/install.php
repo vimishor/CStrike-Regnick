@@ -65,9 +65,7 @@ class install extends MY_Controller {
         'app_cache'     => false,
         'app_logs'      => false,
         'app_cfg'       => false,
-        'app_cfg_env'   => false,
-        //'app_db_cfg'    => false,
-        //'app_email_cfg' => false,
+        'app_cfg_env'   => false
     );
     
     // ------------------------------------------------------------------------
@@ -122,8 +120,6 @@ class install extends MY_Controller {
             'app_dir_logs'  => $this->permissions['app_logs'],
             'app_cfg'       => $this->permissions['app_cfg'],
             'app_cfg_env'   => $this->permissions['app_cfg_env'],
-            //'app_file_db'   => $this->permissions['app_db_cfg'],
-            //'app_file_mail' => $this->permissions['app_email_cfg'],
             'is_error'      => $is_error
         ); 
         $this->template->set_layout('one_col')->build('step_1', $data);
@@ -418,8 +414,6 @@ class install extends MY_Controller {
         $this->permissions['app_logs']      = is_really_writable(APPPATH.'logs') ? 'Yes' : 'No';
         $this->permissions['app_cfg']       = is_really_writable(APPPATH.'config') ? 'Yes' : 'No';
         $this->permissions['app_cfg_env']   = is_really_writable(APPPATH.'config/'.ENVIRONMENT) ? 'Yes' : 'No';
-        //$this->permissions['app_db_cfg']    = is_really_writable(APPPATH.'config/database.php') ? 'Yes' : 'No';
-        //$this->permissions['app_email_cfg'] = is_really_writable(APPPATH.'config/email.php') ? 'Yes' : 'No';
     }
     
     /**
