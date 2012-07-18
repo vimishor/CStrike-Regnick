@@ -18,8 +18,12 @@
                         <td class="center" style="<?php echo ($app_dir_logs == 'Yes') ? 'color: green;' : 'color: red;'; ?>"><?php echo $app_dir_logs; ?></td>
                     </tr>
                     <tr>
-                        <td>Config directory is writable</td>
-                        <td class="center" style="<?php echo ($app_env_dir == 'Yes') ? 'color: green;' : 'color: red;'; ?>"><?php echo $app_env_dir; ?></td>
+                        <td>Global config directory is writable</td>
+                        <td class="center" style="<?php echo ($app_cfg == 'Yes') ? 'color: green;' : 'color: red;'; ?>"><?php echo $app_cfg; ?></td>
+                    </tr>
+                    <tr>
+                        <td><?php echo ucfirst(ENVIRONMENT);?> config directory is writable</td>
+                        <td class="center" style="<?php echo ($app_cfg_env == 'Yes') ? 'color: green;' : 'color: red;'; ?>"><?php echo $app_cfg_env; ?></td>
                     </tr>
                     <!--<tr>
                         <td>Database config file is writable</td>

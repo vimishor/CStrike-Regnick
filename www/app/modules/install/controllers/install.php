@@ -64,7 +64,8 @@ class install extends MY_Controller {
     private $permissions = array(
         'app_cache'     => false,
         'app_logs'      => false,
-        'app_env_dir'   => false,
+        'app_cfg'       => false,
+        'app_cfg_env'   => false,
         //'app_db_cfg'    => false,
         //'app_email_cfg' => false,
     );
@@ -119,7 +120,8 @@ class install extends MY_Controller {
             'page_subtitle' => 'Make sure we can install this application',
             'app_dir_cache' => $this->permissions['app_cache'],
             'app_dir_logs'  => $this->permissions['app_logs'],
-            'app_env_dir'   => $this->permissions['app_env_dir'],
+            'app_cfg'       => $this->permissions['app_cfg'],
+            'app_cfg_env'   => $this->permissions['app_cfg_env'],
             //'app_file_db'   => $this->permissions['app_db_cfg'],
             //'app_file_mail' => $this->permissions['app_email_cfg'],
             'is_error'      => $is_error
@@ -404,9 +406,18 @@ class install extends MY_Controller {
      */
     private function test_permissions()
     {
+        // create environment directory 
+        if(!is_dir(APPPATH.'config/'.ENVIRONMENT))
+        {
+            $old = umask(0); 
+            mkdir(APPPATH.'config/'.ENVIRONMENT,0777);
+            umask($old);
+        }
+        
         $this->permissions['app_cache']     = is_really_writable(APPPATH.'cache') ? 'Yes' : 'No';
         $this->permissions['app_logs']      = is_really_writable(APPPATH.'logs') ? 'Yes' : 'No';
-        $this->permissions['app_env_dir']   = is_really_writable(APPPATH.'config/'.ENVIRONMENT) ? 'Yes' : 'No';
+        $this->permissions['app_cfg']       = is_really_writable(APPPATH.'config') ? 'Yes' : 'No';
+        $this->permissions['app_cfg_env']   = is_really_writable(APPPATH.'config/'.ENVIRONMENT) ? 'Yes' : 'No';
         //$this->permissions['app_db_cfg']    = is_really_writable(APPPATH.'config/database.php') ? 'Yes' : 'No';
         //$this->permissions['app_email_cfg'] = is_really_writable(APPPATH.'config/email.php') ? 'Yes' : 'No';
     }
