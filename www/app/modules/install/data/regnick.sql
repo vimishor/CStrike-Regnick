@@ -78,3 +78,11 @@ CREATE TABLE `{prefix}users_access` (
   PRIMARY KEY (`access_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 :: split ::
+
+CREATE TABLE `{prefix}migrations` (
+  `version` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+:: split ::
+
+INSERT INTO `{prefix}migrations` VALUES ('5');
+:: split ::

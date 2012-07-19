@@ -7,6 +7,34 @@
 
 $config = array(
     
+    'acp-settings' => array(
+        array(
+            'field' => 'site_name',
+            'label' => lang('webmaster_email'),
+            'rules' => 'trim|required|xss_clean'
+        ),
+        array(
+            'field' => 'webmaster_email',
+            'label' => lang('webmaster_email'),
+            'rules' => 'trim|valid_email|xss_clean'
+        ),
+        array(
+            'field' => 'results_per_page',
+            'label' => lang('results_per_page'),
+            'rules' => 'trim|integer|xss_clean'
+        ),
+        array(
+            'field' => 'register_global',
+            'label' => lang('register_global'),
+            'rules' => 'trim|integer|xss_clean'
+        ),
+        array(
+            'field' => 'register_confirmation',
+            'label' => lang('register_confirmation'),
+            'rules' => 'trim|integer|xss_clean'
+        ),
+    ),
+    
     'acp-user-acc-save' => array(
         array(
             'field' => 'user_group',

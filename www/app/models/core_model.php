@@ -69,6 +69,18 @@ class core_model extends MY_Model {
     }
     
     /**
+     * Update multiple options at the same time
+     * 
+     * @access  public
+     * @param   array   $options
+     * @return  mixed               False on error
+     */
+    public function set_options(array $options)
+    {
+        return is_null($this->db->update_batch('options', $options, 'name'));
+    }
+    
+    /**
      * Check if specified option exists
      * 
      * @access  public

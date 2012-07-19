@@ -30,6 +30,108 @@ class Acp extends ACP_Controller
     }
     
     /**
+     * Application settings
+     * 
+     * @access  public
+     * @return  void
+     */
+    public function settings()
+    {
+        $this->load->helper(array('form', 'url'));
+        $this->load->library('form_validation');
+        
+        if ($this->form_validation->run('acp-settings') === true) // process form
+        {
+            $data = array(
+                array(
+                    'name'  => 'site_name', 
+                    'value' => $this->input->post('site_name', TRUE)
+                ),
+                array(
+                    'name'  => 'webmaster_email', 
+                    'value' => $this->input->post('webmaster_email', TRUE)
+                ),
+                array(
+                    'name'  => 'results_per_page', 
+                    'value' => $this->input->post('results_per_page', TRUE)
+                ),
+                array(
+                    'name'  => 'register_global', 
+                    'value' => $this->input->post('register_global', TRUE)
+                ),
+                array(
+                    'name'  => 'register_confirmation', 
+                    'value' => $this->input->post('register_confirmation', TRUE)
+                ),
+                
+            );
+                                
+            if ($this->core_model->set_options($data) === true)
+            {
+                notify($this->lang->line('data_saved'), 'success');
+                redirect('acp/settings', 'refresh');
+            }
+            else
+            {
+                notify($this->lang->line('error_on_save'), 'error');
+                redirect('acp/settings', 'refresh');
+            }
+        }
+        else
+        {
+            $data = array(
+                'page_title'    => lang('admin_settings'),
+                'page_subtitle' => 'Change application settings',
+                
+                'form_site_name' => array(
+                    'class' => 'input-xlarge',
+                    'name'	=> 'site_name',
+               	    'id'	=> 'site_name',
+               	    'value' => get_option('site_name'),
+               	    'maxlength'	=> 100,
+                ),
+                
+                'form_webmaster_email' => array(
+                    'class' => 'input-xlarge',
+                    'name'	=> 'webmaster_email',
+               	    'id'	=> 'webmaster_email',
+               	    'value' => get_option('webmaster_email'),
+               	    'maxlength'	=> 120,
+                ),
+                
+                'form_results_per_page' => array(
+                    'class' => 'input-xlarge',
+                    'name'	=> 'results_per_page',
+               	    'id'	=> 'results_per_page',
+               	    'value' => get_option('results_per_page'),
+               	    'maxlength'	=> 3,
+                ),
+                
+                'ckbox_register_global' => array(
+                    'name'      => 'register_global',
+                    'id'        => 'register_global',
+                    'value'     => '1',
+                    'checked'   => (get_option('register_global') == 1) ? true : false,
+                ),
+                'ckbox_register_confirmation' => array(
+                    'name'      => 'register_confirmation',
+                    'id'        => 'register_confirmation',
+                    'value'     => '1',
+                    'checked'   => (get_option('register_confirmation') == 1) ? true : false,
+                ),
+                
+                //'register_global'       => (get_option('register_global') == 1) ? true : false,
+                //'register_confirmation' => (get_option('register_confirmation') == 1) ? true : false,
+            );
+            
+            $data = Events::trigger('acp_settings', $data);
+            
+            $this->template->set_layout('two_col')->build('acp/settings', $data);
+            
+        }
+    }
+    
+    /**
      * UCP dashboard
      * 
      * @access  public

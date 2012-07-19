@@ -12,7 +12,7 @@
  * Website name.
  * You can use your community name.
  */
-$config['site.name'] = 'My community';
+//$config['site.name'] = 'My community';
 
 /**
  * Password encryption method
@@ -25,7 +25,7 @@ $config['password_encrypt'] = 'none';
  * 
  * default: true
  */
-$config['register.global'] = true;
+//$config['register.global'] = true;
 
 /**
  * Send confirmation email for new accounts ?
@@ -46,12 +46,12 @@ $config['ui.tooltips'] = true;
 /**
  * What email address we will use to send emails ?
  */
-$config['webmaster.email']  = 'accounts@example.com';
+//$config['webmaster.email']  = 'accounts@example.com';
 
 /**
  * How many SQL results do we show on one page ?
  */
-$config['results_per_page'] = '12';
+//$config['results_per_page'] = '12';
 
 /* End of file regnick.php */
 /* Location: ./application/config/regnick.php */

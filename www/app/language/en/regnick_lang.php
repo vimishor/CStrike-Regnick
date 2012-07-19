@@ -87,6 +87,7 @@ $lang['group_added']                    = 'Group added';
 $lang['data_saved']                     = 'Data saved successfully';
 
 // acp
+$lang['admin_settings']                 = 'Application settings';
 $lang['registred_users']                = 'Registred users';
 $lang['add_user']                       = 'Add user';
 $lang['member_since']                   = 'Member since';
@@ -122,5 +123,12 @@ $lang['del_server']                     = 'Delete server';
 $lang['edit_server']                    = 'Edit server';
 
 $lang['email_not_configured']           = 'Email settings are not configured.';
+
+// acp settings
+$lang['site_name']                      = 'Website name';
+$lang['webmaster_email']                = 'Webmaster email';
+$lang['results_per_page']               = 'Results per page';
+$lang['register_global']                = 'Allow global account registration ?';
+$lang['register_confirmation']          = 'Confirm registration via email ?';
 
 /* End of file regnick_lang.php */
