@@ -38,8 +38,10 @@ class Migration_acp_settings extends CI_Migration {
                 'value' => $this->config->item('results_per_page')
             ),
         );
-        
         $this->db->insert_batch('options', $data);
+        
+        // update db version
+        set_option('db_version', '19072012');
     }
     
     /**

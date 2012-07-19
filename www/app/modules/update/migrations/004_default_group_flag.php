@@ -29,8 +29,10 @@ class Migration_default_group_flag extends CI_Migration {
             'access'    => DEFAULT_GROUP_FLAG,
             'public'    => 0,
         );
-        
         $this->db->where('ID', 0)->update('groups', $data);
+        
+        // update db version
+        set_option('db_version', '16072012');
     }
     
     /**

@@ -19,6 +19,9 @@ class Migration_add_email_option extends CI_Migration {
     {        
         // update db version
         set_option('register_confirmation', '1');
+        
+        // update db version
+        set_option('db_version', '12072012');
     }
     
     /**

@@ -84,5 +84,5 @@ CREATE TABLE `{prefix}migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 :: split ::
 
-INSERT INTO `{prefix}migrations` VALUES ('5');
+INSERT INTO `{prefix}migrations` VALUES ('2');
 :: split ::

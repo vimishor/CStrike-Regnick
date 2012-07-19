@@ -32,6 +32,12 @@ class MY_Controller extends MX_Controller {
             $this->output->enable_profiler(TRUE);
         }
         
+        // backward compatible
+        $this->config->set_item('site.name', get_option('site_name'));
+        $this->config->set_item('register.global', get_option('register_global'));
+        $this->config->set_item('webmaster.email', get_option('webmaster_email'));
+        $this->config->set_item('results_per_page', get_option('results_per_page'));
+        
         // Set some default data for forgetful devs :-)
         $data = array(
             'site_name'         => $this->config->item('site.name'),
