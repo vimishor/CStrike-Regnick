@@ -10,7 +10,7 @@
 /*	0.	DOCUMENT LAYOUT
 /*-----------------------------------------------------------------------------------*/
 
-h1, h2, h3, h4, h5, h6 { color: #54585E; }
+h1, h2, h3, h4, h5, h6 { color: #54585E; text-shadow: 0px 2px 3px rgba(69,54,37,0.2); }
 .box { border: 0; background-color: #fff; border-radius: 8px; -webkit-border-radius: 8px; -moz-border-radius: 8px; }
 .box-3d { -moz-box-shadow: 0px 0px 10px #d3d3d3; -webkit-box-shadow: 0px 2px 10px #d3d3d3; box-shadow: 0px 0px 10px #d3d3d3; }
 .hspace { clear:both; margin-bottom: 24px; }
@@ -122,3 +122,12 @@ td.center { text-align: center; }
 .content-data { 
     margin-bottom: 14px;
 }
+
+#acp-widget a { color: #555; text-decoration: none; }
+#acp-widget a:hover { color: #EC6C16; }
+#acp-widget td { font-size: 12px; color: #555; }
+#acp-widget td.good { color: #23A406; }
+#acp-widget td.bad { color: #C50D0D; }
+#acp-widget td.strong { font-weight: bold; }
+
+#acp-widget h3 { font-size: 14px; line-height: 24px; color: #EC6C16; text-transform: uppercase; text-shadow: 0px 2px 3px #EDA97B; }

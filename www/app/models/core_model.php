@@ -43,6 +43,31 @@ class core_model extends MY_Model {
     }
     
     /**
+     * Fetch specified options from DB
+     * 
+     * @access  public
+     * @param   string      $name   Option name
+     * @return  string|bool         False on error
+     */
+    public function get_options(array $names)
+    {
+        $results = array();
+        $where = "name = '". implode("' OR name = '", $names)."'";
+                
+        $result = $this->db->get_where('options', $where)->result_array();
+        
+        if ( is_array($result) AND count($result)>0 )
+        {
+            foreach ($result as $r)
+            {
+                $results[$r['name']] = $r['value'];
+            }
+        }
+        
+        return $results;
+    }
+    
+    /**
      * Add a new option or update an existing one
      * 
      * Values are stored as strings, containing a byte-stream 

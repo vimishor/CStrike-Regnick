@@ -139,9 +139,32 @@ class Acp extends ACP_Controller
      */
     public function dashboard()
     {        
+        $security = array(
+            'key'   => ( strtoupper($this->config->item('encryption_key')) != 'CHANGE-ME') ? true : false,
+            'xss'   => ($this->config->item('global_xss_filtering')),
+            'csrf'  => ($this->config->item('csrf_protection')),
+        );
+        
+        $speed = array(
+            'logs'  => ($this->config->item('log_threshold')>0) ? false : true,
+            'gzip_output'  => ($this->config->item('compress_output')),
+        );
+        
+        $stats = array_merge($this->core_model->get_options(array('app_version', 'db_version')),
+            array(
+                'registred_users'   => $this->db->count_all('users'),
+                'registred_servers' => $this->db->count_all('servers'),
+                'mysql_version'     => $this->db->version(),
+                'php_version'       => PHP_VERSION,
+            )
+        );
+                
         $data = array(
             'page_title'    => lang('admin_dashboard'),
             'page_subtitle' => 'Application overview',
+            'stats'         => $stats,
+            'security'      => $security,
+            'speed'         => $speed,
         );
         
         $data = Events::trigger('acp_dashboard', $data);
