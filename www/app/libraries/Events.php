@@ -57,9 +57,10 @@ class Events
      * 
      * @param   string|array    $events
      * @param   array           $params
+     * @param   bool            $halt       Stop execution after first valid response ?
      * @return  mixed
      */
-    public static function trigger($events, $params = array())
+    public static function trigger($events, $params = array(), $halt = false)
     {
         if (count(self::$_listeners)<1)
         {
@@ -70,6 +71,8 @@ class Events
         {
             $events = array($events);
         }
+        
+        $responses = array();
         
         foreach ($events as $event)
         {
@@ -84,16 +87,16 @@ class Events
                 {
                     $result = call_user_func_array($callback, array($params));
                     
-                    /**
-                     * because data from controllers are passed to some events,
-                     * we need to make sure that we return at least data that we received
-                     * back to controller, so we dont brake views. 
-                     */
-                    return (!is_array($result) AND count($params)>0) ? $params : $result;
+                    if ($halt AND !is_null($result))
+                    {
+                        return $result;
+                    }
+                    
+                    $responses[] = $result;
                 }   
             }
         }
-        
+        return $responses;
     }
     
     /**

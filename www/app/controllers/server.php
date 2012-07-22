@@ -45,7 +45,7 @@ class Server extends MY_Controller
             'server_name'   => $this->server_model->getServer($serverID)->address,
         );
         
-        $data = Events::trigger('members_list', $data);
+        Events::trigger('members_list', $data);
         
         $this->template->set_layout('one_col')->build('server/team', $data);
     }
@@ -67,7 +67,7 @@ class Server extends MY_Controller
             'server_name'   => $this->server_model->getServer($serverID)->address,
         );
         
-        $data = Events::trigger('team_list', $data);
+        Events::trigger('team_list', $data);
         
         $this->template->set_layout('one_col')->build('server/team', $data);
     }
@@ -96,7 +96,7 @@ class Server extends MY_Controller
             'servers'       => $this->server_model->getServers(false, $config['per_page'], $page),
         );
         
-        $data = Events::trigger('server_list', $data);
+        Events::trigger('server_list', $data);
         
         $this->template->set_layout('one_col')->build('server/list', $data);
 	}

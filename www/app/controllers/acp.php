@@ -120,11 +120,9 @@ class Acp extends ACP_Controller
                     'checked'   => (get_option('register_confirmation') == 1) ? true : false,
                 ),
                 
-                //'register_global'       => (get_option('register_global') == 1) ? true : false,
-                //'register_confirmation' => (get_option('register_confirmation') == 1) ? true : false,
             );
             
-            $data = Events::trigger('acp_settings', $data);
+            Events::trigger('acp_settings', $data);
             
             $this->template->set_layout('two_col')->build('acp/settings', $data);
             
@@ -167,7 +165,7 @@ class Acp extends ACP_Controller
             'speed'         => $speed,
         );
         
-        $data = Events::trigger('acp_dashboard', $data);
+        Events::trigger('acp_dashboard', $data);
         
         $this->template->set_layout('two_col')->build('acp/dashboard', $data);
     }
