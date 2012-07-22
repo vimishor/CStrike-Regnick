@@ -74,7 +74,10 @@ class Regnick_auth
      */
     public function hasFlag($userID, $flag)
     {
-        $user_flags = $this->ci->user_model->getRow($userID, 'account_flags');
+        // try to fetch `account_flags` from session first, to diminish number of DB queries
+        $user_flags = ($this->ci->session->userdata('user_flags')) ? 
+                        $this->ci->session->userdata('user_flags') : 
+                        $this->ci->user_model->getRow($userID, 'account_flags'); 
         
         return (($user_flags) AND (strpos($user_flags, $flag) !== false) ) ? true : false;
     }
@@ -132,9 +135,10 @@ class Regnick_auth
         
         // register session
         $session_data = array(
-            'identity'  => $identity,
-            'email'     => $this->ci->user_model->getRow($identity, 'email'),
-            'user_id'   => $this->ci->user_model->getRow($identity, 'ID'),
+            'identity'      => $identity,
+            'email'         => $this->ci->user_model->getRow($identity, 'email'),
+            'user_id'       => $this->ci->user_model->getRow($identity, 'ID'),
+            'user_flags'    => $this->ci->user_model->getRow($identity, 'account_flags'),
         );
         $this->ci->session->set_userdata($session_data);
                 
