@@ -39,6 +39,9 @@ class MY_Controller extends MX_Controller {
         $this->config->set_item('webmaster.email', $options['webmaster_email']);
         $this->config->set_item('results_per_page', $options['results_per_page']);
         
+        // Navigation
+        $this->load->library('navigation/navigation');
+        
         // Set some default data for forgetful devs :-)
         $data = array(
             'site_name'         => $this->config->item('site.name'),

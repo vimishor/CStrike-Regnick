@@ -122,7 +122,7 @@ $autoload['model'] = array('core_model');
 |
 */
 
-$autoload['modules'] = array('welcome', 'update');
+$autoload['modules'] = array('navigation', 'welcome', 'update');
 
 /* End of file autoload.php */
 /* Location: ./application/config/autoload.php */

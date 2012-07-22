@@ -209,7 +209,6 @@ class Ucp extends MY_Controller
     {
         if ($this->regnick_auth->logged_in() === false)
         {
-            store_location();
             redirect('ucp/login', 'refresh');
         }
         
