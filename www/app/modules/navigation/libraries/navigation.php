@@ -88,6 +88,40 @@ class Navigation {
     }
     
     /**
+     * Add a new item in navigation
+     * 
+     * Group is set default to `owner`, just in case someone forgets to specify a group 
+     * for an important item.
+     * 
+     * @access  public
+     * @param   string  $label  Item name
+     * @param   string  $link   Item link
+     * @param   string  $grop   Item group
+     * @return  bool
+     */
+    public function add_item($label, $link, $group = 'owner')
+    {
+        // do not allow usage of custom groups
+        if (!in_array($group, $this->_groups))
+        {
+            return false;
+        }
+        
+        // do we have items defined for this group ?
+        if (!isset($this->_menu[$group]) OR (count($this->_menu[$group])<1) )
+        {
+            return false;
+        }
+        
+        $this->_menu[$group][] = array(
+            'label' => $label,
+            'link'  => $link
+        );
+        
+        return true;
+    }
+    
+    /**
      * Transform menu array in HTML
      * 
      * @access  public
