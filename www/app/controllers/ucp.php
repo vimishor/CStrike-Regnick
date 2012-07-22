@@ -340,7 +340,7 @@ class Ucp extends MY_Controller
      */
     public function logout()
     {
-        Events::trigger('user_logged_out');
+        Events::trigger('user_logged_out', array('user_id', $this->session->userdata('user_id')) );
         $this->regnick_auth->user_logout();
         
         redirect('', 'refresh');
@@ -369,7 +369,7 @@ class Ucp extends MY_Controller
                 // login successful.
                 console_log('Login OK');
                 
-                Events::trigger('user_logged_in');
+                Events::trigger('user_logged_in', array('user_id', $this->session->userdata('user_id')) );
                 
                 if ($continue = $this->session->userdata('continue'))
                 {

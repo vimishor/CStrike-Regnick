@@ -1,6 +1,16 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 /**
- * Events Library
+ * Events
+ * 
+ * Offers an easy way to execute custom code, on specific application execution time 
+ * 
+ * @package     CStrike-Regnick
+ * @subpackage  Library
+ * @category    Library
+ * @copyright   2012 Gentle Software Solutions
+ * @license     http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2
+ * @version     1.0.0
+ * @author      Alexandru G. <www.gentle.ro>
  */
 class Events
 {

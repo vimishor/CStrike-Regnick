@@ -21,7 +21,7 @@ class Migration_app_version extends CI_Migration {
     public function up()
     {
         // update db version
-        set_option('app_version', '2.0.0');
+        set_option('app_version', '2.0.0-rc1');
     }
     
     /**

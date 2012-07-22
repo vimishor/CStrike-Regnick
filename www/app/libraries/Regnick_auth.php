@@ -1,14 +1,16 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-
 /**
  * Regnick Auth
  * 
- * Basic authentication library.
+ * Basic authentication library. 
  * 
- * @package Regnick_Auth
- * @author  Alexandru G. (http://vim.gentle.ro)
- * @version 0.1.0
- * @license MIT
+ * @package     CStrike-Regnick
+ * @subpackage  Library
+ * @category    Authentication
+ * @copyright   2012 Gentle Software Solutions
+ * @license     http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2
+ * @version     1.0.0
+ * @author      Alexandru G. <www.gentle.ro>
  */
 class Regnick_auth
 {    

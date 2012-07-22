@@ -1,16 +1,16 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 /**
- * CStrike-Regnick update class
+ * Update manager
  * 
  * Provides simple update functionalities for CStrike-Regnick application
- *
- * @package		CodeIgniter
- * @subpackage	Libraries
- * @category	Update
- * @author		Alexandru G.
- * @link		http://www.gentle.ro/
- * @license     http://www.gnu.org/licenses/gpl-2.0.txt
+ * 
+ * @package     CStrike-Regnick
+ * @subpackage  Module
+ * @category    Update
+ * @copyright   2012 Gentle Software Solutions
+ * @license     http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2
  * @version     1.0.0
+ * @author      Alexandru G. <www.gentle.ro>
  */
 class Update_Manager {
 
