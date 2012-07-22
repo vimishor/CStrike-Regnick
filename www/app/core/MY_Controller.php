@@ -33,10 +33,11 @@ class MY_Controller extends MX_Controller {
         }
         
         // backward compatible
-        $this->config->set_item('site.name', get_option('site_name'));
-        $this->config->set_item('register.global', get_option('register_global'));
-        $this->config->set_item('webmaster.email', get_option('webmaster_email'));
-        $this->config->set_item('results_per_page', get_option('results_per_page'));
+        $options = $this->core_model->get_options( array('site_name', 'register_global', 'webmaster_email', 'results_per_page'));
+        $this->config->set_item('site.name', $options['site_name']);
+        $this->config->set_item('register.global', $options['register_global']);
+        $this->config->set_item('webmaster.email', $options['webmaster_email']);
+        $this->config->set_item('results_per_page', $options['results_per_page']);
         
         // Set some default data for forgetful devs :-)
         $data = array(
