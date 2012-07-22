@@ -39,10 +39,9 @@
                 
                 <?php if ($this->regnick_auth->logged_in()): ?>
                 <div class="btn-group">
-                  <a class="btn btn-head" href="<?php echo site_url('user/'.$this->session->userdata('user_id')); ?>"><i class="icon-gravatar icon-white"><img src="<?php echo $this->user_model->getAvatar($this->session->userdata('email')); ?>"></i> <?php echo $this->session->userdata('identity'); ?></a>
+                  <a class="btn btn-head" href="<?php echo site_url('ucp/dashboard'); ?>"><i class="icon-gravatar icon-white"><img src="<?php echo $this->user_model->getAvatar($this->session->userdata('email')); ?>"></i> <?php echo $this->session->userdata('identity'); ?></a>
                   <a class="btn btn-head dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <!-- <li><a href="<?php echo site_url('user/'.$this->session->userdata('user_id')); ?>"><i class="icon-user"></i> <?php echo lang('my_profile'); ?></a></li> -->
                     <li><a href="<?php echo site_url('ucp/dashboard'); ?>"><i class="icon-cog"></i> <?php echo lang('my_settings'); ?></a></li>
                     
                     <?php if ($this->regnick_auth->isOwner($this->session->userdata('user_id'))): ?>
