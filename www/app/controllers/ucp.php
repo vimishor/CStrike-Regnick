@@ -324,9 +324,20 @@ class Ucp extends MY_Controller
             redirect('ucp/login', 'refresh');
         }
         
+        $user_id    = $this->session->userdata('user_id');
+        $user       = $this->user_model->getSettings($user_id);
+                
+        $stats = array(
+            'member_since'  => date('d/m/Y', $user->register_date),
+            'email'         => $user->email,
+            'is_owner'      => $this->regnick_auth->isOwner($this->session->userdata('user_id'))
+        );
+        
         $data = array(
             'page_title'    => lang('user_dashboard'),
             'page_subtitle' => lang('account_overview'),
+            'stats'         => $stats,
+            'membership'    => $this->user_model->getAllAccess($user_id, true),
         );
         
         $this->template->set_layout('two_col')->build('ucp/dashboard', $data);

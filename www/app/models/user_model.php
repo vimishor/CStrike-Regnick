@@ -184,22 +184,42 @@ class user_model extends MY_Model
      * 
      * @access  public
      * @param   int         $userID
-     * @return  array|bool          False on error
+     * @param   bool        $with_srv_name  Fetch server name ?
+     * @return  array|bool                  False on error
      */
-    public function getAllAccess($userID)
-    {        
-        $sql = 'SELECT 
-                    acc.server_ID as ID, grp.name as group_name
-                FROM
-                    '.$this->db->dbprefix('users_access').' as acc, 
-                    '.$this->db->dbprefix('groups').' as grp 
-                WHERE (acc.user_ID = ?) 
-                    AND (acc.group_ID = grp.ID);';
+    public function getAllAccess($userID, $with_srv_name = false)
+    {
+        $sql = '';
+        
+        if (!$with_srv_name)
+        {
+            $sql = 'SELECT 
+                        acc.server_ID as ID, grp.name as group_name
+                    FROM
+                        '.$this->db->dbprefix('users_access').' as acc, 
+                        '.$this->db->dbprefix('groups').' as grp 
+                    WHERE (acc.user_ID = ?) 
+                        AND (acc.group_ID = grp.ID);';
+        }
+        else
+        {
+            $sql = 'SELECT
+                        srv.ID, srv.address, acc.server_ID, grp.name as group_name
+                    FROM
+                        '.$this->db->dbprefix('users_access').' as acc,
+                        '.$this->db->dbprefix('groups').' as grp
+                    INNER JOIN
+                        '.$this->db->dbprefix('servers').' as srv
+                    WHERE (acc.user_ID = ?) 
+                        AND (acc.server_ID = srv.ID) 
+                        AND (acc.group_ID = grp.ID);';
+        }
         
         $query = $this->db->query($sql, array($userID)); 
         
         return $query->result_array();
     }
+    
     /**
      * Save user data
      * 
@@ -321,7 +341,7 @@ class user_model extends MY_Model
      */
     public function getSettings($userID)
     {
-        $query = $this->db->select('ID, login, password, email, active, account_flags')
+        $query = $this->db->select('ID, login, password, email, register_date, active, account_flags')
                     ->where('ID', (int)$userID)
                     ->limit(1)
                     ->get('users');
