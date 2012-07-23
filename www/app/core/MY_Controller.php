@@ -14,11 +14,11 @@ class MY_Controller extends MX_Controller {
     function __construct()
     {
         parent::__construct();
-                
+        
         // If application is not installed, proceed with installation
         if ( ($this->session->userdata('installing') OR !defined('RN_INSTALLED')) AND ($this->uri->segment(1) != 'install') )
         {
-             redirect('install/');
+            redirect('install/');
         }
         
         /**
@@ -33,11 +33,14 @@ class MY_Controller extends MX_Controller {
         }
         
         // backward compatible
-        $options = $this->core_model->get_options( array('site_name', 'register_global', 'webmaster_email', 'results_per_page'));
-        $this->config->set_item('site.name', $options['site_name']);
-        $this->config->set_item('register.global', $options['register_global']);
-        $this->config->set_item('webmaster.email', $options['webmaster_email']);
-        $this->config->set_item('results_per_page', $options['results_per_page']);
+        if ($this->uri->segment(1) != 'install')
+        {
+            $options = $this->core_model->get_options( array('site_name', 'register_global', 'webmaster_email', 'results_per_page'));
+            $this->config->set_item('site.name', $options['site_name']);
+            $this->config->set_item('register.global', $options['register_global']);
+            $this->config->set_item('webmaster.email', $options['webmaster_email']);
+            $this->config->set_item('results_per_page', $options['results_per_page']);
+        }
         
         // Navigation
         $this->load->library('navigation/navigation');

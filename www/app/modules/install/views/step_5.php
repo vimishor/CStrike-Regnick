@@ -9,7 +9,7 @@
             
             <p>
                 <a href="http://www.gentle.ro/proiecte/cstrike-regnick/">CStrike-Regnick</a> installation is now complete. You can view your new website  
-                <a href="<?php echo site_url(); ?>">here</a>, browse documentation <a href="http://www.gentle.ro/proiecte/cstrike-regnick/docs/">here</a> 
+                <a href="<?php echo site_url(); ?>">here</a>, browse documentation <a href="http://docs.gentle.ro/cstrike-regnick/">here</a> 
                 and visit out discussion board at <a href="http://forum.evosys.ro/viewforum.php?f=52">http://www.gentle.ro/forum/</a>.<br><br>
                 
                 <h3>You can login with:</h3>

@@ -5,6 +5,7 @@
 
 # development environment specific data
 .dev/*
+.build/*
 www/app/config/development
 www/app/config/production
 www/app/.htaccess

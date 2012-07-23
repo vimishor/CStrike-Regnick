@@ -27,9 +27,19 @@ CREATE TABLE `{prefix}options` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 :: split ::
 
-INSERT INTO `{prefix}options` VALUES ('app_version', '2.0.3-alpha');
+INSERT INTO `{prefix}options` VALUES ('app_version', '2.0.0-rc1');
 :: split ::
-INSERT INTO `{prefix}options` VALUES ('db_version', '09072012');
+INSERT INTO `{prefix}options` VALUES ('db_version', '19072012');
+:: split ::
+INSERT INTO `{prefix}options` VALUES ('register_confirmation', '0');
+:: split ::
+INSERT INTO `{prefix}options` VALUES ('site_name', 'My community');
+:: split ::
+INSERT INTO `{prefix}options` VALUES ('register_global', '1');
+:: split ::
+INSERT INTO `{prefix}options` VALUES ('webmaster_email', 'accounts@example.com');
+:: split ::
+INSERT INTO `{prefix}options` VALUES ('results_per_page', '12');
 :: split ::
 
 DROP TABLE IF EXISTS `{prefix}servers`;
@@ -84,5 +94,5 @@ CREATE TABLE `{prefix}migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 :: split ::
 
-INSERT INTO `{prefix}migrations` VALUES ('2');
+INSERT INTO `{prefix}migrations` VALUES ('4');
 :: split ::
