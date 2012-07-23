@@ -31,6 +31,9 @@ td.center { text-align: center; }
 /* icons */
 .icon-gravatar { background-position: top center; }
 
+/* text colors */
+.blue { color: #0F83C5; }
+
 /*-----------------------------------------------------------------------------------*/
 /*	1.	HEADER
 /*-----------------------------------------------------------------------------------*/
@@ -89,5 +92,6 @@ td.center { text-align: center; }
 #acp-widget td.good { color: #23A406; }
 #acp-widget td.bad { color: #C50D0D; }
 #acp-widget td.strong { font-weight: bold; }
+#acp-widget td.blue { color: #0F83C5; }
 
 #acp-widget h3 { font-size: 14px; line-height: 24px; color: #EC6C16; text-transform: uppercase; text-shadow: 0px 2px 3px #EDA97B; }

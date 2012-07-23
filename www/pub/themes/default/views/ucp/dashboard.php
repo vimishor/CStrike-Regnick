@@ -39,8 +39,8 @@
                 <table class="table table-condensed table-bordered table-striped">
                     <thead>
                         <tr>
-                            <td class="strong center">Server</td>
-                            <td class="strong center">Group</td>
+                            <td class="blue strong center">Server</td>
+                            <td class="blue strong center">Group</td>
                         </tr>
                     </thead>
                     <tbody>
