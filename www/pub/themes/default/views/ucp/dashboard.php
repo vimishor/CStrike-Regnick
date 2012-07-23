@@ -36,7 +36,7 @@
             <!-- access -->
             <div id="acp-widget" class="span4">
                 <h3>Membership</h3>
-                <table class="table table-condensed table-bordered">
+                <table class="table table-condensed table-bordered table-striped">
                     <thead>
                         <tr>
                             <td class="strong center">Server</td>
