@@ -15,25 +15,26 @@
     </div>
 </footer>
 
-<!-- js -->
 <script>var RN_URL = "<?php echo base_url(); ?>";</script>
+<script src="<?php echo assets_base(); ?>js/jquery/jquery-1.7.1.min.js"></script> 
 
-<script src="<?php echo assets_base(); ?>js/jquery/jquery-1.7.1.js"></script> 
-<script src="<?php echo assets_base(); ?>js/jquery/plugins/cookie.js"></script>
+<!-- js -->
+<script src="<?php echo assets_base(); ?>js/jquery/plugins/cookie.min.js"></script>
     
-<script src="<?php echo assets_base(); ?>js/bootstrap/transition.js"></script>
-<script src="<?php echo assets_base(); ?>js/bootstrap/alert.js"></script> 
-<script src="<?php echo assets_base(); ?>js/bootstrap/modal.js"></script>
-<script src="<?php echo assets_base(); ?>js/bootstrap/dropdown.js"></script>
-<script src="<?php echo assets_base(); ?>js/bootstrap/tab.js"></script>
+<script src="<?php echo assets_base(); ?>js/bootstrap-2.0.3/transition.min.js"></script>
+<script src="<?php echo assets_base(); ?>js/bootstrap-2.0.3/alert.min.js"></script> 
+<script src="<?php echo assets_base(); ?>js/bootstrap-2.0.3/modal.min.js"></script>
+<script src="<?php echo assets_base(); ?>js/bootstrap-2.0.3/dropdown.min.js"></script>
+<script src="<?php echo assets_base(); ?>js/bootstrap-2.0.3/tab.min.js"></script>
+<script src="<?php echo assets_base(); ?>js/bootstrap-2.0.3/button.min.js"></script>  
+<script src="<?php echo assets_base(); ?>js/bootstrap-2.0.3/collapse.min.js"></script>
+<!-- /js -->
 
 <?php if ($ui_tooltips): ?>
 <script>var UI_TOOLTIPS = true;</script>
-<script src="<?php echo assets_base(); ?>js/bootstrap/tooltip.js"></script>
+<script src="<?php echo assets_base(); ?>js/bootstrap-2.0.3/tooltip.min.js"></script>
 <?php endif; ?>
 
-<script src="<?php echo assets_base(); ?>js/bootstrap/button.js"></script>  
-<script src="<?php echo assets_base(); ?>js/bootstrap/collapse.js"></script>
 <script src="<?php echo assets_base(); ?>js/regnick.js"></script>
 </body>
 </html>

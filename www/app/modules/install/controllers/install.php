@@ -85,6 +85,8 @@ class install extends MY_Controller {
         { 
             $this->session->set_userdata('installing', TRUE);
         }
+        
+        $this->template->site_name = 'CStrike-Regnick';
     }
     
     /**
