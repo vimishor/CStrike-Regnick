@@ -11,12 +11,12 @@ Counter-Strike 1.6 servers.
 
 
 ## Installation
-Read `docs/Install` (Ro)
+Read step by step [installation instructions](http://docs.gentle.ro/cstrike-regnick/general/installation/) (Ro)
 
 ## Official Links
 
 * [CStrike Regnick official site](http://www.gentle.ro/proiecte/cstrike-regnick/)
-* [CStrike Regnick wiki](https://github.com/vimishor/CStrike-Regnick/wiki)
+* [CStrike Regnick documentation](https://docs.gentle.ro/cstrike-regnick/)
 
 ## LICENSE
 
