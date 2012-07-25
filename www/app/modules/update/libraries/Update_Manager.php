@@ -46,6 +46,65 @@ class Update_Manager {
     // ------------------------------------------------------------------------
     
     /**
+     * Is a new version available for download ?
+     * 
+     * Compare local application version with the newest version 
+     * available on github downloads.
+     * 
+     * @access  public
+     * @return  bool
+     */
+    public function check_new_release()
+    {
+        // if curl is not available, stop here.
+        if(!function_exists('curl_version'))
+        {
+            notify('I can\'t check if a new version is available, because CURL library is not available on this server.');
+            redirect('');
+        }
+        
+        $local      = get_option('app_version');        
+        $remote     = strtolower($this->get_latest_version());
+        
+        return version_compare( strtolower($local), $remote, '<');
+    }
+    
+    /**
+     * Fetch latest version available on github
+     * 
+     * @access  protected
+     * @return  string|bool     False on error  
+     */
+    protected function get_latest_version()
+    {
+        $curl = curl_init('https://api.github.com/repos/'. $this->github_user .'/'. $this->github_repo .'/downloads');
+        
+        curl_setopt($curl, CURLOPT_HEADER, false);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 10);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        
+        $response     = curl_exec($curl);
+        
+        if (is_resource($curl))
+        {
+            curl_close($curl);
+        }
+        
+        if ($response)
+        {
+            $response   = json_decode($response);
+            $versions   = array_map(create_function('$t', 'return $t->description;'), $response);
+            usort($versions, "version_compare");
+            $response = end($versions);
+        }
+        
+        return $response;
+    }
+    
+    // ------------------------------------------------------------------------
+    
+    /**
      * Update database
      * 
      * @access  public

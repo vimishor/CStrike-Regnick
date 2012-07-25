@@ -42,6 +42,23 @@ class Update extends MY_Controller {
         redirect('');
     }
     
+    /**
+     * Check if a new release version is available on github downloads
+     * 
+     * @access  public
+     * @return  void
+     */
+    public function release()
+    {
+        if ($this->update_manager->check_new_release())
+        {
+            notify('A new version of CStrike-Regnick is available. Please update as soon as posible. <br> 
+                    Visit <a href="http://www.gentle.ro/proiecte/cstrike-regnick/">official page</a> for more informations.', 'info');
+        }
+
+        redirect('');
+    }
+    
     public function database()
     {
         if ( $this->migration->db_update_available() )
