@@ -26,7 +26,7 @@ class MY_Controller extends MX_Controller {
          * @see https://github.com/purwandi/codeigniter-debug-bar
          */
         $this->config->load('profiler', false, true);
-        if ($this->config->config['enable_profiler'])
+        if (isset($this->config->config['enable_profiler']) AND ($this->config->config['enable_profiler']))
         {
             $this->load->library('console');
             $this->output->enable_profiler(TRUE);
