@@ -18,7 +18,7 @@ class ACP_Controller extends MY_Controller {
         // Each page served by this controller requires user to be logged in.
         if ($this->regnick_auth->logged_in() === false)
         {
-            //store_location();
+            store_location();
             redirect('ucp/login', 'refresh');
         }
         
