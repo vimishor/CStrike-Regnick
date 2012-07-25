@@ -9,7 +9,7 @@ class Update extends ACP_Controller {
     {
         parent::__construct();
         
-        $this->load->library('update_manager');
+        $this->load->library('Update_Manager');
     }
     
     public function index()

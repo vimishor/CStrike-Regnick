@@ -25,7 +25,7 @@ class Update_Event
         {
             self::$_ci = & get_instance();
             self::$_ci->load->library('migration');
-            self::$_ci->load->library('update/update_manager');
+            self::$_ci->load->library('update/Update_Manager');
             self::is_update();
         }        
     }
