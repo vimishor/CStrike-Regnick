@@ -3,25 +3,11 @@
 /**
  * Update application
  */
-class Update extends MY_Controller {
+class Update extends ACP_Controller {
 
 	public function __construct()
     {
         parent::__construct();
-        
-        // Each page served by this controller requires user to be logged in.
-        if ($this->regnick_auth->logged_in() === false)
-        {
-            store_location();
-            redirect('ucp/login', 'refresh');
-        }
-        
-        // Each page served by this controller requires user to have `administrator` access.
-        if ($this->regnick_auth->isOwner($this->session->userdata('user_id')) === false)
-        {
-            notify($this->lang->line('insuficient_access'), 'success');
-            redirect('', 'refresh');
-        }
         
         $this->load->library('update_manager');
     }
@@ -39,7 +25,7 @@ class Update extends MY_Controller {
             notify('Dabase is up to date.', 'success');
         }
         
-        redirect('');
+        $this->release();
     }
     
     /**

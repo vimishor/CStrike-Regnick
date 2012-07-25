@@ -94,5 +94,5 @@ CREATE TABLE `{prefix}migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 :: split ::
 
-INSERT INTO `{prefix}migrations` VALUES ('6');
+INSERT INTO `{prefix}migrations` VALUES ('7');
 :: split ::
