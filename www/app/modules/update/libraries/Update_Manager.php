@@ -65,7 +65,7 @@ class Update_Manager {
         $local      = get_option('app_version');        
         $remote     = strtolower($this->get_latest_version());
         
-        return version_compare( strtolower($local), $remote, '<');
+        return ($remote) ? version_compare( strtolower($local), $remote, '<') : false;
     }
     
     /**
@@ -76,6 +76,12 @@ class Update_Manager {
      */
     protected function get_latest_version()
     {
+        // if curl is not available, stop here.
+        if(!function_exists('curl_version'))
+        {
+            return false;
+        }
+        
         $curl = curl_init('https://api.github.com/repos/'. $this->github_user .'/'. $this->github_repo .'/downloads');
         
         curl_setopt($curl, CURLOPT_HEADER, false);
