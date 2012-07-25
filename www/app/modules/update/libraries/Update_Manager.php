@@ -59,8 +59,7 @@ class Update_Manager {
         // if curl is not available, stop here.
         if(!function_exists('curl_version'))
         {
-            notify('I can\'t check if a new version is available, because CURL library is not available on this server.');
-            redirect('');
+            return false;
         }
         
         $local      = get_option('app_version');        
