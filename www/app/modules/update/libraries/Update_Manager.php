@@ -81,7 +81,7 @@ class Update_Manager {
         {
             return false;
         }
-        
+                        
         $curl = curl_init('https://api.github.com/repos/'. $this->github_user .'/'. $this->github_repo .'/downloads');
         
         curl_setopt($curl, CURLOPT_HEADER, false);
@@ -152,7 +152,7 @@ class Update_Manager {
     protected function schema($version)
     {
         if ($version == 0)
-        {
+        {            
             return $this->CI->migration->latest();
         }         
         

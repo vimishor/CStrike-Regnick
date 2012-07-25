@@ -749,7 +749,7 @@ class Acp extends ACP_Controller
             if ($this->user_model->user_add($login, $this->input->post('passwd'), $this->input->post('email'), (bool)$this->input->post('active'), $flags ))
             {
                 console_log('OK');
-                notify('account_added', 'success');
+                notify($this->lang->line('account_created'), 'success');
                 redirect('acp/user/list', 'refresh');
             }
             else
