@@ -45,7 +45,7 @@ class user_model extends MY_Model
     {        
         $this->load->model('group_model');
         
-        if (!$this->group_model->getUserGroup($userID, $serverID))
+        if ($this->group_model->getUserGroup($userID, $serverID) === false)
         {
             return $this->addAccess($userID, $serverID, $groupID);
         }
