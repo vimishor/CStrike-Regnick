@@ -584,7 +584,7 @@ class Acp extends ACP_Controller
             }
             else
             {
-                $error = $this->user_model->get_error();
+                $error = $this->user_model->is_error() ? $this->user_model->get_error() : 'error_on_save';
                 console_log('Error: '.$error);
                 notify($this->lang->line($error), 'error');
             }

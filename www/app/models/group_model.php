@@ -173,7 +173,7 @@ class group_model extends MY_Model
         
         $result = $query->row();
         
-        return (is_object($result) AND is_numeric($result->group_ID) ) ? $result->group_ID : false;   
+        return ($query->num_rows() > 0) ? $result->group_ID : false;   
     }
     
     /**
@@ -192,7 +192,7 @@ class group_model extends MY_Model
         
         $user = $query->row();
         
-        return is_object($user) ? $user : false;
+        return ($query->num_rows() > 0) ? $user : false;
     }
     
     /**
