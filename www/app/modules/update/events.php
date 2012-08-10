@@ -35,14 +35,14 @@ class Update_Event
         $db_update      = self::$_ci->migration->db_update_available();
         
         store_location();
+        set_option('update_last_run', time());
         
         // notify user only if an update is available.
         if ($db_update)
         {
             notify('Database update available. [ <a href="'. site_url('update/database') .'">update now</a> ]', 'info');
-        }
-        
-        set_option('update_last_run', time());
+            return;
+        }s
         
         // +github
         if (self::$_ci->update_manager->check_new_release())
@@ -52,7 +52,7 @@ class Update_Event
         }
         // -github 
         
-        redirect('');
+        //redirect('');
     }
 }
 
