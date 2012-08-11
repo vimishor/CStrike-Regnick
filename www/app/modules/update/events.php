@@ -42,7 +42,7 @@ class Update_Event
         {
             notify('Database update available. [ <a href="'. site_url('update/database') .'">update now</a> ]', 'info');
             return;
-        }s
+        }
         
         // +github
         if (self::$_ci->update_manager->check_new_release())
