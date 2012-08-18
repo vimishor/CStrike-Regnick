@@ -82,6 +82,7 @@
                                 <tr>
                                     <th style="width: 14px;">#</th>
                                     <th><?php echo lang('server_address'); ?></th>
+                                    <th><?php echo lang('group'); ?></th>
                                     <th style="width: 100px;"><?php echo lang('access'); ?></th>
                                 </tr>
                             </thead>
@@ -93,6 +94,7 @@
                                 <tr id="<?php echo $servers[0]['ID']; ?>">
                                     <td><a href="#" data-scope="del-access" data-serverID="0" data-userID="<?php echo $userID; ?>" title="<?php echo lang('del_access_on_server'); ?>">0</a></td>
                                     <td><?php echo $servers[0]['address']; ?></td>
+                                    <td><?php echo isset($servers[0]['group_name']) ? $servers[0]['group_name'] : '-'; ?></td>
                                     <td><a class="has-access" href="<?php echo site_url('acp/user/'.$userID.'/access/0/') ?>" title="<?php echo lang('edit_access_on_server'); ?>"> <?php echo (array_key_exists($servers[0]['ID'], $no_access)) ? lang('no') : lang('yes'); ?></a></td>
                                 </tr>
                                 </tr>
@@ -102,6 +104,7 @@
                                     <tr id="<?php echo $server['ID']; ?>">
                                         <td><a href="#" data-scope="del-access" data-serverID="<?php echo $server['ID']; ?>" data-userID="<?php echo $userID; ?>" title="<?php echo lang('del_access_on_server'); ?>"><?php echo $server['ID']; ?></a></td>
                                         <td><?php echo $server['address']; ?></td>
+                                        <td><?php echo isset($server['group_name']) ? $server['group_name'] : '-'; ?></td>
                                         <td><a class="has-access" href="<?php echo site_url('acp/user/'.$userID.'/access/'.$server['ID'].'/') ?>" title="<?php echo lang('edit_access_on_server'); ?>"> <?php echo (array_key_exists($server['ID'], $no_access)) ? lang('no') : lang('yes'); ?></a></td>
                                     </tr>
                                     <?php endforeach; ?>

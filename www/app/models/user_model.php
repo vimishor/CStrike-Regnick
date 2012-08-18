@@ -159,11 +159,11 @@ class user_model extends MY_Model
     /**
      * Use server ID as array key id
      * 
-     * @access  private
+     * @access  public
      * @param   array   $arr
      * @return  array
      */
-    private function change_key_id($arr)
+    public function change_key_id($arr)
     {
         $newArr = array();
         

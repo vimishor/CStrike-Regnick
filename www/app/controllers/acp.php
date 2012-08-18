@@ -645,11 +645,15 @@ class Acp extends ACP_Controller
             $servers    = $this->server_model->getServers(true, 200, 0, 'arr');
             
             $data = array(
-                    'page_title'    => 'Edit account',  
-                    'page_subtitle' => '',      
-                    'servers'       => $servers,
-                    'no_access'     => $this->user_model->match_access($userID, $servers), // TODO: refactor this
-                    'userID'        => $userID,
+                    'page_title'    =>  'Edit account',  
+                    'page_subtitle' =>  '',      
+                    'no_access'     =>  $this->user_model->match_access($userID, $servers), // TODO: refactor this
+                    'userID'        =>  $userID,
+                    'servers'       =>  array_merge_recursive_distinct($servers, 
+                                            $this->user_model->change_key_id(
+                                                $this->user_model->getAllAccess($userID, true)
+                                            )
+                                        ),
                     
                     'input_login' => array(
                         'class'     => 'input-xlarge',

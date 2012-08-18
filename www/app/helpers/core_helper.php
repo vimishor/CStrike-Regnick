@@ -244,3 +244,32 @@ function ci()
 {
     return get_instance();
 }
+
+/**
+ * Merge two arrays without changing the datatypes of the values in the arrays.
+ * 
+ * array_merge_recursive() it converts values with duplicate keys to
+ * arrays rather then overwriting the value with the new one.
+ * 
+ * @param   array $array1
+ * @param   array $array2
+ * @return  array
+ */
+function array_merge_recursive_distinct ( array &$array1, array &$array2 )
+{
+    $merged = $array1;
+
+    foreach ( $array2 as $key => &$value )
+    {
+        if ( is_array ( $value ) && isset ( $merged [$key] ) && is_array ( $merged [$key] ) )
+        {
+            $merged [$key] = array_merge_recursive_distinct ( $merged [$key], $value );
+        }
+        else
+        {
+            $merged [$key] = $value;
+        }
+    }
+
+    return $merged;
+}
