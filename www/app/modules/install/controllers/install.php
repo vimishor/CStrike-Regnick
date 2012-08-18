@@ -75,7 +75,7 @@ class install extends MY_Controller {
         parent::__construct();
                 
         $this->load->library('session');
-        
+                
         // if is already installed, stop execution here.
         if (!$this->session->userdata('installing') AND defined('RN_INSTALLED') )
         {
@@ -372,7 +372,7 @@ class install extends MY_Controller {
     }
     
     /**
-     * This is step #4
+     * This is step #5
      * 
      * We are done !
      * 
@@ -439,15 +439,10 @@ class install extends MY_Controller {
         // replace {} variables from template with real data
         $new_cfg_file   = str_replace(array_keys($replace), $replace, $cfg_tpl);
         
-        // open config file and write new data
-        $handle = @fopen(APPPATH.'config/'.ENVIRONMENT.'/database.php','w+');
+        // process main config file
+        $this->save_main_config();
         
-        if ($handle !== false)
-        {
-            return @fwrite($handle, $new_cfg_file);
-        }
-        
-        return false;
+        return $this->write_file(APPPATH.'config/'.ENVIRONMENT.'/database.php', $new_cfg_file);
     }
     
     /**
@@ -470,12 +465,43 @@ class install extends MY_Controller {
         // replace {} variables from template with real data
         $new_cfg_file   = str_replace(array_keys($replace), $replace, $cfg_tpl);
         
+        return $this->write_file(APPPATH.'config/'.ENVIRONMENT.'/email.php', $new_cfg_file);
+    }
+    
+    /**
+     * Write main config file
+     * 
+     * @access  protected
+     * @return  bool
+     */
+    protected function save_main_config()
+    {
+        $this->load->helper('string');
+        
+        $cfg_tpl        = file_get_contents(APPPATH.'config/config.php');
+        $new_key        = random_string('alnum', 34); 
+        $new_cfg_file   = str_replace('CHANGE-ME', $new_key, $cfg_tpl);
+        
+        
+        return $this->write_file(APPPATH.'config/config.php', $new_cfg_file);
+    }
+    
+    /**
+     * Write content to file
+     * 
+     * @access  protected
+     * @param   string      $file       Path to file
+     * @param   string      $content    Content that will be written in file
+     * @return  bool
+     */
+    protected function write_file($file, $content)
+    {
         // open config file and write new data
-        $handle = @fopen(APPPATH.'config/'.ENVIRONMENT.'/email.php','w+');
+        $handle = @fopen($file,'w+');
         
         if ($handle !== false)
         {
-            return @fwrite($handle, $new_cfg_file);
+            return @fwrite($handle, $content);
         }
         
         return false;

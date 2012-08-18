@@ -27,7 +27,7 @@ CREATE TABLE `{prefix}options` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 :: split ::
 
-INSERT INTO `{prefix}options` VALUES ('app_version', '2.0.0-rc2');
+INSERT INTO `{prefix}options` VALUES ('app_version', '2.0.0-rc3');
 :: split ::
 INSERT INTO `{prefix}options` VALUES ('db_version', '19072012');
 :: split ::
@@ -94,5 +94,5 @@ CREATE TABLE `{prefix}migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 :: split ::
 
-INSERT INTO `{prefix}migrations` VALUES ('7');
+INSERT INTO `{prefix}migrations` VALUES ('8');
 :: split ::

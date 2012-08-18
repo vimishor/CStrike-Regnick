@@ -25,14 +25,6 @@
                         <td><?php echo ucfirst(ENVIRONMENT);?> config directory is writable</td>
                         <td class="center" style="<?php echo ($app_cfg_env == 'Yes') ? 'color: green;' : 'color: red;'; ?>"><?php echo $app_cfg_env; ?></td>
                     </tr>
-                    <!--<tr>
-                        <td>Database config file is writable</td>
-                        <td class="center" style="<?php echo ($app_file_db == 'Yes') ? 'color: green;' : 'color: red;'; ?>"><?php echo $app_file_db; ?></td>
-                    </tr>
-                    <tr>
-                        <td>Email config file is writable</td>
-                        <td class="center" style="<?php echo ($app_file_mail == 'Yes') ? 'color: green;' : 'color: red;'; ?>"><?php echo $app_file_mail; ?></td>
-                    </tr>-->
                 </tbody>
             </table>
             
