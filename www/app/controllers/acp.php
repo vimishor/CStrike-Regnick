@@ -726,7 +726,8 @@ class Acp extends ACP_Controller
                     'radio_none' => array(
                         'name'      => 'user_flags_c',
                         'id'        => 'user_flags_c',
-                        'value'     => ''
+                        'value'     => '',
+                        'checked'   => (!$this->regnick_auth->hasFlag($userID, 'f')) ? true : false
                     ),
             );
             

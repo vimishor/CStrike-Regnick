@@ -72,14 +72,22 @@ class Regnick_auth
      * @access  public
      * @param   int     $userID     Username ID
      * @param   string  $flag       Account flag(s)
+     * @param   bool    $use_cache  Use data from session ?
      * @return  bool
      */
-    public function hasFlag($userID, $flag)
+    public function hasFlag($userID, $flag, $use_cache = false)
     {
-        // try to fetch `account_flags` from session first, to diminish number of DB queries
-        $user_flags = ($this->ci->session->userdata('user_flags')) ? 
-                        $this->ci->session->userdata('user_flags') : 
-                        $this->ci->user_model->getRow($userID, 'account_flags'); 
+        if ($use_cache)
+        {
+            // try to fetch `account_flags` from session first, to diminish number of DB queries
+            $user_flags = ($this->ci->session->userdata('user_flags')) ? 
+                            $this->ci->session->userdata('user_flags') : 
+                            $this->ci->user_model->getRow($userID, 'account_flags'); 
+        }
+        else
+        {
+            $user_flags = $this->ci->user_model->getRow($userID, 'account_flags');
+        }
         
         return (($user_flags) AND (strpos($user_flags, $flag) !== false) ) ? true : false;
     }
