@@ -158,16 +158,7 @@ class Regnick_auth
         
         return true;
     }
-    
-    /**
-     * Save data for user autologin
-     * 
-     * @access  private
-     * @param   string      $identity   Username
-     * @return  void
-     */
-    private function create_autologin($identity) { }
-    
+        
     /**
      * Is user logged in ?
      * 
@@ -281,8 +272,6 @@ class Regnick_auth
         notify($this->ci->lang->line('recover_successful'), 'success');
         return true;
     }
-    
-    public function user_activate() { }
     
     /**
      * Change user account password
