@@ -75,7 +75,6 @@ class install extends MY_Controller {
     {
         parent::__construct();
         
-        /*
         $this->load->library('session');
                 
         // if is already installed, stop execution here.
@@ -87,7 +86,6 @@ class install extends MY_Controller {
         { 
             $this->session->set_userdata('installing', TRUE);
         }
-        */
         
         $this->template->site_name = 'CStrike-Regnick';
     }
@@ -415,7 +413,7 @@ class install extends MY_Controller {
             mkdir(APPPATH.'config/'.ENVIRONMENT,0777);
             umask($old);
         }
-                
+
         $this->permissions['app_cache']     = is_really_writable(APPPATH.'cache') ? 'Yes' : 'No';
         $this->permissions['app_logs']      = is_really_writable(APPPATH.'logs') ? 'Yes' : 'No';
         $this->permissions['app_cfg']       = is_really_writable(APPPATH.'config') ? 'Yes' : 'No';
