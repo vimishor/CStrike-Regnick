@@ -25,6 +25,10 @@
                         <td><?php echo ucfirst(ENVIRONMENT);?> config directory is writable</td>
                         <td class="center" style="<?php echo ($app_cfg_env == 'Yes') ? 'color: green;' : 'color: red;'; ?>"><?php echo $app_cfg_env; ?></td>
                     </tr>
+                    <tr>
+                        <td>Public storage directory is writable</td>
+                        <td class="center" style="<?php echo ($pub_storage == 'Yes') ? 'color: green;' : 'color: red;'; ?>"><?php echo $pub_storage; ?></td>
+                    </tr>
                 </tbody>
             </table>
             
