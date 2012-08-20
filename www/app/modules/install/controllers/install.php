@@ -65,7 +65,8 @@ class install extends MY_Controller {
         'app_cache'     => false,
         'app_logs'      => false,
         'app_cfg'       => false,
-        'app_cfg_env'   => false
+        'app_cfg_env'   => false,
+        'pub_storage'   => false
     );
     
     // ------------------------------------------------------------------------
@@ -73,7 +74,7 @@ class install extends MY_Controller {
     function __construct() 
     {
         parent::__construct();
-                
+        
         $this->load->library('session');
                 
         // if is already installed, stop execution here.
@@ -122,6 +123,7 @@ class install extends MY_Controller {
             'app_dir_logs'  => $this->permissions['app_logs'],
             'app_cfg'       => $this->permissions['app_cfg'],
             'app_cfg_env'   => $this->permissions['app_cfg_env'],
+            'pub_storage'   => $this->permissions['pub_storage'],
             'is_error'      => $is_error
         ); 
         $this->template->set_layout('one_col')->build('step_1', $data);
@@ -411,11 +413,12 @@ class install extends MY_Controller {
             mkdir(APPPATH.'config/'.ENVIRONMENT,0777);
             umask($old);
         }
-        
+
         $this->permissions['app_cache']     = is_really_writable(APPPATH.'cache') ? 'Yes' : 'No';
         $this->permissions['app_logs']      = is_really_writable(APPPATH.'logs') ? 'Yes' : 'No';
         $this->permissions['app_cfg']       = is_really_writable(APPPATH.'config') ? 'Yes' : 'No';
         $this->permissions['app_cfg_env']   = is_really_writable(APPPATH.'config/'.ENVIRONMENT) ? 'Yes' : 'No';
+        $this->permissions['pub_storage']   = is_really_writable(FCPATH.'pub/storage') ? 'Yes' : 'No';
     }
     
     /**
