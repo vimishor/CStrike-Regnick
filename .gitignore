@@ -21,6 +21,7 @@ www/app/cache/*
 
 # do not track logs
 www/app/logs/*
+www/app/modules/cli
 !www/app/logs/index.html
 !www/app/logs/.htaccess 
 
