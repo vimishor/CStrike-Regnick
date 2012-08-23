@@ -29,7 +29,7 @@ CREATE TABLE `{prefix}options` (
 
 INSERT INTO `{prefix}options` VALUES ('app_version', '2.0.0-rc3');
 :: split ::
-INSERT INTO `{prefix}options` VALUES ('db_version', '19072012');
+INSERT INTO `{prefix}options` VALUES ('db_version', '23082012');
 :: split ::
 INSERT INTO `{prefix}options` VALUES ('register_confirmation', '0');
 :: split ::
@@ -70,6 +70,8 @@ CREATE TABLE `{prefix}users` (
   `active` int(1) NOT NULL DEFAULT '0',
   `activation_key` varchar(60) NOT NULL,
   `account_flags` varchar(12) NOT NULL DEFAULT 'ab',
+  `last_login` int(10) NOT NULL,
+  `passwd_type` int(2) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 :: split ::
@@ -94,5 +96,5 @@ CREATE TABLE `{prefix}migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 :: split ::
 
-INSERT INTO `{prefix}migrations` VALUES ('8');
+INSERT INTO `{prefix}migrations` VALUES ('9');
 :: split ::
