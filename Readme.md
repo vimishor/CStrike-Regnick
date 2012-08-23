@@ -6,7 +6,7 @@ Counter-Strike 1.6 servers.
 
 
 ## Requirements
-* Web space with PHP 5.2.x and up.
+* Web space with PHP 5.3.x and up.
 * Counter-Strike 1.6 server with AMXModX and Mysql module enabled.
 
 
