@@ -143,14 +143,19 @@ class Regnick_auth
             return false;
         }
         
+        $userID = $this->ci->user_model->getRow($identity, 'ID');
+        
         // register session
         $session_data = array(
             'identity'      => $identity,
             'email'         => $this->ci->user_model->getRow($identity, 'email'),
-            'user_id'       => $this->ci->user_model->getRow($identity, 'ID'),
+            'user_id'       => $userID,
             'user_flags'    => $this->ci->user_model->getRow($identity, 'account_flags'),
         );
         $this->ci->session->set_userdata($session_data);
+        
+        // update last login
+        $this->set_last_login($userID);
                 
         notify($this->ci->lang->line('login_successful'), 'success');
         
@@ -158,7 +163,24 @@ class Regnick_auth
         
         return true;
     }
+    
+    /**
+     * Update last login time
+     * 
+     * @access  public
+     * @param   int     $userID     User ID
+     * @return  bool
+     */
+    public function set_last_login($userID)
+    {
+        $data = array(
+            'last_login' => time()
+        );
+        $this->ci->db->where('ID', $userID);
         
+        return $this->ci->db->update('users', $data);
+    }
+    
     /**
      * Is user logged in ?
      * 
