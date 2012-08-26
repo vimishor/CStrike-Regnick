@@ -204,7 +204,7 @@ class group_model extends MY_Model
      * @param   int         $offset
      * @return  array|bool                  False on error
      */
-    public function get_groups($only_public = false, $num = 100, $offset = 0)
+    public function get_groups($only_public = false, $num = 100, $offset = 0, $search)
     {
         $query = '';
         
@@ -212,12 +212,14 @@ class group_model extends MY_Model
         {
             $query = $this->db->select('ID, name, access, public')
                     ->where('public =', '1')
+                    ->like('name', $search)
                     ->limit($num, $offset)
                     ->get('groups');
         }
         else
         {
             $query = $this->db->select('ID, name, access, public')
+                    ->like('name', $search)
                     ->limit($num, $offset)
                     ->get('groups');
         }

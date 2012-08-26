@@ -331,24 +331,47 @@ class Acp extends ACP_Controller
      * @access  public
      * @return  void
      */
-    public function server_list($page = 0)
+    public function server_list($page = 0, $search = '')
     {        
         $this->load->model('server_model');
+        
         $this->load->library('pagination');
-        $config['base_url']     = base_url().'/acp/server/list/';
-        $config['total_rows']   = $this->db->where('ID >', DEFAULT_SERVER_ID)->count_all_results('servers');
-        $config['per_page']     = $this->config->item('results_per_page');
-        $config['uri_segment']  = 4;
+        $config['per_page'] = $this->config->item('results_per_page');
+        
+        if ($search != '')
+        {   
+            $config['base_url']     = base_url().'/acp/server/search/'.$search;
+            $config['total_rows']   = $this->db->like('address', $search)->count_all_results('servers');
+            $config['uri_segment']  = 5;
+        }
+        else
+        {
+            $config['base_url']     = base_url().'/acp/server/list/';
+            $config['total_rows']   = $this->db->count_all('servers');
+            $config['uri_segment']  = 4;
+        }
         $this->pagination->initialize($config);
-                
+        
         $data = array(
             'page_title'    => lang('available_servers'),
             'page_subtitle' => '',
-            'servers'       => $this->server_model->getServers(false, $config['per_page'], $page),
+            'servers'       => $this->server_model->getServers(false, $config['per_page'], $page, 'obj', $search),
+            'show_search'   => 'server'
         );
             
         $this->template->set_layout('two_col')->build('acp/server/list', $data);        
     }
+    
+    /**
+     * Prepare a server search
+     * 
+     * @access  public
+     * @return  void
+     */
+    public function pre_server_search($page = 0, $search)
+    {
+        redirect('acp/server/search/'.strtolower($this->input->post('server')).'/'.(int)$page);
+    } 
     
     // ----------------------------------------------------------------------------------------------------------
     
@@ -509,26 +532,48 @@ class Acp extends ACP_Controller
      * @access  public
      * @return  void
      */
-    public function group_list($page = 0)
+    public function group_list($page = 0, $search = '')
     {        
         $this->load->model('group_model');
-        $this->load->library('pagination');
-        $config['base_url']     = base_url().'/acp/group/list/';
-        $config['total_rows']   = $this->db->count_all('groups');
-        $config['per_page']     = $this->config->item('results_per_page');;
-        $config['uri_segment']  = 4;
-        $this->pagination->initialize($config);
         
+        $this->load->library('pagination');
+        $config['per_page'] = $this->config->item('results_per_page');
+        
+        if ($search != '')
+        {   
+            $config['base_url']     = base_url().'/acp/group/search/'.$search;
+            $config['total_rows']   = $this->db->like('name', $search)->count_all_results('groups');
+            $config['uri_segment']  = 5;
+        }
+        else
+        {
+            $config['base_url']     = base_url().'/acp/group/list/';
+            $config['total_rows']   = $this->db->count_all('groups');
+            $config['uri_segment']  = 4;
+        }
+        $this->pagination->initialize($config);
         
         $data = array(
             'page_title'    => lang('available_groups'),
             'page_subtitle' => '',
-            'groups'        => $this->group_model->get_groups(false, $config['per_page'],$page),
+            'groups'        => $this->group_model->get_groups(false, $config['per_page'],$page, $search),
+            'show_search'   => 'groups'
         );
             
         $this->template->set_layout('two_col')->build('acp/group/list', $data);        
     }
     
+    /**
+     * Prepare a user search
+     * 
+     * @access  public
+     * @return  void
+     */
+    public function pre_group_search($page = 0, $search)
+    {
+        redirect('acp/group/search/'.strtolower($this->input->post('group')).'/'.(int)$page);
+    }    
+        
     // ----------------------------------------------------------------------------------------------------------
     
     /**
@@ -795,26 +840,48 @@ class Acp extends ACP_Controller
     }
     
     /**
+     * Prepare a user search
+     * 
+     * @access  public
+     * @return  void               
+     */
+    public function pre_user_search($page = 0, $search)
+    {
+        redirect('acp/user/search/'.strtolower($this->input->post('user')).'/'.(int)$page);
+    }
+    
+    /**
      * User list
      * 
      * @access  public
      * @return  void
      */
-    public function users_list($page = 0)
+    public function users_list($page = 0, $search = '')
     {        
         
         $this->load->library('pagination');
-        $config['base_url']     = base_url().'/acp/user/list/';
-        $config['total_rows']   = $this->db->count_all('users');
-        $config['per_page']     = $this->config->item('results_per_page');
-        $config['uri_segment']  = 4;
+        $config['per_page'] = $this->config->item('results_per_page');
+        
+        if ($search != '')
+        {   
+            $config['base_url']     = base_url().'/acp/user/search/'.$search;
+            $config['total_rows']   = $this->db->like('login', $search)->count_all_results('users');
+            $config['uri_segment']  = 5;
+        }
+        else
+        {
+            $config['base_url']     = base_url().'/acp/user/list/';
+            $config['total_rows']   = $this->db->count_all('users');
+            $config['uri_segment']  = 4;
+        }        
         $this->pagination->initialize($config);
         
         
         $data = array(
             'page_title'    => lang('registred_users'),
             'page_subtitle' => '',
-            'users'         => $this->user_model->get_users($config['per_page'],$page),
+            'users'         => $this->user_model->get_users($config['per_page'],$page, $search),
+            'show_search'   => 'users'
         );
             
         $this->template->set_layout('two_col')->build('acp/user/list', $data);        

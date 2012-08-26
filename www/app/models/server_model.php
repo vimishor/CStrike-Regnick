@@ -243,7 +243,7 @@ class server_model extends MY_Model {
      * @param   string      $return         Return data as object or array ? Values: 'obj' or 'arr'
      * @return  array|bool  False on error
      */
-    public function getServers($with_global = false, $num = 100, $offset = 0, $return = 'obj')
+    public function getServers($with_global = false, $num = 100, $offset = 0, $return = 'obj', $search = '')
     {
         $this->benchmark->mark('servers_list_(SQL)_start');
         
@@ -252,6 +252,7 @@ class server_model extends MY_Model {
         if ($with_global === true)
         {
             $query = $this->db->select('ID, address, name')
+                        ->like('address', $search)
                         ->limit($num, $offset)
                         ->get('servers');
         }
@@ -259,6 +260,7 @@ class server_model extends MY_Model {
         {
             $query = $this->db->select('ID, address, name')
                         ->where('ID >', DEFAULT_SERVER_ID)
+                        ->like('address', $search)
                         ->limit($num, $offset)
                         ->get('servers');
         }

@@ -298,17 +298,19 @@ class user_model extends MY_Model
      * @param   int         $offset
      * @return  array|bool          False on error
      */
-    public function get_users($num = 0, $offset = 0)
+    public function get_users($num = 0, $offset = 0, $login = '')
     {
         if ( ($num > 0) OR ($offset>0) )
         {
             $query = $this->db->select('ID, login, register_date, active')
+                        ->like('login', $login)
                         ->limit($num, $offset)
                         ->get('users');
         }
         else
         {
             $query = $this->db->select('ID, login, register_date, active')
+                        ->like('login', $login)
                         ->get('users');
         }
         

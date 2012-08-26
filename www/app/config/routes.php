@@ -51,18 +51,31 @@ $route['acp/server/add']            = 'acp/server_add';
 $route['acp/server/del']            = 'acp/server_delete';
 $route['acp/server/list']           = 'acp/server_list';
 $route['acp/server/list/(:num)']    = 'acp/server_list/$1';
+# server search
+$route['acp/server/search/([a-z0-9]+)']          = 'acp/server_list/0/$1';
+$route['acp/server/search/([a-z0-9]+)/(:num)']   = 'acp/server_list/$2/$1';
+$route['acp/server/pre_search']                  = 'acp/pre_server_search';
 
 $route['acp/group/edit/(:num)']     = 'acp/group_edit/$1';
 $route['acp/group/add']             = 'acp/group_add';
 $route['acp/group/del']             = 'acp/group_delete';
 $route['acp/group/list']            = 'acp/group_list';
 $route['acp/group/list/(:num)']     = 'acp/group_list/$1';
+# group search
+$route['acp/group/search/([a-z0-9]+)']          = 'acp/group_list/0/$1';
+$route['acp/group/search/([a-z0-9]+)/(:num)']   = 'acp/group_list/$2/$1';
+$route['acp/group/pre_search']                  = 'acp/pre_group_search';
 
-$route['acp/user/edit/(:num)']      = 'acp/user_edit/$1'; // aici
-$route['acp/user/add']              = 'acp/user_add';
-$route['acp/user/del']              = 'acp/user_delete';
-$route['acp/user/list']             = 'acp/users_list';
-$route['acp/user/list/(:num)']      = 'acp/users_list/$1';
+
+$route['acp/user/edit/(:num)']                  = 'acp/user_edit/$1';
+$route['acp/user/add']                          = 'acp/user_add';
+$route['acp/user/del']                          = 'acp/user_delete';
+$route['acp/user/list']                         = 'acp/users_list';
+$route['acp/user/list/(:num)']                  = 'acp/users_list/$1';
+# user search
+$route['acp/user/search/([a-z0-9]+)']               = 'acp/users_list/0/$1';
+$route['acp/user/search/([a-z0-9]+)/(:num)']        = 'acp/users_list/$2/$1';
+$route['acp/user/pre_search']                       = 'acp/pre_user_search';
 
 $route['acp/user/(:num)/access/(:num)'] = 'acp/user_access/$1/$2';    # userID , serverID
 $route['acp/user/access/del']           = 'acp/user_access_del';   # userID

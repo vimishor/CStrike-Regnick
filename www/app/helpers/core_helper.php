@@ -273,3 +273,55 @@ function array_merge_recursive_distinct ( array &$array1, array &$array2 )
 
     return $merged;
 }
+
+/**
+ * Output search form for specified page
+ * 
+ * @param   string  $for_what   Page name where the form will be used
+ * @return  string              HTML to output
+ */
+function show_search_form($for_what)
+{
+    ci()->load->helper('form');
+        
+    if ($for_what == 'users')
+    {        
+        $output = form_open('acp/user/pre_search', array('class' => 'form-search')) . form_input(array(
+            'name'          => 'user',
+            'class'         => 'input-medium search-query',
+            'placeholder'   => 'search ...',
+       )) .' '. form_button(array(
+            'class'         => 'btn btn-small',
+            'content'       => 'Go',
+            'type'          => 'submit'
+       )) . form_close();
+    }
+    
+    if ($for_what == 'groups')
+    {        
+        $output = form_open('acp/group/pre_search', array('class' => 'form-search')) . form_input(array(
+            'name'          => 'group',
+            'class'         => 'input-medium search-query',
+            'placeholder'   => 'search ...',
+       )) .' '. form_button(array(
+            'class'         => 'btn btn-small',
+            'content'       => 'Go',
+            'type'          => 'submit'
+       )) . form_close();
+    }
+    
+    if ($for_what == 'server')
+    {        
+        $output = form_open('acp/server/pre_search', array('class' => 'form-search')) . form_input(array(
+            'name'          => 'server',
+            'class'         => 'input-medium search-query',
+            'placeholder'   => 'search ...',
+       )) .' '. form_button(array(
+            'class'         => 'btn btn-small',
+            'content'       => 'Go',
+            'type'          => 'submit'
+       )) . form_close();
+    }
+    
+    return $output;
+}
