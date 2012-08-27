@@ -40,7 +40,7 @@ $config['useragent'] = 'CI/Regnick';
 $config['newline']  = "\r\n";
 $config['crlf']     = "\r\n";
 
-define('RN_EMAIL_CONFIGURED', TRUE);
+defined('RN_EMAIL_CONFIGURED') OR define('RN_EMAIL_CONFIGURED', TRUE);
 
 /* End of file email.php */
 /* Location: ./application/config/email.php */

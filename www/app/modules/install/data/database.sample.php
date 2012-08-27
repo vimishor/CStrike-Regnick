@@ -68,7 +68,7 @@ $db['production']['autoinit'] = TRUE;
 $db['production']['stricton'] = FALSE;
 
 // Edit end
-define('RN_INSTALLED', TRUE);
+defined('RN_INSTALLED') OR define('RN_INSTALLED', TRUE);
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */
