@@ -204,7 +204,7 @@ class group_model extends MY_Model
      * @param   int         $offset
      * @return  array|bool                  False on error
      */
-    public function get_groups($only_public = false, $num = 100, $offset = 0, $search)
+    public function get_groups($only_public = false, $num = 100, $offset = 0, $search = '')
     {
         $query = '';
         
