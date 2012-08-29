@@ -41,10 +41,12 @@
 $route['default_controller']        = "server/server_list";
 $route['404_override']              = '';
 
-$route['server/(:num)/members']     = 'server/members/$1';
-$route['server/(:num)/team']        = 'server/team/$1';
-$route['server/list/(:num)']        = 'server/server_list/$1';
-$route['server/list']               = 'server/server_list';
+$route['server/(:num)/members']         = 'server/members/$1';
+$route['server/(:num)/members/(:num)']  = 'server/members/$1/$2';
+$route['server/(:num)/team']            = 'server/team/$1';
+$route['server/(:num)/team/(:num)']     = 'server/team/$1/$2';
+$route['server/list/(:num)']            = 'server/server_list/$1';
+$route['server/list']                   = 'server/server_list';
 
 $route['acp/server/edit/(:num)']                        = 'acp/server_edit/$1';
 $route['acp/server/add']                                = 'acp/server_add';

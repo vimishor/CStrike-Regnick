@@ -34,14 +34,21 @@ class Server extends MY_Controller
      * @access  public
      * @return  void
      */
-    public function members($serverID)
+    public function members($serverID, $page = 0)
     {
         $this->load->model('server_model');
+        
+        $this->load->library('pagination');
+        $config['per_page']     = $this->config->item('results_per_page');
+        $config['base_url']     = base_url().'/server/'. (int)$serverID .'/members/';
+        $config['total_rows']   = count($this->server_model->getMembers($serverID));
+        $config['uri_segment']  = 4;
+        $this->pagination->initialize($config);
         
         $data = array(
             'page_title'    => lang('server_members'),
             'page_subtitle' => '',
-            'users'         => $this->server_model->getMembers($serverID),
+            'users'         => $this->server_model->getMembers($serverID, $config['per_page'], $page),
             'server_name'   => $this->server_model->getServer($serverID)->address,
         );
         
@@ -56,14 +63,21 @@ class Server extends MY_Controller
      * @access  public
      * @return  void
      */
-    public function team($serverID)
+    public function team($serverID, $page = 0)
     {
         $this->load->model('server_model');
+        
+        $this->load->library('pagination');
+        $config['per_page']     = $this->config->item('results_per_page');
+        $config['base_url']     = base_url().'/server/'. (int)$serverID .'/team/';
+        $config['total_rows']   = count($this->server_model->getTeam($serverID));
+        $config['uri_segment']  = 4;
+        $this->pagination->initialize($config);
         
         $data = array(
             'page_title'    => lang('server_team'),
             'page_subtitle' => '',
-            'users'         => $this->server_model->getTeam($serverID),
+            'users'         => $this->server_model->getTeam($serverID, $config['per_page'], $page),
             'server_name'   => $this->server_model->getServer($serverID)->address,
         );
         

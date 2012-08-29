@@ -30,6 +30,9 @@
                 </tbody>
             </table>
             
+            <!-- paginatie -->
+            <?php echo $this->pagination->create_links(); ?>
+            
         </div>
     </div><!-- /#content -->
 </div><!-- /#content-wrapper -->

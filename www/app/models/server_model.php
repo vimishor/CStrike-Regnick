@@ -29,11 +29,13 @@ class server_model extends MY_Model {
      * 
      * @access  public
      * @param   int         $serverID
+     * @int     int         $num        Pagination: per_page
+     * @param   int         $offset     Pagination: page 
      * @return  array|bool              False on error
      */
-    public function getMembers($serverID)
+    public function getMembers($serverID, $num = 0, $offset = 0)
     {
-        return $this->getUsers($serverID, true);
+        return $this->getUsers($serverID, true, $num, $offset);
     }
     
     /**
@@ -41,11 +43,13 @@ class server_model extends MY_Model {
      * 
      * @access  public
      * @param   int         $serverID
+     * @int     int         $num        Pagination: per_page
+     * @param   int         $offset     Pagination: page
      * @return  array|bool              False on error
      */
-    public function getTeam($serverID)
+    public function getTeam($serverID, $num = 0, $offset = 0)
     {
-        return $this->getUsers($serverID, false);
+        return $this->getUsers($serverID, false, $num, $offset);
     }
     
     /**
@@ -54,33 +58,58 @@ class server_model extends MY_Model {
      * @access  private
      * @param   int         $serverID
      * @param   bool        $public     Only from public groups ?
+     * @int     int         $num        Pagination: per_page
+     * @param   int         $offset     Pagination: page
      * @return  array|bool              False on error
      */
-    private function getUsers($serverID, $public = false)
+    private function getUsers($serverID, $public = false, $num = 0, $offset = 0)
     {
         $this->benchmark->mark('server_members_list_(SQL)_start');
         
         $public = ($public) ? 1 : 0;
         
-        $sql = 'SELECT 
-                    acc.user_ID, acc.server_ID, acc.group_ID, 
-                    usr.login, 
-                    grp.name 
-                FROM
-                    '.$this->db->dbprefix('users_access').' as acc, 
-                    '.$this->db->dbprefix('users').' as usr, 
-                    '.$this->db->dbprefix('groups').' as grp 
-                WHERE (acc.group_ID > 0)
-                    AND (usr.active = 1)  
-                    AND (acc.server_ID = ? OR acc.server_ID = '.DEFAULT_SERVER_ID.')
-                    AND (acc.user_ID = usr.ID)
-                    AND (acc.group_ID = grp.ID)
-                    AND (grp.public = ?);';
+        if ( ($num > 0) OR ($offset>0) )
+        {
+            $sql = 'SELECT 
+                        acc.user_ID, acc.server_ID, acc.group_ID, 
+                        usr.login, 
+                        grp.name 
+                    FROM
+                        '.$this->db->dbprefix('users_access').' as acc, 
+                        '.$this->db->dbprefix('users').' as usr, 
+                        '.$this->db->dbprefix('groups').' as grp 
+                    WHERE (acc.group_ID > 0)
+                        AND (usr.active = 1)  
+                        AND (acc.server_ID = ? OR acc.server_ID = '.DEFAULT_SERVER_ID.')
+                        AND (acc.user_ID = usr.ID)
+                        AND (acc.group_ID = grp.ID)
+                        AND (grp.public = ?)
+                    LIMIT ?, ?;';
+            $query = $this->db->query($sql, array((int)$serverID, (int)$public, (int)$offset, (int)$num ));
+        }
+        else
+        {
         
-        $query = $this->db->query($sql, array((int)$serverID, (int)$public));
+            $sql = 'SELECT 
+                        acc.user_ID, acc.server_ID, acc.group_ID, 
+                        usr.login, 
+                        grp.name 
+                    FROM
+                        '.$this->db->dbprefix('users_access').' as acc, 
+                        '.$this->db->dbprefix('users').' as usr, 
+                        '.$this->db->dbprefix('groups').' as grp 
+                    WHERE (acc.group_ID > 0)
+                        AND (usr.active = 1)  
+                        AND (acc.server_ID = ? OR acc.server_ID = '.DEFAULT_SERVER_ID.')
+                        AND (acc.user_ID = usr.ID)
+                        AND (acc.group_ID = grp.ID)
+                        AND (grp.public = ?);';
+            
+            $query = $this->db->query($sql, array((int)$serverID, (int)$public));
+        }
         
         $this->benchmark->mark('server_members_list_(SQL)_end');
-        
+                
         return $query->result_array(); 
     }
     
