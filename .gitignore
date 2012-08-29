@@ -21,9 +21,12 @@ www/app/cache/*
 
 # do not track logs
 www/app/logs/*
-www/app/modules/cli
 !www/app/logs/index.html
 !www/app/logs/.htaccess 
+
+# do not track modules
+www/app/modules/cli
+www/app/modules/user-reminder
 
 # other files and directories
 .DS_Store
