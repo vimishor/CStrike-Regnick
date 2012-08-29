@@ -155,7 +155,7 @@ $config = array(
         array(
             'field' => 'password_b',
             'label' => 'New password',
-            'rules' => 'trim|required|xss_clean|matches[password_c]'
+            'rules' => 'trim|required|xss_clean|min_length[6]|matches[password_c]'
         ),
         array(
             'field' => 'password_c',
@@ -168,7 +168,7 @@ $config = array(
         array(
             'field' => 'username',
             'label' => 'Username',
-            'rules' => 'trim|required|xss_clean|is_unique[users.login]'
+            'rules' => 'trim|required|xss_clean|is_unique[users.login]|min_length[5]'
         ),
         array(
             'field' => 'email',
@@ -184,7 +184,7 @@ $config = array(
         array(
             'field' => 'password',
             'label' => 'Password',
-            'rules' => 'trim|required|xss_clean'
+            'rules' => 'trim|required|xss_clean|min_length[6]'
         ),
         array(
             'field' => 'password-conf',
