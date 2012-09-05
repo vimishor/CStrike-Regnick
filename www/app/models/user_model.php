@@ -130,10 +130,14 @@ class user_model extends MY_Model
     
     // ----------------------------------------------------------------------------------------------------------
     
+    /**
+     * @deprecated
+     * @see Regnick_auth::build_account_flags()
+     */
     public function checkFlags($login, $type, $connection, $regnick)
     {
         // defaults
-        $type = 'b';
+        //$type = 'b';
         
         if (is_steamid($login)) { $type = 'c'; }
         elseif (is_ip($login)) { $type = 'd'; }

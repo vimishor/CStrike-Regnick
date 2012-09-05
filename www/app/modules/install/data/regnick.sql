@@ -69,7 +69,7 @@ CREATE TABLE `{prefix}users` (
   `register_date` int(10) NOT NULL,
   `active` int(1) NOT NULL DEFAULT '0',
   `activation_key` varchar(60) NOT NULL,
-  `account_flags` varchar(12) NOT NULL DEFAULT 'ab',
+  `account_flags` varchar(12) NOT NULL DEFAULT 'a',
   `last_login` int(10) NOT NULL,
   `passwd_type` int(2) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`)

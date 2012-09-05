@@ -33,7 +33,8 @@
                     
                     <div class="row">
                         <div class="span2">
-                            <label class="radio"><input type="radio" name="user_flags_b" value="b" checked="checked">Clan tag</label>
+                            <label class="radio"><input type="radio" name="user_flags_b" value="" checked="checked">User</label>
+                            <label class="radio"><input type="radio" name="user_flags_b" value="b">Clan tag</label>
                             <label class="radio"><input type="radio" name="user_flags_b" value="c">SteamID</label>
                             <label class="radio"><input type="radio" name="user_flags_b" value="d">IP</label>
                         </div>
@@ -44,6 +45,7 @@
                         </div>
                                 
                         <div class="span2">
+                            <label class="radio"><input type="radio" name="user_flags_c" value="">None</label>
                             <label class="radio"><input type="radio" name="user_flags_c" value="f">Owner</label>
                         </div>
                                 

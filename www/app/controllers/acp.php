@@ -790,11 +790,17 @@ class Acp extends ACP_Controller
     {
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
+        $this->load->library('regnick_auth');
         
         if ($this->form_validation->run('acp-user-add') === true) // process form
         {
-            $login = $this->input->post('login');
-            $flags = $this->user_model->checkFlags($login, $this->input->post('user_flags_b'), $this->input->post('user_flags_a'), $this->input->post('user_flags_c'));
+            $login          = $this->input->post('login');
+            $is_owner       = (bool)strpos($this->input->post('user_flags_c'), 'f');
+            $is_clan_tag    = (bool)strpos($this->input->post('user_flags_b'), 'b');
+            $flags          = $this->regnick_auth->build_account_flags($login, array(
+                                'is_owner'      => $is_owner,
+                                'is_clan_tag'   => $is_clan_tag
+                            ));
             
             if ($this->user_model->user_add($login, $this->input->post('passwd'), $this->input->post('email'), (bool)$this->input->post('active'), $flags ))
             {

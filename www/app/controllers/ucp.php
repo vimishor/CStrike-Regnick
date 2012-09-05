@@ -102,7 +102,7 @@ class Ucp extends MY_Controller
                 if ( (get_option('register_confirmation') == '1') AND (can_send_email() === true) )
                 {
                     notify($this->lang->line('account_created_validation'), 'success');
-                    
+
                     // send email
                     $this->load->helper('email');
                     $key = $this->user_model->getRow($this->input->post('username'), 'activation_key');

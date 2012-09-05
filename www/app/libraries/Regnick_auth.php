@@ -216,7 +216,7 @@ class Regnick_auth
     }
     
     /**
-     * Add new account
+     * Add new account (used for registration process)
      * 
      * Data is validated automatically by framework, so we can assume this is 
      * valid and sanitized data.
@@ -233,7 +233,7 @@ class Regnick_auth
      */
     public function user_add($login, $email, $email_conf, $password, $password_conf, $groupID = false, $serverID = false)
     {        
-        $flags      = $this->ci->user_model->checkFlags($login, 'b', 'a', '');
+        $flags      = $this->build_account_flags($login);
         $is_active  = ( (get_option('register_confirmation') == '1') AND (can_send_email() === true) ) ? false : true;
         
         // add user
@@ -320,6 +320,51 @@ class Regnick_auth
         
         notify($this->ci->lang->line('chg_pass_successful'), 'success');
         return true;
+    }
+    
+    /**
+     * Build `account flags` according to `$login` type
+     * 
+     * <code>
+     * $params = array(
+     *      'is_owner'      => true, // Flag 'f' will be added (used only by CStrike-Regnick web application)
+     *      'is_clan_tag'   => true, // If `$login` is not IP or SteamID, flag 'b' will be added.
+     * );
+     * </code>
+     * 
+     * @access  public
+     * @param   string  $login          Username | SteamID | IP
+     * @param   array   $options
+     * @return  string                  Account flags
+     */
+    public function build_account_flags($login, $options = array())
+    {
+        $user_flags = '';
+        
+        if (is_steamid($login))
+        {
+            $user_flags = 'ce';
+        }
+        elseif (is_ip($login))
+        {
+            $user_flags = 'de';
+        }
+        elseif (isset($options['is_clan_tag']) AND ($options['is_clan_tag']) )
+        {
+            $user_flags = 'ba';
+        }
+        else
+        {
+            // simple username, without clan tag
+            $user_flags = 'a';
+        }
+        
+        if (isset($options['is_owner']) AND ($options['is_owner']) )
+        {
+            $user_flags .= 'f';
+        }
+        
+        return $user_flags;
     }
     
     // ----------------------------------------------------------------------------------------------------------
