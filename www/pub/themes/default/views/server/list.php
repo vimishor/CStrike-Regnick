@@ -12,7 +12,7 @@
                 <tr>
                     <th style="width: 14px;">#</th>
                     <th><?php echo lang('address'); ?></th>
-                    <th style="width: 100px;"><?php echo lang('view'); ?></th>
+                    <th style="width: 30%;"><?php echo lang('view'); ?></th>
                 </tr>
             </thead>
             <tbody>
