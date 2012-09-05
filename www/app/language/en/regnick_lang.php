@@ -93,7 +93,7 @@ $lang['add_user']                       = 'Add user';
 $lang['member_since']                   = 'Member since';
 $lang['del_user']                       = 'Delete user';
 $lang['edit_user']                      = 'Edit user';
-
+$lang['user_notes']                     = 'User notes';
 $lang['connection_flags']               = 'Connection flags';
 $lang['flags_description']              = 'This flags are valid on all servers';
 $lang['account_is_active']              = 'Account is active';

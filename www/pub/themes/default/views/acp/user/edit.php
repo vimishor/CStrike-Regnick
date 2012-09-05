@@ -32,6 +32,11 @@
                                 <?php echo form_label( lang('email_address'), 'email', array('class' => 'control-label')); ?>
                                 <div class="controls"><?php echo form_input($input_email); ?></div>
                             </div>
+                            <div class="control-group">
+                                <?php echo form_label( lang('user_notes'), 'notes', array('class' => 'control-label')); ?>
+                                <div class="controls"><?php echo form_textarea($txt_notes); ?></div>
+                            </div>
+                            
                             <div class="control-group well">
                                 <div class="content-header hspace">
                                     <h4 class="section-title"><?php echo lang('connection_flags'); ?></h4>
@@ -40,6 +45,7 @@
                                 
                                 <div class="row">
                                     <div class="span2">
+                                        <label class="radio"><?php echo form_radio($radio_none1); ?>User</label>
                                         <label class="radio"><?php echo form_radio($radio_b); ?>Clan tag</label>
                                         <label class="radio"><?php echo form_radio($radio_c); ?>SteamID</label>
                                         <label class="radio"><?php echo form_radio($radio_d); ?>IP</label>

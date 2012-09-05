@@ -234,8 +234,10 @@ class user_model extends MY_Model
      * @param   string  $email      User email
      * @param   bool    $is_active  Account is active ?
      * @param   string  $flags      Connection flags
+     * @param   string  $notes      User notes
+     * @return  bool
      */
-    public function saveUser($userID, $login, $password = '', $email = '', $is_active, $flags)
+    public function saveUser($userID, $login, $password = '', $email = '', $is_active, $flags, $notes = '')
     {
         if (!$this->user_exist($userID))
         {
@@ -247,6 +249,7 @@ class user_model extends MY_Model
             'login'             => $login,
             'active'            => ((bool)$is_active) ? 1 : 0, 
             'account_flags'     => $flags,
+            'notes'             => $notes,
         );
         
         if ($password != '') {
@@ -349,7 +352,7 @@ class user_model extends MY_Model
      */
     public function getSettings($userID)
     {
-        $query = $this->db->select('ID, login, password, email, register_date, active, account_flags')
+        $query = $this->db->select('ID, login, password, email, register_date, active, account_flags, notes')
                     ->where('ID', (int)$userID)
                     ->limit(1)
                     ->get('users');

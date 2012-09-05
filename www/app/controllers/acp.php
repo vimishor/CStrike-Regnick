@@ -670,7 +670,8 @@ class Acp extends ACP_Controller
             $login = $this->input->post('login');
             $flags = $this->user_model->checkFlags($login, $this->input->post('user_flags_b'), $this->input->post('user_flags_a'), $this->input->post('user_flags_c'));
             
-            if ( $this->user_model->saveUser($userID, $login, $this->input->post('passwd'), $this->input->post('email'), (bool)$this->input->post('active'), $flags ) === true)
+            if ( $this->user_model->saveUser($userID, $login, $this->input->post('passwd'), $this->input->post('email'), 
+                (bool)$this->input->post('active'), $flags, $this->input->post('notes') ) === true)
             {
                 console_log('OK');
                 notify($this->lang->line('data_saved'), 'success');
@@ -721,6 +722,12 @@ class Acp extends ACP_Controller
                         'id'            => 'email',
                         'placeholder'   => $user->email,
                     ),
+                    'txt_notes' => array(
+                        'class'         => 'input-xlarge',
+                        'name'          => 'notes',
+                        'id'            => 'notes',
+                        'value'         => $user->notes,
+                    ),
                     
                     'ckbox_public' => array(
                         'name'      => 'active',
@@ -730,7 +737,12 @@ class Acp extends ACP_Controller
                     ),
                     
                     
-                    
+                    'radio_none1' => array(
+                        'name'      => 'user_flags_b',
+                        'id'        => 'user_flags_b',
+                        'value'     => '',
+                        'checked'   => ($this->regnick_auth->hasFlag($userID, 'b') === false) ? true : false,
+                    ),
                     'radio_b' => array(
                         'name'      => 'user_flags_b',
                         'id'        => 'user_flags_b',
