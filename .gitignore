@@ -32,6 +32,11 @@ www/app/modules/user-reminder
 # other files and directories
 .DS_Store
 *.back
+*.gz
+*.zip
+*.tar
+*.rar
+*.exe
 
 # ignore this file
 !.gitignore
