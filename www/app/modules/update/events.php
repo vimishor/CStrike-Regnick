@@ -25,7 +25,7 @@ class Update_Event
         {
             self::$_ci = & get_instance();
             self::$_ci->load->library('migration');
-            self::$_ci->load->library('update/Update_Manager');
+            self::$_ci->load->library('update/update_lib');
             self::is_update();
         }        
     }
@@ -45,7 +45,7 @@ class Update_Event
         }
         
         // +github
-        if (self::$_ci->update_manager->check_new_release())
+        if (self::$_ci->update_lib->release_available())
         {
             notify('A new version of CStrike-Regnick is available. Please update as soon as posible. <br> 
                     Visit <a href="http://www.gentle.ro/proiecte/cstrike-regnick/">official page</a> for more informations.', 'info');
