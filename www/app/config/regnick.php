@@ -9,49 +9,19 @@
 */
 
 /**
- * Website name.
- * You can use your community name.
- */
-//$config['site.name'] = 'My community';
-
-/**
  * Password encryption method
- * Values: md5, sha1, 'none'
+ *  Values: md5, none
+ *
+ * Default value: 'none'
  */
 $config['password_encrypt'] = 'none';
 
 /**
- * Allow nickname registration on all servers ?
- * 
- * default: true
- */
-//$config['register.global'] = true;
-
-/**
- * Send confirmation email for new accounts ?
- * default: true
- * 
- * @deprecated  Moved to DB as `register_confirmation` 
- */
-//$config['register.confirmation'] = false;
-
-/**
  * Use those sexy tooltips ?
  * 
- * default: false
+ * Default value: true
  */
 $config['ui.tooltips'] = true;
-
-
-/**
- * What email address we will use to send emails ?
- */
-//$config['webmaster.email']  = 'accounts@example.com';
-
-/**
- * How many SQL results do we show on one page ?
- */
-//$config['results_per_page'] = '12';
 
 /* End of file regnick.php */
 /* Location: ./application/config/regnick.php */

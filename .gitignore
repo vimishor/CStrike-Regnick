@@ -28,6 +28,7 @@ www/app/logs/*
 www/app/modules/cli
 www/app/modules/cron
 www/app/modules/user-reminder
+www/app/modules/rescue
 
 # other files and directories
 .DS_Store

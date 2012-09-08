@@ -28,7 +28,7 @@ class user_model extends MY_Model
      * Password encryption methods
      * @var array
      */
-    public $encrypt_methods = array('md5', 'sha1', 'none');
+    public $encrypt_methods = array('md5', 'none');
     
     // ----------------------------------------------------------------------------------------------------------
     
