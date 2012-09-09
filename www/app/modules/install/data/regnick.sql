@@ -77,7 +77,7 @@ CREATE TABLE `{prefix}users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 :: split ::
 
-INSERT INTO `{prefix}users` VALUES ('1', 'administrator', 'admin', 'admin@example.com', '1331499421', '1', 'FROM_INSTALL', 'af');
+INSERT INTO `{prefix}users` VALUES ('1', 'administrator', 'admin', 'admin@example.com', '1331499421', '1', 'FROM_INSTALL', 'af', '0', '0', 'The wise one !');
 :: split ::
 
 DROP TABLE IF EXISTS `{prefix}users_access`;
