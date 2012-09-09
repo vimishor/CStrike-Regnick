@@ -675,7 +675,7 @@ class Acp extends ACP_Controller
             {
                 console_log('OK');
                 notify($this->lang->line('data_saved'), 'success');
-                redirect('acp/user/list', 'refresh');
+                redirect('acp/user/edit/'.$userID, 'refresh');
             }
             else
             {
