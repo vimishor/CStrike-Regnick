@@ -136,6 +136,10 @@ class Update extends ACP_Controller {
                 
                 force_download(base_url().'storage/'.$filename, $backup);
             }
+            else
+            {
+                notify('Can\'t write backup file!<br>Please make sure that user under which web server is running, has write permission in directory `pub/storage` ', 'error');
+            }
         }
         
         if ($what == 'fs')
