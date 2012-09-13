@@ -27,6 +27,7 @@ www/app/logs/*
 # do not track modules
 www/app/modules/cli
 www/app/modules/cron
+www/app/modules/servers
 www/app/modules/user-reminder
 www/app/modules/rescue
 
