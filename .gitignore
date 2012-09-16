@@ -30,6 +30,7 @@ www/app/modules/cron
 www/app/modules/servers
 www/app/modules/user-reminder
 www/app/modules/rescue
+www/pub/storage
 
 # other files and directories
 .DS_Store
