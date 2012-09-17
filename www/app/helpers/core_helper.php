@@ -325,3 +325,14 @@ function show_search_form($for_what)
     
     return $output;
 }
+
+/**
+ * Check if a PHP function is disabled from php.ini
+ * 
+ * @param   string  $function   Function name
+ * @return  bool
+ */
+function is_disabled($function) {
+    $disabled_functions=explode(',',ini_get('disable_functions'));
+    return in_array($function, $disabled_functions);
+}
