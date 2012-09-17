@@ -863,7 +863,7 @@ class Acp extends ACP_Controller
      * @access  public
      * @return  void               
      */
-    public function pre_user_search($page = 0, $search)
+    public function pre_user_search($page = 0, $search = '')
     {
         redirect('acp/user/search/'.strtolower($this->input->post('user')).'/'.(int)$page);
     }
