@@ -30,7 +30,9 @@
  * @author		ExpressionEngine Dev Team
  * @link		http://codeigniter.com/user_guide/general/profiling.html
  */
-class MY_Profiler extends CI_Profiler {
+class MY_Profiler extends CI_Loader {
+
+	var $CI;
 
 	protected $_available_sections = array(
 		'benchmarks',
@@ -313,7 +315,7 @@ class MY_Profiler extends CI_Profiler {
 	 */
 	protected function _compile_memory_usage()
 	{
-		if (function_exists('memory_get_peak_usage') && ($usage = memory_get_peak_usage()) != '')
+		if (function_exists('memory_get_usage') && ($usage = memory_get_usage()) != '')
 		{
 			$output = number_format($usage) .' bytes';
 		}
@@ -427,7 +429,7 @@ class MY_Profiler extends CI_Profiler {
 					$output[$key] = "'$val'";
 				}
 				
-				if (is_array($val))
+				if (is_array($val) || is_object($val))
 				{
 					$output[$key] = htmlspecialchars(stripslashes(print_r($val, true)));
 				}
