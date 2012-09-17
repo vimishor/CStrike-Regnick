@@ -15,11 +15,11 @@
                 <table class="table table-condensed table-bordered">
                     <tbody>
                         <tr>
-                            <td>Member since</td>
+                            <td><?php echo lang('member_since'); ?></td>
                             <td class="center"><?php echo $stats['member_since']; ?></td>
                         </tr>
                         <tr>
-                            <td>Email</td>
+                            <td><?php echo lang('email_address'); ?></td>
                             <td class="center"><?php echo $stats['email']; ?></td>
                         </tr>
                         <tr>
@@ -35,12 +35,12 @@
             
             <!-- access -->
             <div id="acp-widget" class="span4">
-                <h3>Membership</h3>
+                <h3><?php echo lang('membership'); ?></h3>
                 <table class="table table-condensed table-bordered table-striped">
                     <thead>
                         <tr>
-                            <td class="blue strong center">Server</td>
-                            <td class="blue strong center">Group</td>
+                            <td class="blue strong center"><?php echo lang('server'); ?></td>
+                            <td class="blue strong center"><?php echo lang('group'); ?></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,7 +52,7 @@
                             </tr>
                             <?php endforeach; ?>
                         <?php else: ?>
-                        <tr><td colspan="2" class="center">You don't have access to any server.</td></tr>
+                        <tr><td colspan="2" class="center"><?php echo lang('user_has_no_access'); ?></td></tr>
                         <?php endif; ?>
                   </tbody>
                 </table>            

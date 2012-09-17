@@ -84,7 +84,7 @@ $lang['chg_pass_successful']            = 'Password changed successfully';
 $lang['insuficient_access']             = 'Insuficient access';
 $lang['user_deleted']                   = 'User deleted';
 $lang['group_added']                    = 'Group added';
-$lang['data_saved']                     = 'Data saved successfully';
+$lang['data_saved']                     = 'Settings successfully saved';
 
 // acp
 $lang['admin_settings']                 = 'Application settings';
@@ -130,5 +130,18 @@ $lang['webmaster_email']                = 'Webmaster email';
 $lang['results_per_page']               = 'Results per page';
 $lang['register_global']                = 'Allow global account registration ?';
 $lang['register_confirmation']          = 'Confirm registration via email ?';
+
+$lang['application_version']            = 'Application version';
+$lang['database_version']               = 'Database version';
+$lang['mysql_version']                  = 'MySQL version';
+$lang['php_version']                    = 'PHP version';
+$lang['registred_users']                = 'Registred users';
+$lang['registred_servers']              = 'Registred servers';
+$lang['member_since']                   = 'Member since';
+$lang['membership']                     = 'Membership';
+$lang['change_app_settings']            = 'Change application settings';
+$lang['app_overview']                   = 'Application overview';
+$lang['not_mandatory']                  = 'Only if you wish to change it';
+$lang['enjoy_playing']                  = 'Play with joy !';
 
 /* End of file regnick_lang.php */

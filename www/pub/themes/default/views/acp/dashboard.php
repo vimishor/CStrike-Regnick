@@ -15,27 +15,27 @@
                 <table class="table table-condensed table-bordered">
                     <tbody>
                         <tr>
-                            <td>Application version</td>
+                            <td><?php echo lang('application_version'); ?></td>
                             <td class="center"><?php echo $stats['app_version']; ?></td>
                         </tr>
                         <tr>
-                            <td>Database version</td>
+                            <td><?php echo lang('database_version'); ?></td>
                             <td class="center"><?php echo $stats['db_version']; ?></td>
                         </tr>
                         <tr>
-                            <td>Registred users</td>
+                            <td><?php echo lang('registred_users'); ?></td>
                             <td class="center"><?php echo $stats['registred_users']; ?></td>
                         </tr>
                         <tr>
-                            <td>Registred servers</td>
+                            <td><?php echo lang('registred_servers'); ?></td>
                             <td class="center"><?php echo $stats['registred_servers']; ?></td>
                         </tr>
                         <tr>
-                            <td>MySQL version</td>
+                            <td><?php echo lang('mysql_version'); ?></td>
                             <td class="center"><?php echo $stats['mysql_version']; ?></td>
                         </tr>
                         <tr>
-                            <td>PHP version</td>
+                            <td><?php echo lang('php_version'); ?></td>
                             <td class="center"><?php echo $stats['php_version']; ?></td>
                         </tr>
                   </tbody>

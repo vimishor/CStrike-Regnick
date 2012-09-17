@@ -106,7 +106,7 @@ class Server extends MY_Controller
         
         $data = array(
             'page_title'    => lang('community_servers'),
-            'page_subtitle' => 'Play with joy !',
+            'page_subtitle' => lang('enjoy_playing'),
             'servers'       => $this->server_model->getServers(false, $config['per_page'], $page),
         );
         

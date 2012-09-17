@@ -81,7 +81,7 @@ class Acp extends ACP_Controller
         {
             $data = array(
                 'page_title'    => lang('admin_settings'),
-                'page_subtitle' => 'Change application settings',
+                'page_subtitle' => lang('change_app_settings'),
                 
                 'form_site_name' => array(
                     'class' => 'input-xlarge',
@@ -162,7 +162,7 @@ class Acp extends ACP_Controller
                 
         $data = array(
             'page_title'    => lang('admin_dashboard'),
-            'page_subtitle' => 'Application overview',
+            'page_subtitle' => lang('app_overview'),
             'stats'         => $stats,
             'security'      => $security,
             'speed'         => $speed,
@@ -199,7 +199,7 @@ class Acp extends ACP_Controller
         {
             $this->output->enable_profiler(FALSE);
         }
-        $response = array('status' => 'error', 'message' => 'Error saving new settings.');
+        $response = array('status' => 'error', 'message' => lang('error_on_save'));
         
         if ($this->input->is_post())
         {
@@ -208,7 +208,7 @@ class Acp extends ACP_Controller
             
             if ($this->server_model->delServer($serverID))
             {
-                $response = array('status' => 'ok', 'message' => 'Settings successfully saved.');
+                $response = array('status' => 'ok', 'message' => lang('data_saved'));
             }
         }
         
@@ -387,7 +387,7 @@ class Acp extends ACP_Controller
         {
             $this->output->enable_profiler(FALSE);
         }
-        $response = array('status' => 'error', 'message' => 'Error saving new settings.');
+        $response = array('status' => 'error', 'message' => lang('error_on_save'));
         
         if ($this->input->is_post())
         {
@@ -396,7 +396,7 @@ class Acp extends ACP_Controller
             
             if ($this->group_model->delGroup($groupID))
             {
-                $response = array('status' => 'ok', 'message' => 'Settings successfully saved.');
+                $response = array('status' => 'ok', 'message' => lang('data_saved'));
             }
         }
         
@@ -588,7 +588,7 @@ class Acp extends ACP_Controller
         {
             $this->output->enable_profiler(FALSE);
         }
-        $response = array('status' => 'error', 'message' => 'Error saving new settings.');
+        $response = array('status' => 'error', 'message' => lang('error_on_save'));
         
         if ($this->input->is_post())
         {
@@ -599,7 +599,7 @@ class Acp extends ACP_Controller
                         
             if ($this->user_model->delAccess($userID, $serverID))
             {
-                $response = array('status' => 'ok', 'message' => 'Settings successfully saved.');
+                $response = array('status' => 'ok', 'message' => lang('data_saved'));
             }
         }
         
@@ -713,7 +713,7 @@ class Acp extends ACP_Controller
                         'class'         => 'input-xlarge',
                         'name'          => 'passwd',
                         'id'            => 'passwd',
-                        'placeholder'   => 'Only if you wish to change it',
+                        'placeholder'   => lang('not_mandatory'),
                     ),
                     
                     'input_email' => array(
@@ -918,7 +918,7 @@ class Acp extends ACP_Controller
         {
             $this->output->enable_profiler(FALSE);
         }
-        $response = array('status' => 'error', 'message' => 'Error saving new settings.');
+        $response = array('status' => 'error', 'message' => lang('error_on_save'));
         
         if ($this->input->is_post())
         {
@@ -927,7 +927,7 @@ class Acp extends ACP_Controller
             
             if ( $this->user_model->user_exist($userID) AND $this->user_model->delete_user($userID) )
             {
-                $response = array('status' => 'ok', 'message' => 'Settings successfully saved.');
+                $response = array('status' => 'ok', 'message' => lang('data_saved'));
             }
         }
         
