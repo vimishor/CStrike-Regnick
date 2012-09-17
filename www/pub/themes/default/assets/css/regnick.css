@@ -33,6 +33,7 @@ td.center { text-align: center; }
 
 /* text colors */
 .blue { color: #0F83C5; }
+a.menu-link, a.menu-link:hover { color: #fff; text-decoration: none; }
 
 /*-----------------------------------------------------------------------------------*/
 /*	1.	HEADER

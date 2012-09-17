@@ -26,7 +26,7 @@ class ACP_Controller extends MY_Controller {
         // Each page served by this controller requires user to have `administrator` access.
         if ($this->regnick_auth->isOwner($this->session->userdata('user_id')) === false)
         {
-            notify($this->lang->line('insuficient_access'), 'success');
+            notify($this->lang->line('insuficient_access'), 'error');
             redirect('', 'refresh');
         }
         
