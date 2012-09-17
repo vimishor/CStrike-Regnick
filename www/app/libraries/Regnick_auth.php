@@ -77,6 +77,12 @@ class Regnick_auth
      */
     public function hasFlag($userID, $flag, $use_cache = false)
     {
+        // if $userID is equal with the one from session, activate cache
+        if ( ($this->ci->session->userdata('user_id')) AND ((int)$userID == $this->ci->session->userdata('user_id')) )
+        {
+            $use_cache = true;
+        }
+        
         if ($use_cache)
         {
             // try to fetch `account_flags` from session first, to diminish number of DB queries
