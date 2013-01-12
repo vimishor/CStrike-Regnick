@@ -98,10 +98,10 @@ class install extends MY_Controller {
      * @access  public
      * @return  void
      */
-	public function index()
-	{
-		$this->step1();
-	}
+    public function index()
+    {
+        $this->step1();
+    }
     
     /**
      * This is step #1
@@ -140,45 +140,46 @@ class install extends MY_Controller {
     public function step2()
     {
         $this->load->helper(array('form', 'url'));
-		$this->load->library('form_validation'); 
+        $this->load->library('form_validation'); 
                 
         $this->form_validation->set_rules(array(
             array(
-				'field' => 'hostname',
-				'label'	=> 'Hostname',
-				'rules'	=> 'trim|required|callback_test_db_credentials'
-			),
+                'field' => 'hostname',
+                'label' => 'Hostname',
+                'rules' => 'trim|required|callback_test_db_credentials'
+            ),
             array(
-				'field' => 'database',
-				'label'	=> 'Database',
-				'rules'	=> 'trim|required'
-			),
+                'field' => 'database',
+                'label' => 'Database',
+                'rules' => 'trim|required'
+            ),
             array(
-				'field' => 'username',
-				'label'	=> 'Username',
-				'rules'	=> 'trim|required'
-			),
+                'field' => 'username',
+                'label' => 'Username',
+                'rules' => 'trim|required'
+            ),
             array(
-				'field' => 'password',
-				'label'	=> 'Password',
-				'rules'	=> 'trim'
-			),
+                'field' => 'password',
+                'label' => 'Password',
+                'rules' => 'trim'
+            ),
             array(
-				'field' => 'prefix',
-				'label'	=> 'Prefix',
-				'rules'	=> 'trim'
-			),
+                'field' => 'prefix',
+                'label' => 'Prefix',
+                'rules' => 'trim'
+            ),
         ));
         
         // If the form validation passed
         if ($this->form_validation->run('', $this))
         {
+            $db_prefix = ($this->input->post('prefix')) ? $this->input->post('prefix') : '';
             $conf = array(
                 'hostname' => $this->input->post('hostname'),
                 'database' => $this->input->post('database'),
                 'username' => $this->input->post('username'),
                 'password' => $this->input->post('password'),
-                'dbprefix' => $this->input->post('prefix')
+                'dbprefix' => $db_prefix
             );
             $this->db_conf = array_merge($this->db_conf, $conf);
             
@@ -204,39 +205,39 @@ class install extends MY_Controller {
                 'form_hostname' => array(
                     'class'         => 'input-xlarge',
                     'name'          => 'hostname',
-               	    'id'            => 'hostname',
+                    'id'            => 'hostname',
                     'placeholder'   => 'ex: 127.0.0.1',
                     'maxlength'     => 80,
                 ),
                 'form_database' => array(
                     'class'         => 'input-xlarge',
                     'name'          => 'database',
-               	    'id'            => 'database',
+                    'id'            => 'database',
                     'placeholder'   => 'MySQL database name',
                     'maxlength'     => 80,
                 ),
                 'form_username' => array(
                     'class'         => 'input-xlarge',
                     'name'          => 'username',
-               	    'id'            => 'username',
+                    'id'            => 'username',
                     'placeholder'   => 'MySQL username',
                     'maxlength'     => 60,
                 ),
                 'form_password' => array(
                     'class'         => 'input-xlarge',
                     'name'          => 'password',
-               	    'id'            => 'password',
+                    'id'            => 'password',
                     'maxlength'     => 80,
                 ),
                 'form_prefix' => array(
                     'class'         => 'input-xlarge',
                     'name'          => 'prefix',
-               	    'id'            => 'prefix',
+                    'id'            => 'prefix',
                     'placeholder'   => 'ex: regnick_',
                     'maxlength'     => 40,
                 ),
             );
-    		$this->template->set_layout('one_col')->build('step_2', $data);
+            $this->template->set_layout('one_col')->build('step_2', $data);
         }
     }
     
@@ -288,29 +289,29 @@ class install extends MY_Controller {
     public function step4()
     {
         $this->load->helper(array('form', 'url'));
-		$this->load->library('form_validation'); 
+        $this->load->library('form_validation'); 
         
         $this->form_validation->set_rules(array(
             array(
-				'field' => 'smtp_host',
-				'label'	=> 'SMTP Host',
-				'rules'	=> 'trim|required'
-			),
+                'field' => 'smtp_host',
+                'label' => 'SMTP Host',
+                'rules' => 'trim|required'
+            ),
             array(
-				'field' => 'smtp_port',
-				'label'	=> 'SMTP Port',
-				'rules'	=> 'trim|required|numeric'
-			),
+                'field' => 'smtp_port',
+                'label' => 'SMTP Port',
+                'rules' => 'trim|required|numeric'
+            ),
             array(
-				'field' => 'smtp_user',
-				'label'	=> 'SMTP User',
-				'rules'	=> 'trim|required'
-			),
+                'field' => 'smtp_user',
+                'label' => 'SMTP User',
+                'rules' => 'trim|required'
+            ),
             array(
-				'field' => 'smtp_pass',
-				'label'	=> 'SMTP Pass',
-				'rules'	=> 'trim|required'
-			)
+                'field' => 'smtp_pass',
+                'label' => 'SMTP Pass',
+                'rules' => 'trim|required'
+            )
         ));
         
         // If the form validation passed
@@ -343,28 +344,28 @@ class install extends MY_Controller {
                 'smtp_host' => array(
                     'class'         => 'input-xlarge',
                     'name'          => 'smtp_host',
-               	    'id'            => 'smtp_host',
+                    'id'            => 'smtp_host',
                     'placeholder'   => '',
                     'maxlength'     => 210,
                 ),
                 'smtp_port' => array(
                     'class'         => 'input-xlarge',
                     'name'          => 'smtp_port',
-               	    'id'            => 'smtp_port',
+                    'id'            => 'smtp_port',
                     'placeholder'   => '',
                     'maxlength'     => 80,
                 ),
                 'smtp_user' => array(
                     'class'         => 'input-xlarge',
                     'name'          => 'smtp_user',
-               	    'id'            => 'smtp_user',
+                    'id'            => 'smtp_user',
                     'placeholder'   => '',
                     'maxlength'     => 80,
                 ),
                 'smtp_pass' => array(
                     'class'         => 'input-xlarge',
                     'name'          => 'smtp_pass',
-               	    'id'            => 'smtp_pass',
+                    'id'            => 'smtp_pass',
                     'maxlength'     => 80,
                 ),
             );
@@ -432,12 +433,12 @@ class install extends MY_Controller {
         $cfg_tpl = file_get_contents(MODULES_PATH.'install/data/database.sample.php');
         
         $replace = array(
-			'{hostname}' 	=> $this->db_conf['hostname'],
+            '{hostname}'    => $this->db_conf['hostname'],
             '{database}'    => $this->db_conf['database'],
-			'{username}' 	=> $this->db_conf['username'],
-			'{password}' 	=> $this->db_conf['password'],
+            '{username}'    => $this->db_conf['username'],
+            '{password}'    => $this->db_conf['password'],
             '{prefix}'      => $this->db_conf['dbprefix'],
-		);
+        );
         
         // replace {} variables from template with real data
         $new_cfg_file   = str_replace(array_keys($replace), $replace, $cfg_tpl);
@@ -459,11 +460,11 @@ class install extends MY_Controller {
         $cfg_tpl = file_get_contents(MODULES_PATH.'install/data/email.sample.php');
         
         $replace = array(
-			'{smtp_host}' 	=> $this->email_conf['smtp_host'],
+            '{smtp_host}'   => $this->email_conf['smtp_host'],
             '{smtp_user}'   => $this->email_conf['smtp_user'],
-			'{smtp_pass}' 	=> $this->email_conf['smtp_pass'],
-			'{smtp_port}' 	=> $this->email_conf['smtp_port']
-		);
+            '{smtp_pass}'   => $this->email_conf['smtp_pass'],
+            '{smtp_port}'   => $this->email_conf['smtp_port']
+        );
         
         // replace {} variables from template with real data
         $new_cfg_file   = str_replace(array_keys($replace), $replace, $cfg_tpl);
