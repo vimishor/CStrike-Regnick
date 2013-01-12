@@ -45,7 +45,7 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 |
 */
 
-define('DEFAULT_GROUP_ID', 0);
+define('DEFAULT_GROUP_ID', 1);
 define('DEFAULT_SERVER_ID', 0);
 define('DEFAULT_GROUP_FLAG', 'r');
 

@@ -12,10 +12,6 @@ CREATE TABLE `{prefix}groups` (
 
 INSERT INTO `{prefix}groups` VALUES ('1', 'Default', 'r', '0');
 :: split ::
-UPDATE `{prefix}groups` SET `ID` = '0' WHERE (`ID`='1');
-:: split ::
-ALTER TABLE {prefix}groups AUTO_INCREMENT = 1;
-:: split ::
 
 DROP TABLE IF EXISTS `{prefix}options`;
 :: split ::
