@@ -30,10 +30,15 @@ class Migration_default_group_and_server extends CI_Migration {
         // update db version 
         set_option('db_version', '12012013');
 
-        // @see https://github.com/vimishor/CStrike-Regnick/issues/36
+        // @see https://github.com/vimishor/CStrike-Regnick/issues/36 : group
         $this->db->simple_query('UPDATE '.$this->db->dbprefix('groups') .' SET ID = REPLACE(ID, ID, ID+1) ORDER BY ID DESC;');
         $this->db->simple_query('UPDATE '.$this->db->dbprefix('groups') .' AUTO_INCREMENT = 1;');
         $this->db->simple_query('UPDATE '.$this->db->dbprefix('users_access') .' SET group_ID = REPLACE(group_ID, group_ID, group_ID+1);');
+
+        // @see https://github.com/vimishor/CStrike-Regnick/issues/36 : server
+        $this->db->simple_query('UPDATE '.$this->db->dbprefix('servers') .' SET ID = REPLACE(ID, ID, ID+1) ORDER BY ID DESC;');
+        $this->db->simple_query('UPDATE '.$this->db->dbprefix('servers') .' AUTO_INCREMENT = 1;');
+        $this->db->simple_query('UPDATE '.$this->db->dbprefix('users_access') .' SET server_ID = REPLACE(server_ID, server_ID, server_ID+1);');
     }
     
     /**

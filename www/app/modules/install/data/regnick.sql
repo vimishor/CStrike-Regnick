@@ -25,7 +25,7 @@ CREATE TABLE `{prefix}options` (
 
 INSERT INTO `{prefix}options` VALUES ('app_version', '2.0.0-rc3');
 :: split ::
-INSERT INTO `{prefix}options` VALUES ('db_version', '05092012');
+INSERT INTO `{prefix}options` VALUES ('db_version', '12012013');
 :: split ::
 INSERT INTO `{prefix}options` VALUES ('register_confirmation', '0');
 :: split ::
@@ -49,10 +49,6 @@ CREATE TABLE `{prefix}servers` (
 :: split ::
 
 INSERT INTO `{prefix}servers` VALUES ('1', 'All servers', 'All servers');
-:: split ::
-UPDATE `{prefix}servers` SET `ID` = '0' WHERE (`ID`='1');
-:: split ::
-ALTER TABLE {prefix}servers AUTO_INCREMENT = 1;
 :: split ::
 
 DROP TABLE IF EXISTS `{prefix}users`;
@@ -93,5 +89,5 @@ CREATE TABLE `{prefix}migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 :: split ::
 
-INSERT INTO `{prefix}migrations` VALUES ('10');
+INSERT INTO `{prefix}migrations` VALUES ('11');
 :: split ::
