@@ -6,7 +6,7 @@
     # rewrite `pub/` requests
     #   IE: [app_path]/themes/default/css/ maps to [app_path]/pub/themes/default/css/
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^(?:themes|upload)\b.* pub/$0 [L]
+    RewriteRule ^(?:themes|storage)\b.* pub/$0 [L]
     
     # this adds trailing slash
     RewriteCond %{REQUEST_FILENAME} !-f
