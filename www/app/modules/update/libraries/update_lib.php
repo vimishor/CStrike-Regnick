@@ -9,7 +9,7 @@
  * @category    Update
  * @copyright   2012 Gentle Software Solutions
  * @license     http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2
- * @version     1.0.0
+ * @version     1.0.1
  * @author      Alexandru G. <www.gentle.ro>
  */
 class Update_lib {
@@ -137,14 +137,7 @@ class Update_lib {
      * @return  bool
      */
     public function release_available()
-    {
-        // if curl is not available, stop here.
-        if(!function_exists('curl_version'))
-        {
-            $this->status = 'CURL is not available on this machine.';
-            return false;
-        }
-        
+    {        
         $local      = get_option('app_version');        
         $remote     = strtolower($this->get_latest_version());
         
@@ -166,7 +159,7 @@ class Update_lib {
             return false;
         }
                         
-        $curl = curl_init('https://api.github.com/repos/'. $this->github_user .'/'. $this->github_repo .'/downloads');
+        $curl = curl_init('https://api.github.com/repos/'. $this->github_user .'/'. $this->github_repo .'/tags');
         
         curl_setopt($curl, CURLOPT_HEADER, false);
         curl_setopt($curl, CURLOPT_TIMEOUT, 10);
@@ -175,7 +168,7 @@ class Update_lib {
         
         $response     = curl_exec($curl);
         
-        if (is_resource($curl))
+        if (!is_resource($curl))
         {
             curl_close($curl);
             $this->status = 'Invalid response received.';
@@ -184,13 +177,28 @@ class Update_lib {
         
         if ($response)
         {
-            $response   = json_decode($response);
-            $versions   = array_map(create_function('$t', 'return $t->description;'), $response);
+            $response = json_decode($response);
+            $versions = array_map(array($this, 'getVersion'), $response);
             usort($versions, "version_compare");
             $response = end($versions);
         }
         
         return $response;
+    }
+
+    /**
+     * Extract version number
+     *
+     * Remove custom data that tag name may contain and returns an clean 
+     * version string that can be used in version_compare.
+     *
+     * @access protected
+     * @param  object $obj Git tag object
+     * @return string      Version number to be used in version_compare
+     */
+    protected function getVersion($obj)
+    {
+        return str_replace(array('v', '-stable', '-pre'), '', strtolower($obj->name));
     }
     
     // ------------------------------------------------------------------------
