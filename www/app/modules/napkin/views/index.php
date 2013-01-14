@@ -11,11 +11,27 @@
                database backup before proceeding using the options available bellow. [<a href="<?php echo site_url('update/backup/db'); ?>">backup database</a>]<br>
             </div>
             
-            <?php if ($database['fixed'] > 0): ?>
-            <div class="alert alert-success">
-                &nbsp;&nbsp;<?php echo $database['fixed']; ?> database problems have been successfully repaired. <a href="<?php echo site_url('napkin/database/check/'); ?>">check again</a>
-            </div>
+            
+            <?php if ($this->uri->segment(3)): ?>
+
+                <?php if ( ($this->uri->segment(3) == 'check') AND ($database['total'] == 0) ): ?>
+                <div class="alert alert-success">
+                    &nbsp;&nbsp;Excellent! No database problems found.
+                </div>
+                <?php endif; ?>
+
+                <?php if ( ($this->uri->segment(3) == 'repair') AND ($database['fixed'] > 0) ): ?>
+                <div class="alert alert-success">
+                    &nbsp;&nbsp;<?php echo $database['fixed']; ?> database problems have been successfully repaired. <a href="<?php echo site_url('napkin/database/check/'); ?>">check again</a>
+                </div>
+                <?php elseif ( ($this->uri->segment(3) == 'repair') AND ($database['fixed'] == 0) ): ?>
+                <div class="alert alert-success">
+                    &nbsp;&nbsp;No database problems found, so nothing was fixed.
+                </div>
+                <?php endif; ?>
+
             <?php endif; ?>
+
 
             <div id="acp-widget" class="span6">
                 <h3>Database</h3>
@@ -23,15 +39,33 @@
                     <tbody>
                         <tr>
                             <td>Orphan accounts</td>
-                            <td class="center"><?php echo $database['orphan_accounts']; ?></td>
+                            <td class="center">
+                                <?php if (is_int($database['orphan_accounts'])): ?>
+                                    <?php echo $database['orphan_accounts']; ?>
+                                <?php else: ?>
+                                    Not checked
+                                <?php endif;?>
+                            </td>
                         </tr>
                         <tr>
                             <td>Orphan accesses</td>
-                            <td class="center"><?php echo $database['orphan_accesses']; ?></td>
+                            <td class="center">
+                                <?php if (is_numeric($database['orphan_accesses'])): ?>
+                                    <?php echo $database['orphan_accesses']; ?>
+                                <?php else: ?>
+                                    Not checked
+                                <?php endif;?>
+                            </td>
                         </tr>
                         <tr>
                             <td>Accounts with invalid emails</td>
-                            <td class="center"><?php echo $database['invalid_emails']; ?></td>
+                            <td class="center">
+                                <?php if (is_numeric($database['invalid_emails'])): ?>
+                                    <?php echo $database['invalid_emails']; ?>
+                                <?php else: ?>
+                                    Not checked
+                                <?php endif;?>
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="2" class="center">

@@ -40,7 +40,7 @@ class Napkin extends ACP_Controller
      * @param  string $action Action to be performed on database (ex: 'check' or 'repair')
      * @return void
      */
-    public function database($action = 'check')
+    public function database($action = null)
     {
         switch ($action) {
             case 'check':

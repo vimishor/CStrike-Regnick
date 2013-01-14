@@ -18,11 +18,11 @@ class Napkin_lib {
     protected $CI;
 
     public $db_problems = array(
-        'orphan_accounts'   => 0,
-        'orphan_accesses'   => 0,
-        'invalid_emails'    => 0,
-        'total'             => 0,
-        'fixed'             => 0
+        'orphan_accounts'   => null,
+        'orphan_accesses'   => null,
+        'invalid_emails'    => null,
+        'total'             => null,
+        'fixed'             => null
     );
     
     // ------------------------------------------------------------------------
@@ -45,6 +45,10 @@ class Napkin_lib {
      */
     public function database_check()
     {
+        $this->db_problems['orphan_accounts'] = 
+            $this->db_problems['orphan_accesses'] = 
+            $this->db_problems['invalid_emails'] = $this->db_problems['total'] = 0;
+
         if ($orphan_accounts = $this->CI->napkin_m->getOrphanAccounts()) {
             $this->db_problems['orphan_accounts'] = count($orphan_accounts);
             $this->db_problems['total'] += count($orphan_accounts);
@@ -59,6 +63,8 @@ class Napkin_lib {
             $this->db_problems['invalid_emails'] = count($invalid_emails);
             $this->db_problems['total'] += count($invalid_emails);
         }
+
+
     }
 
     /**
