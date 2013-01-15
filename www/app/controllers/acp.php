@@ -818,7 +818,7 @@ class Acp extends ACP_Controller
             {
                 console_log('OK');
                 notify($this->lang->line('account_created'), 'success');
-                redirect('acp/user/list', 'refresh');
+                redirect('acp/user/edit/'.$this->db->insert_id(), 'refresh');
             }
             else
             {
