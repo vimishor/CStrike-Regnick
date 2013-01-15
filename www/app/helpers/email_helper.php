@@ -76,7 +76,7 @@ if ( ! function_exists('send_email'))
         $CI->email->subject( $subject .' - '. $CI->config->item('site.name') );
         $CI->email->message($message);
         
-        return $CI->email->send();
+        return @$CI->email->send();
     }
 }
 

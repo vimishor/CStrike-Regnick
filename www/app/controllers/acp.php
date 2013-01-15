@@ -633,7 +633,7 @@ class Acp extends ACP_Controller
                 console_log('Error: '.$error);
                 notify($this->lang->line($error), 'error');
             }
-            redirect('acp/user/'.$userID.'/access/'.$serverID, 'refresh');
+            redirect('acp/user/edit/'.$userID.'/#access');
         }
         else
         {
@@ -695,7 +695,7 @@ class Acp extends ACP_Controller
                     'page_subtitle' =>  '',      
                     'no_access'     =>  $this->user_model->match_access($userID, $servers), // TODO: refactor this
                     'userID'        =>  $userID,
-                    'servers'       =>  array_merge_recursive_distinct($servers, 
+                    'servers'       =>  array_merge_recursive_distinct($this->user_model->change_key_id($servers), 
                                             $this->user_model->change_key_id(
                                                 $this->user_model->getAllAccess($userID, true)
                                             )
