@@ -101,13 +101,15 @@ class user_model extends MY_Model
     
     /**
      * Delete user access on a server
+     *
+     * If serverID = 0, accesses from all servers will be deleted.
      * 
      * @access  public
      * @param   int     $userID     User ID
-     * @param   int     $serverID   Server ID
+     * @param   int     $serverID   Server ID (Optional)
      * @return  bool
      */
-    public function delAccess($userID, $serverID)
+    public function delAccess($userID, $serverID = 0)
     {
         if (!$this->user_exist($userID))
         {
@@ -115,15 +117,20 @@ class user_model extends MY_Model
             return false;
         }        
         
-        if (!$this->server_model->isServer($serverID))
-        {
-            $this->set_error('no_such_server');
-            return false;
+        if ($serverID > 0) {
+            if (!$this->server_model->isServer($serverID))
+            {
+                $this->set_error('no_such_server');
+                return false;
+            }
+            
+            $this->db->where('user_ID =', $userID)
+                ->where('server_ID =', $serverID)
+                ->delete('users_access');
+        } else {
+            $this->db->where('user_ID =', $userID)
+                ->delete('users_access');
         }
-        
-        $this->db->where('user_ID =', $userID)
-            ->where('server_ID =', $serverID)
-            ->delete('users_access');
         
         return $this->db->affected_rows() > 0;
     }
