@@ -926,7 +926,7 @@ class Acp extends ACP_Controller
             $userID = (int) $this->input->post('user_ID');
             
             if ( $this->user_model->user_exist($userID) AND 
-                    $this->user_model->delAccess($userID, 0) AND 
+                    $this->user_model->delAccess($userID, 0) OR 
                     $this->user_model->delete_user($userID) )
             {
                 $response = array('status' => 'ok', 'message' => lang('data_saved'));
