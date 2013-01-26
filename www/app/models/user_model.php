@@ -300,7 +300,7 @@ class user_model extends MY_Model
             'activation_key'    => strtolower(random_string('alnum', 24)),
             'account_flags'     => $flags,
             'last_login'        => 0,
-            'passwd_type'       => 0
+            'passwd_type'       => 1
         );
         
         return $this->db->insert('users', $data);
