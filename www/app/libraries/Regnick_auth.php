@@ -382,12 +382,42 @@ class Regnick_auth
      * @param   string|int  $identity   Username or userID
      * @return  bool
      */
-    protected function password_valid($identity, $password)
+    public function password_valid($identity, $password)
     {
+        $this->setEncryption($identity);
+
         $db_pass    = $this->ci->user_model->getRow($identity, 'password');
         $password   = $this->ci->user_model->hash_password($password);
         
         return ($db_pass == $password);
+    }
+
+    /**
+     * Change the encryption method, based on user setting
+     *
+     * @access  protected
+     * @param   string|int  $identity   Username or userID
+     * @return  void
+     */
+    protected function setEncryption($identity)
+    {
+        $method = $this->ci->user_model->getRow($identity, 'passwd_type');
+
+        switch ($method) {
+            case '0':
+                $method = 'none';
+                break;
+            
+            case '1':
+                $method = 'md5';
+                break;
+            
+            default:
+                $method = 'md5';
+                break;
+        }
+
+        $this->ci->config->set_item('password_encrypt', $method);
     }
     
     // ----------------------------------------------------------------------------------------------------------

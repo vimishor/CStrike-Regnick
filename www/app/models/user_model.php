@@ -300,7 +300,7 @@ class user_model extends MY_Model
             'activation_key'    => strtolower(random_string('alnum', 24)),
             'account_flags'     => $flags,
             'last_login'        => 0,
-            'passwd_type'       => 0
+            'passwd_type'       => 1
         );
         
         return $this->db->insert('users', $data);
@@ -574,7 +574,9 @@ class user_model extends MY_Model
     }
     
     /**
-     * Encrypt password
+     * Hash password
+     *
+     * Note: MD5 is using as salt `encryption_key` from config.php
      * 
      * @access  public
      * @param   string  $password   Clear text password
@@ -589,7 +591,8 @@ class user_model extends MY_Model
             $enc_method = 'none';
         }
         
-        return ($enc_method == 'none') ? $password : call_user_func($enc_method, $password);
+        return ($enc_method == 'none') ? $password : call_user_func($enc_method, 
+                    $this->config->item('encryption_key').$password);
     }
     
 }

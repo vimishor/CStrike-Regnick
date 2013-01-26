@@ -13,6 +13,8 @@
  *  Values: md5, none
  *
  * Default value: 'none'
+ *
+ * @deprecated This is changed on the fly according to `passwd_type` column from `users` table.
  */
 $config['password_encrypt'] = 'none';
 
