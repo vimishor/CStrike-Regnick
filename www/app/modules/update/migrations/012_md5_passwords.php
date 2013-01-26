@@ -33,6 +33,15 @@ class Migration_md5_passwords extends CI_Migration {
         // hash with salted md5 all clear text passwords
         $salt = $this->config->item('encryption_key');
         $this->db->simple_query('UPDATE '. $this->db->dbprefix('users') .' SET password = MD5(CONCAT("'.$salt.'", password)), passwd_type = "1" WHERE passwd_type = "0";');
+
+        // change password column to 32
+        $this->dbforge->modify_column('users', array(
+            'password' => array(
+                'name'          => 'password',
+                'type'          => 'VARCHAR',
+                'constraint'    => 32
+            ),
+        ));
     }
     
     /**
