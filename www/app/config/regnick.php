@@ -14,7 +14,7 @@
  *
  * Default value: 'none'
  *
- * @deprecated
+ * @deprecated This is changed on the fly according to `passwd_type` column from `users` table.
  */
 $config['password_encrypt'] = 'none';
 

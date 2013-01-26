@@ -29,6 +29,11 @@ class ACP_Controller extends MY_Controller {
             notify($this->lang->line('insuficient_access'), 'error');
             redirect('', 'refresh');
         }
+
+        // Stress the user with notifications, until he/she changes default `encryption_key` value
+        if ($this->config->item('encryption_key') == 'CHANGE-ME') {
+            notify('[Security warning] Please change default `encryption_key` value. <a href="http://docs.gentle.ro/cstrike-regnick/general/configuration/#encryption-key">see how</a>', 'warning');
+        }
         
         Events::trigger('acp_controller');
     }
