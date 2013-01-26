@@ -32,7 +32,7 @@ class ACP_Controller extends MY_Controller {
 
         // Stress the user with notifications, until he/she changes default `encryption_key` value
         if ($this->config->item('encryption_key') == 'CHANGE-ME') {
-            notify('[Security warning] Please change default `encryption_key` value. <a href="http://docs.gentle.ro/cstrike-regnick/general/configuration/#encryption-key">see how</a>', 'warning');
+            notify('[Security] Please change default `encryption_key` value. <a href="http://docs.gentle.ro/cstrike-regnick/general/configuration/#encryption-key">see how</a>', 'warning');
         }
         
         Events::trigger('acp_controller');
