@@ -13,6 +13,8 @@
  *  Values: md5, none
  *
  * Default value: 'none'
+ *
+ * @deprecated
  */
 $config['password_encrypt'] = 'none';
 

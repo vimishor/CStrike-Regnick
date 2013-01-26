@@ -45,6 +45,11 @@ class Ucp extends MY_Controller
         redirect('ucp/dashboard', 'refresh');
 	}
     
+    public function test()
+    {
+        var_dump($this->regnick_auth->password_valid('test1', 'alex'));
+    }
+
     /**
      * Confirm new account
      * 
