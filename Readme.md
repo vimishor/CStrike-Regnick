@@ -1,3 +1,7 @@
+## Warning
+
+This application is not maintained anymore and has not been updated for very long time. Use it on your own risk!
+
 ## What is CStrike Regnick?
 
 CStrike Regnick is a small web interface which can be used by server owners 
